@@ -168,7 +168,7 @@ SFX = list(_m1.SFX) + [
     ("pop_01", a(26, "stops", 2), -18), ("footsteps_tile_02", a(26, "stops", 2) - 0.15, -18),
     ("whoosh_short_02", a(26, "She", 2), -17),
     ("sparkle_01", a(26, "up"), -22), ("pop_03", a(26, "you"), -20),
-    ("whoosh_fast_01", PE(26) + 0.1, -13), ("impact_low_01", PE(26) + 0.1, -11),
+    ("whoosh_fast_01", PE(26) + 0.1, -13), ("impact_low_02", PE(26) + 0.1, -11),
     ("train_horn_03", PE(26) + 0.6, -11),
     ("crowd_gasp_02", PE(26) + 1.4, -18),
     # beat 27: after

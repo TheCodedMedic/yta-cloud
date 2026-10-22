@@ -41,6 +41,14 @@ def resolve(name):
     raise FileNotFoundError(f"no sound named {name} in {LIB}")
 
 
+def resolve_ok(name):
+    try:
+        resolve(name)
+        return True
+    except FileNotFoundError:
+        return False
+
+
 def loudest(x, win=0.3):
     n = int(win * SR)
     mono = x.mean(axis=1)
@@ -62,6 +70,9 @@ def main(cue_path, out_path):
     cues = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(cues)
 
+    missing = sorted({n for n in [b[0] for b in cues.BEDS] + [x[0] for x in cues.SFX] if not resolve_ok(n)})
+    if missing:
+        sys.exit(f"cue sheet names sounds that are not in the library: {missing}")
     total = int(cues.LENGTH * SR)
     voice = load(cues.VOICE)[:total]
     voice = np.pad(voice, ((0, total - len(voice)), (0, 0)))
