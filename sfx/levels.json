@@ -1,0 +1,1418 @@
+{
+ "amb_bus_interior_01.ogg": {
+  "duration_s": 19.236,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.75,
+  "max_rms_0p3s_dbfs": -13.18,
+  "overall_rms_dbfs": -18.71
+ },
+ "amb_cafe_01.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -12.87,
+  "max_rms_0p3s_dbfs": -30.65,
+  "overall_rms_dbfs": -48.38
+ },
+ "amb_cafe_02.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -22.13,
+  "max_rms_0p3s_dbfs": -35.56,
+  "overall_rms_dbfs": -45.83
+ },
+ "amb_cafe_03.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -19.82,
+  "max_rms_0p3s_dbfs": -38.72,
+  "overall_rms_dbfs": -48.29
+ },
+ "amb_cafe_04.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.23,
+  "max_rms_0p3s_dbfs": -16.16,
+  "overall_rms_dbfs": -24.9
+ },
+ "amb_city_evening_01.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -21.65,
+  "max_rms_0p3s_dbfs": -35.26,
+  "overall_rms_dbfs": -44.88
+ },
+ "amb_city_evening_02.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -8.85,
+  "max_rms_0p3s_dbfs": -20.85,
+  "overall_rms_dbfs": -28.58
+ },
+ "amb_city_street_03.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -6.96,
+  "max_rms_0p3s_dbfs": -23.09,
+  "overall_rms_dbfs": -29.97
+ },
+ "amb_rain_light_01.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -35.18,
+  "max_rms_0p3s_dbfs": -54.49,
+  "overall_rms_dbfs": -56.87
+ },
+ "amb_rain_light_02.ogg": {
+  "duration_s": 15.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -27.59,
+  "overall_rms_dbfs": -30.26
+ },
+ "amb_room_tone_01.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -42.08,
+  "max_rms_0p3s_dbfs": -54.45,
+  "overall_rms_dbfs": -58.7
+ },
+ "amb_room_tone_02.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.74,
+  "max_rms_0p3s_dbfs": -18.29,
+  "overall_rms_dbfs": -20.19
+ },
+ "amb_room_tone_03.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -35.89,
+  "max_rms_0p3s_dbfs": -47.65,
+  "overall_rms_dbfs": -48.9
+ },
+ "amb_school_gym_01.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -16.1,
+  "max_rms_0p3s_dbfs": -27.29,
+  "overall_rms_dbfs": -33.35
+ },
+ "amb_school_gym_02.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -2.66,
+  "max_rms_0p3s_dbfs": -22.89,
+  "overall_rms_dbfs": -32.29
+ },
+ "amb_school_gym_03.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -13.55,
+  "max_rms_0p3s_dbfs": -23.99,
+  "overall_rms_dbfs": -32.09
+ },
+ "amb_school_gym_04.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -13.91,
+  "max_rms_0p3s_dbfs": -26.81,
+  "overall_rms_dbfs": -37.39
+ },
+ "amb_train_platform_01.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -14.97,
+  "max_rms_0p3s_dbfs": -27.36,
+  "overall_rms_dbfs": -36.01
+ },
+ "amb_train_platform_02.ogg": {
+  "duration_s": 26.208,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -7.98,
+  "max_rms_0p3s_dbfs": -31.59,
+  "overall_rms_dbfs": -37.9
+ },
+ "amb_train_platform_03.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -11.13,
+  "max_rms_0p3s_dbfs": -25.81,
+  "overall_rms_dbfs": -32.22
+ },
+ "amb_train_platform_04.ogg": {
+  "duration_s": 17.007,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -21.75,
+  "max_rms_0p3s_dbfs": -31.46,
+  "overall_rms_dbfs": -34.02
+ },
+ "amb_wind_soft_01.ogg": {
+  "duration_s": 35.671,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -21.74,
+  "max_rms_0p3s_dbfs": -31.22,
+  "overall_rms_dbfs": -37.54
+ },
+ "amb_wind_soft_02.ogg": {
+  "duration_s": 45.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -31.08,
+  "max_rms_0p3s_dbfs": -42.15,
+  "overall_rms_dbfs": -45.31
+ },
+ "amb_wind_soft_03.ogg": {
+  "duration_s": 18.048,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -19.25,
+  "max_rms_0p3s_dbfs": -30.39,
+  "overall_rms_dbfs": -36.41
+ },
+ "ball_bounce_01.ogg": {
+  "duration_s": 3.019,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.29,
+  "max_rms_0p3s_dbfs": -21.32,
+  "overall_rms_dbfs": -27.65
+ },
+ "ball_bounce_02.ogg": {
+  "duration_s": 1.968,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -21.4,
+  "overall_rms_dbfs": -27.73
+ },
+ "ball_bounce_03.ogg": {
+  "duration_s": 4.505,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.29,
+  "max_rms_0p3s_dbfs": -22.34,
+  "overall_rms_dbfs": -30.44
+ },
+ "ball_hit_01.ogg": {
+  "duration_s": 1.28,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.0,
+  "max_rms_0p3s_dbfs": -16.25,
+  "overall_rms_dbfs": -22.55
+ },
+ "ball_hit_02.ogg": {
+  "duration_s": 1.738,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.51,
+  "max_rms_0p3s_dbfs": -13.82,
+  "overall_rms_dbfs": -20.84
+ },
+ "ball_hit_03.ogg": {
+  "duration_s": 0.36,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -4.9,
+  "max_rms_0p3s_dbfs": -29.57,
+  "overall_rms_dbfs": -30.37
+ },
+ "ball_throw_01.ogg": {
+  "duration_s": 0.863,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.0,
+  "max_rms_0p3s_dbfs": -12.66,
+  "overall_rms_dbfs": -17.2
+ },
+ "ball_throw_03.ogg": {
+  "duration_s": 2.544,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -8.87,
+  "max_rms_0p3s_dbfs": -19.83,
+  "overall_rms_dbfs": -28.44
+ },
+ "balloon_pop_01.ogg": {
+  "duration_s": 1.178,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.81,
+  "max_rms_0p3s_dbfs": -26.24,
+  "overall_rms_dbfs": -32.18
+ },
+ "balloon_squeak_01.ogg": {
+  "duration_s": 1.132,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -27.8,
+  "max_rms_0p3s_dbfs": -44.12,
+  "overall_rms_dbfs": -47.97
+ },
+ "balloon_squeak_02.ogg": {
+  "duration_s": 4.306,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.16,
+  "max_rms_0p3s_dbfs": -11.92,
+  "overall_rms_dbfs": -20.84
+ },
+ "balloon_squeak_03.ogg": {
+  "duration_s": 0.765,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -8.14,
+  "overall_rms_dbfs": -12.04
+ },
+ "balloon_squeak_04.ogg": {
+  "duration_s": 8.614,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -8.47,
+  "max_rms_0p3s_dbfs": -22.72,
+  "overall_rms_dbfs": -27.19
+ },
+ "body_thud_01.ogg": {
+  "duration_s": 1.27,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -6.06,
+  "max_rms_0p3s_dbfs": -23.17,
+  "overall_rms_dbfs": -29.43
+ },
+ "body_thud_02.ogg": {
+  "duration_s": 1.29,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.91,
+  "max_rms_0p3s_dbfs": -19.33,
+  "overall_rms_dbfs": -25.66
+ },
+ "body_thud_03.ogg": {
+  "duration_s": 0.391,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.0,
+  "max_rms_0p3s_dbfs": -16.54,
+  "overall_rms_dbfs": -17.68
+ },
+ "body_thud_04.ogg": {
+  "duration_s": 1.512,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.18,
+  "max_rms_0p3s_dbfs": -10.73,
+  "overall_rms_dbfs": -17.53
+ },
+ "bus_door_01.ogg": {
+  "duration_s": 1.645,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.67,
+  "max_rms_0p3s_dbfs": -13.54,
+  "overall_rms_dbfs": -16.06
+ },
+ "camera_shutter_01.ogg": {
+  "duration_s": 0.231,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -6.55,
+  "max_rms_0p3s_dbfs": -28.88,
+  "overall_rms_dbfs": -28.88
+ },
+ "camera_shutter_02.ogg": {
+  "duration_s": 1.512,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.61,
+  "max_rms_0p3s_dbfs": -26.5,
+  "overall_rms_dbfs": -33.5
+ },
+ "catch_thump_01.ogg": {
+  "duration_s": 0.112,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.92,
+  "max_rms_0p3s_dbfs": -14.05,
+  "overall_rms_dbfs": -14.05
+ },
+ "catch_thump_02.ogg": {
+  "duration_s": 0.13,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.97,
+  "max_rms_0p3s_dbfs": -13.97,
+  "overall_rms_dbfs": -13.97
+ },
+ "catch_thump_03.ogg": {
+  "duration_s": 0.567,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.94,
+  "max_rms_0p3s_dbfs": -14.6,
+  "overall_rms_dbfs": -17.36
+ },
+ "click_01.ogg": {
+  "duration_s": 0.094,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -4.44,
+  "max_rms_0p3s_dbfs": -29.27,
+  "overall_rms_dbfs": -29.27
+ },
+ "click_02.ogg": {
+  "duration_s": 0.017,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -4.4,
+  "max_rms_0p3s_dbfs": -21.43,
+  "overall_rms_dbfs": -21.43
+ },
+ "click_03.ogg": {
+  "duration_s": 0.088,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.3,
+  "max_rms_0p3s_dbfs": -23.79,
+  "overall_rms_dbfs": -23.79
+ },
+ "clink_glass_01.ogg": {
+  "duration_s": 1.197,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.13,
+  "max_rms_0p3s_dbfs": -21.25,
+  "overall_rms_dbfs": -27.26
+ },
+ "clink_glass_02.ogg": {
+  "duration_s": 2.529,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -8.59,
+  "max_rms_0p3s_dbfs": -29.02,
+  "overall_rms_dbfs": -38.22
+ },
+ "clink_plate_01.ogg": {
+  "duration_s": 1.872,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.29,
+  "max_rms_0p3s_dbfs": -17.77,
+  "overall_rms_dbfs": -24.33
+ },
+ "clink_plate_02.ogg": {
+  "duration_s": 1.491,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.24,
+  "max_rms_0p3s_dbfs": -19.42,
+  "overall_rms_dbfs": -26.38
+ },
+ "clock_tick_01.ogg": {
+  "duration_s": 40.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -29.85,
+  "max_rms_0p3s_dbfs": -54.21,
+  "overall_rms_dbfs": -61.81
+ },
+ "clock_tick_02.ogg": {
+  "duration_s": 23.013,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -14.85,
+  "max_rms_0p3s_dbfs": -34.12,
+  "overall_rms_dbfs": -41.27
+ },
+ "clock_tick_03.ogg": {
+  "duration_s": 40.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -7.83,
+  "max_rms_0p3s_dbfs": -27.78,
+  "overall_rms_dbfs": -38.25
+ },
+ "coffee_sip_01.ogg": {
+  "duration_s": 3.029,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -33.62,
+  "max_rms_0p3s_dbfs": -50.15,
+  "overall_rms_dbfs": -57.16
+ },
+ "coffee_sip_02.ogg": {
+  "duration_s": 2.468,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -10.63,
+  "max_rms_0p3s_dbfs": -26.91,
+  "overall_rms_dbfs": -35.72
+ },
+ "coffee_sip_03.ogg": {
+  "duration_s": 2.711,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -6.26,
+  "max_rms_0p3s_dbfs": -27.66,
+  "overall_rms_dbfs": -34.82
+ },
+ "crowd_gasp_01.ogg": {
+  "duration_s": 3.076,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -6.93,
+  "max_rms_0p3s_dbfs": -17.36,
+  "overall_rms_dbfs": -25.21
+ },
+ "crowd_gasp_02.ogg": {
+  "duration_s": 1.597,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -2.88,
+  "max_rms_0p3s_dbfs": -11.93,
+  "overall_rms_dbfs": -15.46
+ },
+ "crowd_gasp_03.ogg": {
+  "duration_s": 4.116,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.4,
+  "max_rms_0p3s_dbfs": -16.25,
+  "overall_rms_dbfs": -20.22
+ },
+ "crowd_murmur_01.ogg": {
+  "duration_s": 57.394,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -19.09,
+  "max_rms_0p3s_dbfs": -32.04,
+  "overall_rms_dbfs": -38.8
+ },
+ "crowd_murmur_02.ogg": {
+  "duration_s": 20.274,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -27.54,
+  "max_rms_0p3s_dbfs": -40.47,
+  "overall_rms_dbfs": -48.75
+ },
+ "cup_set_down_01.ogg": {
+  "duration_s": 0.646,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -2.15,
+  "max_rms_0p3s_dbfs": -25.55,
+  "overall_rms_dbfs": -28.88
+ },
+ "cup_set_down_02.ogg": {
+  "duration_s": 1.308,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.88,
+  "max_rms_0p3s_dbfs": -23.89,
+  "overall_rms_dbfs": -30.27
+ },
+ "cup_set_down_03.ogg": {
+  "duration_s": 0.941,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -18.73,
+  "overall_rms_dbfs": -23.56
+ },
+ "cutlery_plate_01.ogg": {
+  "duration_s": 1.318,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.23,
+  "max_rms_0p3s_dbfs": -23.5,
+  "overall_rms_dbfs": -29.59
+ },
+ "ding_01.ogg": {
+  "duration_s": 2.927,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.55,
+  "max_rms_0p3s_dbfs": -14.06,
+  "overall_rms_dbfs": -20.35
+ },
+ "ding_02.ogg": {
+  "duration_s": 1.96,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.88,
+  "max_rms_0p3s_dbfs": -14.6,
+  "overall_rms_dbfs": -22.72
+ },
+ "ding_03.ogg": {
+  "duration_s": 0.321,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -4.13,
+  "max_rms_0p3s_dbfs": -17.4,
+  "overall_rms_dbfs": -17.69
+ },
+ "ding_04.ogg": {
+  "duration_s": 0.287,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.86,
+  "max_rms_0p3s_dbfs": -14.19,
+  "overall_rms_dbfs": -14.19
+ },
+ "door_close_01.ogg": {
+  "duration_s": 0.672,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -13.85,
+  "overall_rms_dbfs": -17.29
+ },
+ "door_open_01.ogg": {
+  "duration_s": 0.916,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -15.53,
+  "overall_rms_dbfs": -20.16
+ },
+ "drone_tension_01.ogg": {
+  "duration_s": 34.944,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.48,
+  "max_rms_0p3s_dbfs": -14.35,
+  "overall_rms_dbfs": -25.0
+ },
+ "drone_tension_02.ogg": {
+  "duration_s": 40.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -14.44,
+  "max_rms_0p3s_dbfs": -26.67,
+  "overall_rms_dbfs": -30.66
+ },
+ "drone_tension_03.ogg": {
+  "duration_s": 40.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -18.03,
+  "max_rms_0p3s_dbfs": -29.9,
+  "overall_rms_dbfs": -37.52
+ },
+ "drone_tension_04.ogg": {
+  "duration_s": 40.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -7.04,
+  "max_rms_0p3s_dbfs": -15.78,
+  "overall_rms_dbfs": -19.77
+ },
+ "fly_buzz_01.ogg": {
+  "duration_s": 28.761,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.88,
+  "max_rms_0p3s_dbfs": -14.66,
+  "overall_rms_dbfs": -24.29
+ },
+ "fly_buzz_02.ogg": {
+  "duration_s": 30.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -4.56,
+  "max_rms_0p3s_dbfs": -17.97,
+  "overall_rms_dbfs": -32.81
+ },
+ "fly_buzz_03.ogg": {
+  "duration_s": 24.047,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.38,
+  "max_rms_0p3s_dbfs": -25.61,
+  "overall_rms_dbfs": -33.73
+ },
+ "fly_buzz_pass_01.ogg": {
+  "duration_s": 3.87,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.13,
+  "max_rms_0p3s_dbfs": -22.37,
+  "overall_rms_dbfs": -33.22
+ },
+ "fly_buzz_pass_02.ogg": {
+  "duration_s": 1.272,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -15.34,
+  "max_rms_0p3s_dbfs": -30.83,
+  "overall_rms_dbfs": -35.42
+ },
+ "fly_buzz_pass_03.ogg": {
+  "duration_s": 1.327,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.8,
+  "max_rms_0p3s_dbfs": -15.85,
+  "overall_rms_dbfs": -17.01
+ },
+ "fly_buzz_pass_04.ogg": {
+  "duration_s": 1.128,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -14.49,
+  "overall_rms_dbfs": -18.88
+ },
+ "footsteps_tile_01.ogg": {
+  "duration_s": 21.711,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -15.92,
+  "max_rms_0p3s_dbfs": -44.35,
+  "overall_rms_dbfs": -58.0
+ },
+ "footsteps_tile_02.ogg": {
+  "duration_s": 24.188,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.93,
+  "max_rms_0p3s_dbfs": -27.26,
+  "overall_rms_dbfs": -35.27
+ },
+ "footsteps_tile_03.ogg": {
+  "duration_s": 10.753,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -12.28,
+  "max_rms_0p3s_dbfs": -31.21,
+  "overall_rms_dbfs": -38.02
+ },
+ "game_victory_01.ogg": {
+  "duration_s": 4.203,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.78,
+  "max_rms_0p3s_dbfs": -19.05,
+  "overall_rms_dbfs": -22.13
+ },
+ "game_victory_02.ogg": {
+  "duration_s": 4.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -12.49,
+  "max_rms_0p3s_dbfs": -21.62,
+  "overall_rms_dbfs": -23.9
+ },
+ "game_victory_03.ogg": {
+  "duration_s": 3.484,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -7.61,
+  "max_rms_0p3s_dbfs": -18.23,
+  "overall_rms_dbfs": -21.89
+ },
+ "game_victory_04.ogg": {
+  "duration_s": 2.485,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.15,
+  "max_rms_0p3s_dbfs": -10.64,
+  "overall_rms_dbfs": -13.92
+ },
+ "game_victory_05.ogg": {
+  "duration_s": 1.758,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.11,
+  "max_rms_0p3s_dbfs": -12.68,
+  "overall_rms_dbfs": -14.07
+ },
+ "glitch_01.ogg": {
+  "duration_s": 1.07,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.07,
+  "max_rms_0p3s_dbfs": -19.78,
+  "overall_rms_dbfs": -24.49
+ },
+ "glitch_02.ogg": {
+  "duration_s": 1.857,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.35,
+  "max_rms_0p3s_dbfs": -15.84,
+  "overall_rms_dbfs": -20.55
+ },
+ "glitch_03.ogg": {
+  "duration_s": 0.014,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.99,
+  "max_rms_0p3s_dbfs": -9.37,
+  "overall_rms_dbfs": -9.37
+ },
+ "heartbeat_01.ogg": {
+  "duration_s": 15.098,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.65,
+  "max_rms_0p3s_dbfs": -9.63,
+  "overall_rms_dbfs": -14.02
+ },
+ "heartbeat_02.ogg": {
+  "duration_s": 40.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.14,
+  "max_rms_0p3s_dbfs": -8.5,
+  "overall_rms_dbfs": -14.48
+ },
+ "heartbeat_03.ogg": {
+  "duration_s": 9.866,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.36,
+  "max_rms_0p3s_dbfs": -11.77,
+  "overall_rms_dbfs": -15.8
+ },
+ "heartbeat_04.ogg": {
+  "duration_s": 20.5,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -10.51,
+  "overall_rms_dbfs": -14.25
+ },
+ "impact_hit_01.ogg": {
+  "duration_s": 0.487,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.43,
+  "max_rms_0p3s_dbfs": -17.81,
+  "overall_rms_dbfs": -19.9
+ },
+ "impact_hit_02.ogg": {
+  "duration_s": 1.333,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.89,
+  "max_rms_0p3s_dbfs": -12.66,
+  "overall_rms_dbfs": -18.58
+ },
+ "impact_hit_03.ogg": {
+  "duration_s": 0.646,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.9,
+  "max_rms_0p3s_dbfs": -14.61,
+  "overall_rms_dbfs": -17.94
+ },
+ "impact_hit_04.ogg": {
+  "duration_s": 0.495,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.79,
+  "max_rms_0p3s_dbfs": -15.1,
+  "overall_rms_dbfs": -17.27
+ },
+ "impact_low_02.ogg": {
+  "duration_s": 5.981,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.6,
+  "max_rms_0p3s_dbfs": -7.97,
+  "overall_rms_dbfs": -14.49
+ },
+ "impact_low_03.ogg": {
+  "duration_s": 3.469,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.62,
+  "max_rms_0p3s_dbfs": -11.36,
+  "overall_rms_dbfs": -20.94
+ },
+ "impact_low_04.ogg": {
+  "duration_s": 1.048,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.2,
+  "max_rms_0p3s_dbfs": -7.38,
+  "overall_rms_dbfs": -12.74
+ },
+ "keyboard_gaming_01.ogg": {
+  "duration_s": 13.767,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -26.93,
+  "overall_rms_dbfs": -35.05
+ },
+ "keyboard_typing_01.ogg": {
+  "duration_s": 19.632,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.61,
+  "max_rms_0p3s_dbfs": -22.63,
+  "overall_rms_dbfs": -25.73
+ },
+ "keyboard_typing_02.ogg": {
+  "duration_s": 19.583,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.0,
+  "max_rms_0p3s_dbfs": -24.07,
+  "overall_rms_dbfs": -27.03
+ },
+ "mouse_click_01.ogg": {
+  "duration_s": 0.298,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -6.43,
+  "max_rms_0p3s_dbfs": -32.7,
+  "overall_rms_dbfs": -32.7
+ },
+ "mouse_click_02.ogg": {
+  "duration_s": 0.445,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.06,
+  "max_rms_0p3s_dbfs": -28.78,
+  "overall_rms_dbfs": -29.42
+ },
+ "mouse_click_03.ogg": {
+  "duration_s": 0.059,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.32,
+  "max_rms_0p3s_dbfs": -24.04,
+  "overall_rms_dbfs": -24.04
+ },
+ "notification_ping_02.ogg": {
+  "duration_s": 0.687,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -7.37,
+  "max_rms_0p3s_dbfs": -19.55,
+  "overall_rms_dbfs": -23.14
+ },
+ "notification_ping_03.ogg": {
+  "duration_s": 0.42,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -17.1,
+  "max_rms_0p3s_dbfs": -29.54,
+  "overall_rms_dbfs": -29.98
+ },
+ "notification_ping_04.ogg": {
+  "duration_s": 2.755,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.51,
+  "max_rms_0p3s_dbfs": -14.19,
+  "overall_rms_dbfs": -22.92
+ },
+ "pad_calm_01.ogg": {
+  "duration_s": 38.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.52,
+  "max_rms_0p3s_dbfs": -13.08,
+  "overall_rms_dbfs": -18.42
+ },
+ "pad_calm_02.ogg": {
+  "duration_s": 40.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -10.35,
+  "max_rms_0p3s_dbfs": -21.42,
+  "overall_rms_dbfs": -24.39
+ },
+ "pad_calm_03.ogg": {
+  "duration_s": 40.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -8.8,
+  "max_rms_0p3s_dbfs": -19.32,
+  "overall_rms_dbfs": -23.73
+ },
+ "phone_catch_01.ogg": {
+  "duration_s": 0.628,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -32.41,
+  "max_rms_0p3s_dbfs": -48.14,
+  "overall_rms_dbfs": -49.32
+ },
+ "phone_catch_02.ogg": {
+  "duration_s": 2.202,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -16.85,
+  "overall_rms_dbfs": -23.75
+ },
+ "phone_catch_03.ogg": {
+  "duration_s": 0.177,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -18.89,
+  "overall_rms_dbfs": -18.89
+ },
+ "phone_catch_04.ogg": {
+  "duration_s": 0.241,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -2.66,
+  "max_rms_0p3s_dbfs": -26.86,
+  "overall_rms_dbfs": -26.86
+ },
+ "phone_catch_05.ogg": {
+  "duration_s": 0.337,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -27.9,
+  "max_rms_0p3s_dbfs": -44.09,
+  "overall_rms_dbfs": -44.6
+ },
+ "phone_catch_06.ogg": {
+  "duration_s": 3.005,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.35,
+  "max_rms_0p3s_dbfs": -27.38,
+  "overall_rms_dbfs": -37.38
+ },
+ "phone_drop_01.ogg": {
+  "duration_s": 0.698,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -18.61,
+  "overall_rms_dbfs": -22.22
+ },
+ "phone_slide_table_01.ogg": {
+  "duration_s": 8.31,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -17.59,
+  "max_rms_0p3s_dbfs": -32.51,
+  "overall_rms_dbfs": -40.62
+ },
+ "phone_slide_table_02.ogg": {
+  "duration_s": 2.197,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -8.83,
+  "max_rms_0p3s_dbfs": -20.9,
+  "overall_rms_dbfs": -27.93
+ },
+ "pop_01.ogg": {
+  "duration_s": 0.212,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.07,
+  "max_rms_0p3s_dbfs": -20.62,
+  "overall_rms_dbfs": -20.62
+ },
+ "pop_02.ogg": {
+  "duration_s": 0.458,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -8.57,
+  "max_rms_0p3s_dbfs": -24.19,
+  "overall_rms_dbfs": -26.04
+ },
+ "pop_03.ogg": {
+  "duration_s": 0.085,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.89,
+  "max_rms_0p3s_dbfs": -15.83,
+  "overall_rms_dbfs": -15.83
+ },
+ "pop_04.ogg": {
+  "duration_s": 0.466,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.87,
+  "max_rms_0p3s_dbfs": -22.12,
+  "overall_rms_dbfs": -24.0
+ },
+ "pop_05.ogg": {
+  "duration_s": 0.377,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.19,
+  "max_rms_0p3s_dbfs": -18.71,
+  "overall_rms_dbfs": -19.7
+ },
+ "pop_06.ogg": {
+  "duration_s": 0.263,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -16.65,
+  "overall_rms_dbfs": -16.65
+ },
+ "riser_01.ogg": {
+  "duration_s": 3.047,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -9.87,
+  "max_rms_0p3s_dbfs": -21.04,
+  "overall_rms_dbfs": -27.14
+ },
+ "riser_02.ogg": {
+  "duration_s": 3.75,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -7.81,
+  "max_rms_0p3s_dbfs": -18.56,
+  "overall_rms_dbfs": -25.85
+ },
+ "riser_03.ogg": {
+  "duration_s": 2.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.07,
+  "max_rms_0p3s_dbfs": -13.54,
+  "overall_rms_dbfs": -20.24
+ },
+ "riser_04.ogg": {
+  "duration_s": 9.336,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.81,
+  "max_rms_0p3s_dbfs": -12.84,
+  "overall_rms_dbfs": -14.68
+ },
+ "riser_05.ogg": {
+  "duration_s": 3.592,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.27,
+  "max_rms_0p3s_dbfs": -13.29,
+  "overall_rms_dbfs": -21.41
+ },
+ "sparkle_01.ogg": {
+  "duration_s": 1.271,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -24.35,
+  "max_rms_0p3s_dbfs": -39.4,
+  "overall_rms_dbfs": -45.6
+ },
+ "sparkle_02.ogg": {
+  "duration_s": 1.683,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -27.43,
+  "max_rms_0p3s_dbfs": -38.39,
+  "overall_rms_dbfs": -43.76
+ },
+ "sparkle_03.ogg": {
+  "duration_s": 1.497,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.98,
+  "max_rms_0p3s_dbfs": -17.92,
+  "overall_rms_dbfs": -24.55
+ },
+ "splat_soft_01.ogg": {
+  "duration_s": 0.524,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.1,
+  "max_rms_0p3s_dbfs": -19.27,
+  "overall_rms_dbfs": -21.12
+ },
+ "splat_soft_02.ogg": {
+  "duration_s": 0.623,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -2.07,
+  "max_rms_0p3s_dbfs": -21.74,
+  "overall_rms_dbfs": -24.9
+ },
+ "splat_soft_03.ogg": {
+  "duration_s": 1.012,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.04,
+  "max_rms_0p3s_dbfs": -17.02,
+  "overall_rms_dbfs": -22.3
+ },
+ "swish_01.ogg": {
+  "duration_s": 1.1,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.97,
+  "max_rms_0p3s_dbfs": -16.42,
+  "overall_rms_dbfs": -22.06
+ },
+ "swish_02.ogg": {
+  "duration_s": 1.25,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.03,
+  "max_rms_0p3s_dbfs": -14.95,
+  "overall_rms_dbfs": -21.03
+ },
+ "swish_03.ogg": {
+  "duration_s": 0.317,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.0,
+  "max_rms_0p3s_dbfs": -17.43,
+  "overall_rms_dbfs": -17.66
+ },
+ "tape_rewind_01.ogg": {
+  "duration_s": 1.81,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -13.6,
+  "overall_rms_dbfs": -15.59
+ },
+ "tape_rewind_02.ogg": {
+  "duration_s": 1.837,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -7.09,
+  "max_rms_0p3s_dbfs": -19.22,
+  "overall_rms_dbfs": -21.96
+ },
+ "tape_rewind_03.ogg": {
+  "duration_s": 4.267,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -10.58,
+  "overall_rms_dbfs": -12.55
+ },
+ "text_tick_01.ogg": {
+  "duration_s": 0.287,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -16.88,
+  "overall_rms_dbfs": -16.88
+ },
+ "text_tick_02.ogg": {
+  "duration_s": 0.117,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -5.92,
+  "max_rms_0p3s_dbfs": -32.23,
+  "overall_rms_dbfs": -32.23
+ },
+ "text_tick_03.ogg": {
+  "duration_s": 0.065,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -2.94,
+  "max_rms_0p3s_dbfs": -26.41,
+  "overall_rms_dbfs": -26.41
+ },
+ "text_tick_04.ogg": {
+  "duration_s": 1.0,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -9.96,
+  "max_rms_0p3s_dbfs": -21.47,
+  "overall_rms_dbfs": -21.51
+ },
+ "train_horn_01.ogg": {
+  "duration_s": 10.006,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -4.26,
+  "max_rms_0p3s_dbfs": -13.5,
+  "overall_rms_dbfs": -15.24
+ },
+ "train_horn_02.ogg": {
+  "duration_s": 1.891,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -8.35,
+  "overall_rms_dbfs": -10.65
+ },
+ "train_horn_03.ogg": {
+  "duration_s": 9.88,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -8.66,
+  "overall_rms_dbfs": -12.49
+ },
+ "train_pass_rush_01.ogg": {
+  "duration_s": 22.099,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.17,
+  "max_rms_0p3s_dbfs": -15.47,
+  "overall_rms_dbfs": -21.48
+ },
+ "train_pass_rush_02.ogg": {
+  "duration_s": 11.774,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.36,
+  "max_rms_0p3s_dbfs": -14.88,
+  "overall_rms_dbfs": -21.48
+ },
+ "train_pass_rush_03.ogg": {
+  "duration_s": 20.248,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -2.62,
+  "max_rms_0p3s_dbfs": -18.9,
+  "overall_rms_dbfs": -26.6
+ },
+ "train_pass_rush_04.ogg": {
+  "duration_s": 15.716,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -25.62,
+  "max_rms_0p3s_dbfs": -38.9,
+  "overall_rms_dbfs": -43.63
+ },
+ "train_pass_rush_05.ogg": {
+  "duration_s": 19.604,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.03,
+  "max_rms_0p3s_dbfs": -10.47,
+  "overall_rms_dbfs": -21.87
+ },
+ "train_rumble_approach_01.ogg": {
+  "duration_s": 26.551,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -8.18,
+  "overall_rms_dbfs": -12.96
+ },
+ "train_rumble_approach_02.ogg": {
+  "duration_s": 23.667,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -4.76,
+  "max_rms_0p3s_dbfs": -16.17,
+  "overall_rms_dbfs": -21.92
+ },
+ "train_rumble_approach_03.ogg": {
+  "duration_s": 19.998,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.02,
+  "max_rms_0p3s_dbfs": -15.27,
+  "overall_rms_dbfs": -22.04
+ },
+ "whoosh_fast_01.ogg": {
+  "duration_s": 1.757,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.21,
+  "max_rms_0p3s_dbfs": -18.31,
+  "overall_rms_dbfs": -25.94
+ },
+ "whoosh_fast_02.ogg": {
+  "duration_s": 1.334,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.73,
+  "max_rms_0p3s_dbfs": -15.2,
+  "overall_rms_dbfs": -21.1
+ },
+ "whoosh_fast_03.ogg": {
+  "duration_s": 0.526,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.89,
+  "max_rms_0p3s_dbfs": -22.64,
+  "overall_rms_dbfs": -25.08
+ },
+ "whoosh_fast_04.ogg": {
+  "duration_s": 0.847,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.03,
+  "max_rms_0p3s_dbfs": -13.97,
+  "overall_rms_dbfs": -18.24
+ },
+ "whoosh_medium_01.ogg": {
+  "duration_s": 1.606,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -10.35,
+  "max_rms_0p3s_dbfs": -20.19,
+  "overall_rms_dbfs": -25.18
+ },
+ "whoosh_medium_02.ogg": {
+  "duration_s": 2.251,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -1.38,
+  "max_rms_0p3s_dbfs": -14.87,
+  "overall_rms_dbfs": -22.82
+ },
+ "whoosh_medium_03.ogg": {
+  "duration_s": 1.922,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": 0.0,
+  "max_rms_0p3s_dbfs": -9.74,
+  "overall_rms_dbfs": -17.09
+ },
+ "whoosh_short_01.ogg": {
+  "duration_s": 0.424,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.71,
+  "max_rms_0p3s_dbfs": -18.71,
+  "overall_rms_dbfs": -20.2
+ },
+ "whoosh_short_02.ogg": {
+  "duration_s": 0.445,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.08,
+  "max_rms_0p3s_dbfs": -18.32,
+  "overall_rms_dbfs": -20.03
+ },
+ "whoosh_short_03.ogg": {
+  "duration_s": 0.434,
+  "channels": 2,
+  "sample_rate": 48000,
+  "peak_dbfs": -0.01,
+  "max_rms_0p3s_dbfs": -14.97,
+  "overall_rms_dbfs": -16.57
+ }
+}

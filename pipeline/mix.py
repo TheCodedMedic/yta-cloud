@@ -35,7 +35,10 @@ def resolve(name):
     p = pathlib.Path(name)
     if p.suffix and p.exists():
         return p
-    return LIB / f"{name}.wav"
+    for ext in (".ogg", ".wav"):
+        if (LIB / f"{name}{ext}").exists():
+            return LIB / f"{name}{ext}"
+    raise FileNotFoundError(f"no sound named {name} in {LIB}")
 
 
 def loudest(x, win=0.3):

@@ -5,3 +5,6 @@ analysis/
 episodes/*/*.wav
 episodes/*/voiceover_*.mp3
 sfx/_downloads/
+sfx/build.log
+sfx/tools/__pycache__/
+episodes/*/mix_*.wav
