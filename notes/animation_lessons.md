@@ -1,0 +1,37 @@
+# Animation lessons: character anatomy and staging
+
+Every rule here came from a real mistake found in a frame review. Read this before writing or changing any shot, and run the checklist at the bottom before every long render. When a review finds a new mistake, fix it **in the rig** when possible (so it cannot recur), then add a row here.
+
+References used for the rules: the contact → down → passing → up walk cycle with arms swinging opposite the legs (Richard Williams, *The Animator's Survival Kit*; [UW CSE 459 walk-cycle assignment](https://courses.cs.washington.edu/courses/cse459/19au/assignments/assignment_5)); the shrug as raised shoulders, forearms out, palms up, head tilted ([Shrug](https://en.wikipedia.org/wiki/Shrug), [Darwin's antithesis breakdown](https://allthingslinguistic.com/post/176385950859/origins-of-the-shrug)).
+
+## The rig (`video/src/kit/Character.tsx`) and what it enforces
+
+| Rule | Why | How the rig enforces it |
+|---|---|---|
+| **R1. One view per shot: `view="side"` (3/4, facing +x) or `view="front"` (facing camera).** | The first rig was side-view only and was used facing the camera, so both arms sprouted from the sternum. | In front view the shoulders sit at the torso corners (±40), the face is centred, and arm angles mean "outward". In side view the shoulders sit at the top of the torso (±9) and angles mean "forward". |
+| **R2. Elbows only flex forward (side) / outward-up (front); knees only flex backward.** | Several poses had forearms bending behind the upper arm (hyperextension) and the walk had the knee bending the wrong way. | `joints()` clamps every elbow and knee angle (`ELBOW`, `KNEE`). A wrong sign in a pose can no longer hyperextend a joint. |
+| **R3. Arms attach to shoulders below the neck base, never to the neck or chest.** | Shrug arms came out of the chest. | `RIG.shoulderDrop` (12 px below the neck base); all limb roots come from `joints()`. |
+| **R4. A short visible neck; the head overlaps the collar.** | A long black neck stump made the head look stuck on; no neck made it look like a ball on a box. | `RIG.headGap` 68 with `headR` 62: the head bottom sits just over the hood collar. |
+| **R5. Arms must read against the torso.** | Same-colour sleeves melted into the hoodie; dark on dark had no outline contrast. | Every arm is a single round-joined path over a dark outline; dark outfits define a lighter `sleeve` colour. Any new dark outfit must set `sleeve`. |
+| **R6. Hands are mittens aligned with the forearm, thumb toward the body; feet are shoes pointing forward, toe tilting down when the leg trails.** | Dot hands and flat ellipses for feet read as sticks. | `Limb` draws them from the forearm/shin direction. |
+| **R7. The walk is the four-pose cycle.** | The first walk bent knees mid-stance and elbows backward, with no body bob. | `walkPose(phase)`: knee straight at contact, most bent mid-swing; arms opposite the same-side leg with elbows flexed forward; body lowest at contact. Use it, don't hand-write walks. |
+| **R8. Furniture is sized from the legs.** | Seated feet dangled; the table was at chest height. | `seatLayout(hipY, s)` gives seat, floor, chair-leg and table heights. |
+| **R9. Held props sit in a hand.** | The cup floated beside the face. | Place from `handPos(x, y, s, facing, pose, which, view)` plus a fixed grip offset. |
+| **R10. Overlays never cover a face or a hand.** | The brain icon covered the eyes; a label sat on a runner's head; a foreground phone overlapped the friend's hand. | Brain icon is high on the forehead; labels use `headPos()` clearance or live in the top/bottom third; check the first, middle and last frame of a shot for overlaps. |
+
+## Staging rules for every shot
+
+- A reaching arm must end outside the head circle and point at its target: check where `handPos()` lands, not just the angle numbers.
+- Close-ups: hips at y ≈ 990 for s = 2.7, so the head centre lands near y ≈ 430 and the shoulders are in frame.
+- Front view for anything symmetric (shrug, spread arms, fists up, hero stance, reaction to camera). Side view for walking, reaching, sitting at a table, pointing.
+- Never start the long render until the checklist passes; if the code changes, stop the render and restart it (a running render keeps the old code).
+
+## Review checklist (before every long render)
+
+1. Render `KitTest` (expressions in both views, the 8 walk keys, the named poses, the seated pair) and `Strips1` (start, middle and end frame of every character shot). Look at every frame; do not rely on the middle frame alone.
+2. For each character: both arms readable against the torso; a short neck; head centred on the shoulders; mitten hands; feet on the floor or on a chair rung.
+3. No joint bends the wrong way (if one does, the clamp is wrong: fix the rig, not the pose).
+4. Every held prop is in a hand; every reach points at its target; no hand passes through the head.
+5. No overlay covers a face, an eye or a hand.
+6. Framing: head in the upper half of a close-up; nothing important under the letterbox bars.
+7. Fix, delete `out/strips`, re-render, look again. Only then render the minute.

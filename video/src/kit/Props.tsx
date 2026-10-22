@@ -64,10 +64,10 @@ export const Phone: React.FC<{ x: number; y: number; s?: number; rot?: number; g
 );
 
 /** Café table, side view. (x, y) = centre of the tabletop. */
-export const Table: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
+export const Table: React.FC<{ x: number; y: number; s?: number; h?: number }> = ({ x, y, s = 1, h = 190 }) => (
   <g transform={`translate(${x},${y}) scale(${s})`}>
-    <rect x={-8} y={0} width={16} height={190} fill={C.ink} />
-    <ellipse cx={0} cy={190} rx={60} ry={10} fill={C.ink} />
+    <rect x={-8} y={0} width={16} height={h} fill={C.ink} />
+    <ellipse cx={0} cy={h} rx={60} ry={10} fill={C.ink} />
     <ellipse cx={0} cy={0} rx={150} ry={22} fill={C.tableTop} />
     <path d="M-150,0 Q0,30 150,0 L150,10 Q0,42 -150,10 Z" fill={C.table} />
     <ellipse cx={-40} cy={-6} rx={70} ry={8} fill="white" opacity={0.08} />
@@ -75,11 +75,11 @@ export const Table: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s 
 );
 
 /** Bistro chair, side view facing right. (x, y) = seat centre. */
-export const Chair: React.FC<{ x: number; y: number; s?: number; facing?: 1 | -1 }> = ({ x, y, s = 1, facing = 1 }) => (
+export const Chair: React.FC<{ x: number; y: number; s?: number; facing?: 1 | -1; legs?: number }> = ({ x, y, s = 1, facing = 1, legs = 150 }) => (
   <g transform={`translate(${x},${y}) scale(${s * facing},${s})`} stroke={C.ink} strokeWidth={7} fill="none" strokeLinecap="round">
     <line x1={-40} y1={0} x2={40} y2={0} strokeWidth={10} />
-    <line x1={-36} y1={0} x2={-46} y2={150} />
-    <line x1={36} y1={0} x2={46} y2={150} />
+    <line x1={-36} y1={0} x2={-44} y2={legs} />
+    <line x1={36} y1={0} x2={44} y2={legs} />
     <path d="M-40,0 Q-52,-80 -40,-140" />
     <path d="M-40,-140 Q-20,-150 -16,-130" />
   </g>

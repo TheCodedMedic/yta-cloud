@@ -2,7 +2,7 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
 import { Cam, Stage } from "../kit/Camera";
-import { blinkAt, Character, mixPose, Pose, POSES } from "../kit/Character";
+import { blinkAt, Character, handPos, mixPose, Pose, POSES, seatLayout, walkPose } from "../kit/Character";
 import { clamp01, Dust, easeOut, lerp, Rings, sstep, Streaks } from "../kit/Fx";
 import { Chip, Label, Stamp, Stopwatch, TitleText } from "../kit/Graphics";
 import { Hand } from "../kit/Hand";
@@ -14,32 +14,27 @@ import { Flash, Shot } from "./types";
 
 const seg = (t: number, a: number, b: number) => clamp01((t - a) / (b - a));
 
-const walk = (ph: number, amp = 1): Pose => ({
-  lean: 8,
-  legN: [Math.sin(ph) * 32 * amp, -Math.max(0, Math.sin(ph + 1.2)) * 50 * amp],
-  legF: [-Math.sin(ph) * 32 * amp, -Math.max(0, -Math.sin(ph + 1.2)) * 50 * amp],
-  armN: [-Math.sin(ph) * 40 * amp, -50],
-  armF: [Math.sin(ph) * 40 * amp, -50],
-});
 
 /** The terrace two-shot set: hero left, friend right, table between. */
 const Terrace: React.FC<{ t: number; heroPose?: Pose; friendPose?: Pose; heroExpr?: any; friendExpr?: any; phone?: React.ReactNode; frame: number }> = ({
   t, heroPose = POSES.sitTable, friendPose = POSES.sitTable, heroExpr = "smile", friendExpr = "laugh", phone, frame,
 }) => (
   <Stage>
-    <Chair x={720} y={760} s={0.95} />
-    <Chair x={1200} y={760} s={0.95} facing={-1} />
-    <Character x={730} y={736} s={1.0} pose={heroPose} expr={heroExpr} look={[0.4, 0.2]} blink={blinkAt(frame, 7)} />
-    <Character x={1190} y={736} s={1.0} facing={-1} outfit="friend" pose={friendPose} expr={friendExpr} blink={blinkAt(frame, 40)} />
-    <Table x={960} y={690} s={1.05} />
-    <Cup x={890} y={688} s={0.45} t={t} />
+    <Chair x={740} y={L.seatY} s={0.9} legs={L.chairLegs / 0.9} />
+    <Chair x={1180} y={L.seatY} s={0.9} facing={-1} legs={L.chairLegs / 0.9} />
+    <Character x={750} y={L.hip} s={1.0} pose={heroPose} expr={heroExpr} look={[0.4, 0.2]} blink={blinkAt(frame, 7)} />
+    <Character x={1170} y={L.hip} s={1.0} facing={-1} outfit="friend" pose={friendPose} expr={friendExpr} blink={blinkAt(frame, 40)} />
+    <Table x={960} y={L.tableTopY} s={0.9} h={L.tableH / 0.9} />
+    <Cup x={895} y={L.tableTopY - 2} s={0.42} t={t} />
     {phone}
   </Stage>
 );
 
+const L = { hip: 760, ...seatLayout(760, 1) };
+
 const heroClose = (t: number, frame: number, expr: any, opts: { look?: [number, number]; pose?: Pose; glow?: number; x?: number } = {}) => (
   <Stage>
-    <Character x={opts.x ?? 960} y={990} s={2.7} pose={opts.pose ?? { lean: 4, armN: [20, -40], armF: [10, -30] }}
+    <Character x={opts.x ?? 960} y={990} s={2.7} pose={opts.pose ?? { lean: 4, armN: [14, 18], armF: [6, 16] }}
       expr={expr} look={opts.look ?? [0.3, 0.1]} blink={blinkAt(frame, 11)} brainGlow={opts.glow} />
   </Stage>
 );
@@ -63,9 +58,9 @@ export const MIN1: Shot[] = [
         <CafeBg t={t} u={u} a={[960, 560, 1.0]} b={[960, 600, 1.08]}
           patrons={
             <g>
-              <Character x={890} y={942} s={0.32} pose={POSES.sitTable} expr="smile" blink={blinkAt(f)} />
-              <Character x={1030} y={942} s={0.32} facing={-1} outfit="friend" pose={POSES.sitTable} expr="laugh" />
-              <Table x={960} y={925} s={0.35} />
+              <Character x={895} y={922} s={0.32} pose={POSES.sitTable} expr="smile" blink={blinkAt(f)} />
+              <Character x={1025} y={922} s={0.32} facing={-1} outfit="friend" pose={POSES.sitTable} expr="laugh" />
+              <Table x={960} y={902} s={0.3} h={126} />
             </g>
           } />
         <Stage>
@@ -84,7 +79,7 @@ export const MIN1: Shot[] = [
           <CafeBg t={t} u={u} a={[700, 700, 2.0]} b={[720, 700, 2.05]} blur={10} />
           <Stage>
             <Character x={760} y={1000} s={2.2} outfit="extra"
-              pose={mixPose({ lean: 0, armN: [40, -60], armF: [10, -20] }, { lean: 10, armN: [150, -10], armF: [10, -20] }, sstep(sw))}
+              pose={mixPose({ lean: 0, armN: [30, 40], armF: [-10, 10] }, { lean: 12, armN: [122, 4], armF: [-10, 10] }, sstep(sw))}
               expr={flyT > 0.2 ? "deadpan" : "determined"} look={[0.8, -0.6]} blink={blinkAt(f, 3)} />
             <Fly x={flyT < 0 ? 1180 + Math.sin(t * 6) * 30 : 1180 + flyT * 900} y={flyT < 0 ? 330 + Math.cos(t * 5) * 30 : 330 - flyT * 500}
               s={1.3} t={t} rot={flyT > 0 ? -25 : 0} />
@@ -186,7 +181,7 @@ export const MIN1: Shot[] = [
     render: (t, u, f) => (
       <AbsoluteFill>
         <CafeBg t={t} u={u} a={[760, 640, 2.2]} blur={12} />
-        {heroClose(t, f, "smug", { look: [0.2, 0], pose: { lean: 2, armN: [40, 120 + Math.sin(t * 30) * 2], armF: [10, -30] } })}
+        {heroClose(t, f, "smug", { look: [0.2, 0], pose: { lean: 2, armN: [40, 120 + Math.sin(t * 30) * 2], armF: [10, 24] } })}
       </AbsoluteFill>
     ),
   },
@@ -198,8 +193,8 @@ export const MIN1: Shot[] = [
         <CafeBg t={t} u={u} a={[960, 600, 1.35]} b={[960, 610, 1.42]} blur={3} />
         <Cam u={u} a={[960, 560, 1.0]} b={[960, 570, 1.05]} t={t}>
           <Terrace t={t} frame={f}
-            friendPose={mixPose(POSES.sitTable, { ...POSES.sitTable, armN: [120, -60] }, (Math.sin(t * 5) + 1) / 2)}
-            phone={<Phone x={1065 + seg(t, at(2, "phone") - 0.2, at(2, "slides")) * 25} y={676} s={0.32} rot={-4} />} />
+            friendPose={mixPose(POSES.sitTable, { ...POSES.sitTable, armN: [110, 30] }, (Math.sin(t * 5) + 1) / 2)}
+            phone={<Phone x={1060 + seg(t, at(2, "phone") - 0.2, at(2, "slides")) * 25} y={L.tableTopY - 6} s={0.3} rot={-4} />} />
         </Cam>
       </AbsoluteFill>
     ),
@@ -227,11 +222,11 @@ export const MIN1: Shot[] = [
       <AbsoluteFill>
         <CafeBg t={t} u={u} a={[1160, 640, 2.2]} blur={12} />
         <Stage>
-          <Character x={980} y={990} s={2.7} facing={-1} outfit="friend" pose={{ lean: 6, armN: [120, -60], armF: [20, -30] }} expr="laugh" />
+          <Character x={1040} y={990} s={2.7} facing={-1} outfit="friend" pose={{ lean: 6, armN: [70, 40], armF: [20, 24] }} expr="laugh" />
         </Stage>
         <AbsoluteFill style={{ filter: "blur(10px)" }}>
           <Stage>
-            <Phone x={560} y={780 + (t - at(2, "Before")) * 18} s={3.2} rot={30 + (t - at(2, "Before")) * 6} />
+            <Phone x={380} y={900 + (t - at(2, "Before")) * 18} s={3.0} rot={30 + (t - at(2, "Before")) * 6} />
           </Stage>
         </AbsoluteFill>
         <Dust t={t * 0.1} n={40} seed="frz" />
@@ -274,13 +269,15 @@ export const MIN1: Shot[] = [
     id: "sip", t0: at(2, "and", 1), t1: PS(3),
     render: (t, u, f) => {
       const lift = sstep(seg(t, at(2, "and", 1), at(2, "sip")));
+      const pose: Pose = { lean: -2, armN: [lerp(20, 95, lift), lerp(70, 105, lift)], armF: [-10, 10], head: lift * 8 };
+      const [hx, hy] = handPos(900, 990, 2.7, 1, pose);
       return (
         <AbsoluteFill>
           <CafeBg t={t} u={u} a={[760, 640, 2.2]} blur={12} />
           <Stage>
-            <Character x={900} y={990} s={2.7} pose={{ lean: -2, armN: [lerp(30, 110, lift), lerp(-60, -150, lift)], armF: [10, -30], head: lift * 8 }}
-              expr={lift > 0.8 ? "happy" : "smile"} blink={blinkAt(f, 2)} />
-            <Cup x={lerp(1150, 1090, lift)} y={lerp(1000, 640, lift)} s={1.1} t={t} />
+            <Character x={900} y={990} s={2.7} pose={pose} expr={lift > 0.8 ? "happy" : "smile"} blink={blinkAt(f, 2)} />
+            {/* handle in the hand, mug toward the face */}
+            <Cup x={hx - 20} y={hy + 34} s={1.0} t={t} />
           </Stage>
         </AbsoluteFill>
       );
@@ -294,7 +291,7 @@ export const MIN1: Shot[] = [
         <CafeBg t={t} u={u} a={[1160, 640, 2.2]} blur={12} />
         <Cam u={u} a={[960, 540, 1.0]} b={[960, 500, 1.12]} t={t}>
           <Stage>
-            <Character x={980} y={990} s={2.7} facing={-1} outfit="friend" pose={{ lean: 2, armN: [10, -20], armF: [10, -20] }} expr="shock" blink={blinkAt(f, 30)} />
+            <Character x={980} y={990} s={2.7} facing={-1} outfit="friend" pose={{ lean: 2, armN: [10, 16], armF: [10, 16] }} expr="shock" blink={blinkAt(f, 30)} />
           </Stage>
         </Cam>
       </AbsoluteFill>
@@ -308,7 +305,7 @@ export const MIN1: Shot[] = [
         <AbsoluteFill>
           <CafeBg t={t} u={u} a={[760, 640, 2.0]} blur={10} />
           <Stage>
-            <Character x={960} y={960} s={2.3} pose={mixPose({ lean: 0, armN: [20, -30], armF: [-10, 20] }, POSES.shrug, k)}
+            <Character x={960} y={960} s={2.3} view="front" pose={mixPose(POSES.front, POSES.shrug, k)}
               expr={k > 0.6 ? "happy" : "smile"} blink={blinkAt(f, 5)} />
           </Stage>
         </AbsoluteFill>
@@ -348,7 +345,7 @@ export const MIN1: Shot[] = [
           <Streaks t={t} n={18} speed={2400} opacity={0.25 * g} />
           <Cam u={u} a={[960, 560, 1]} b={[960, 520, 1.1]} t={t}>
             <Stage>
-              <Character x={960} y={990} s={2.6} pose={POSES.hero} expr={g > 0.5 ? "smug" : "smile"} brainGlow={g} blink={blinkAt(f, 9)} rimDir={[0, -1]} />
+              <Character x={960} y={990} s={2.6} view="front" pose={POSES.hero} expr={g > 0.5 ? "smug" : "smile"} brainGlow={g} blink={blinkAt(f, 9)} rimDir={[0, -1]} />
               <Rings t={t - at(4, "ten")} cx={960} cy={610} scale={1.2} color={C.gold} />
             </Stage>
           </Cam>
@@ -365,9 +362,9 @@ export const MIN1: Shot[] = [
         <CafeBg t={t} u={u} a={[960, 640, 1.15]} b={[960, 470, 1.0]}
           patrons={
             <g>
-              <Character x={890} y={942} s={0.32} pose={POSES.sitTable} expr="smile" blink={blinkAt(f)} />
-              <Character x={1030} y={942} s={0.32} facing={-1} outfit="friend" pose={POSES.sitTable} expr="laugh" />
-              <Table x={960} y={925} s={0.35} />
+              <Character x={895} y={922} s={0.32} pose={POSES.sitTable} expr="smile" blink={blinkAt(f)} />
+              <Character x={1025} y={922} s={0.32} facing={-1} outfit="friend" pose={POSES.sitTable} expr="laugh" />
+              <Table x={960} y={902} s={0.3} h={126} />
             </g>
           } />
         <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(20,10,30,0.65) 0%, rgba(20,10,30,0.35) 40%, transparent 55%)" }} />
@@ -385,7 +382,7 @@ export const MIN1: Shot[] = [
           <CafeBg t={t} u={u} a={[760, 640, 1.9]} blur={12} dim={0.25} />
           <Stage>
             <Character x={720} y={960 - (t > react ? Math.sin(seg(t, react, react + 0.3) * Math.PI) * 40 : 0)} s={2.2} outfit="extra"
-              pose={t > react ? POSES.fistsUp : POSES.stand} expr={t > react ? "shock" : "neutral"} blink={blinkAt(f, 21)} />
+              view="front" pose={t > react ? POSES.frontFists : POSES.front} expr={t > react ? "shock" : "neutral"} blink={blinkAt(f, 21)} />
           </Stage>
           <Stopwatch x={1340} y={330} s={2.2} t={seg(t, at(6, "quarter"), react) * 0.25} sweep={4} value={t > at(6, "quarter") ? "0.25 s" : "0.00 s"} />
         </AbsoluteFill>
@@ -405,7 +402,7 @@ export const MIN1: Shot[] = [
       return (
         <AbsoluteFill>
           <Blueprint t={t}>
-            <Character x={760} y={890} s={1.9} pose={mixPose({ armN: [20, -10], armF: [-6, -4], legN: [4, 0], legF: [-4, 0] }, { armN: [80, -10], armF: [-6, -4], legN: [4, 0], legF: [-4, 0] }, move)}
+            <Character x={760} y={890} s={1.9} pose={mixPose({ armN: [20, 10], armF: [-6, 10], legN: [4, 0], legF: [-4, 0] }, { armN: [80, 6], armF: [-6, 10], legN: [4, 0], legF: [-4, 0] }, move)}
               expr="neutral" look={[1, 0]} brainGlow={t > tB ? 0.9 : 0} blink={blinkAt(f, 13)} />
             <circle cx={dot[0]} cy={dot[1]} r={14} fill={C.gold} />
             <circle cx={dot[0]} cy={dot[1]} r={34} fill={C.gold} opacity={0.25} />
@@ -449,12 +446,12 @@ export const MIN1: Shot[] = [
           <Blueprint t={t}>
             <line x1={320} y1={540} x2={1720} y2={540} stroke="#3c5a78" strokeWidth={2} />
             <line x1={330} y1={160} x2={330} y2={920} stroke={C.cream} strokeWidth={4} strokeDasharray="14 10" />
-            <Character x={380 + norm} y={420} s={0.9} outfit="extra" pose={norm > 0 ? walk(t * 11) : POSES.stand} expr="neutral" />
-            <Character x={380 + hero} y={840} s={0.9} pose={hero > 0 ? walk(t * 11) : POSES.stand} expr="happy" blink={blinkAt(f)} />
+            <Character x={380 + norm} y={420} s={0.9} outfit="extra" pose={norm > 0 ? walkPose(t * 11) : POSES.stand} expr="neutral" />
+            <Character x={380 + hero} y={840} s={0.9} pose={hero > 0 ? walkPose(t * 11) : POSES.stand} expr="happy" blink={blinkAt(f)} />
             {bracket > 0 && (
               <g opacity={bracket}>
-                <path d={`M${420 + norm},${590} L${420 + norm},615 L${420 + hero},615 L${420 + hero},590`} stroke={C.gold} strokeWidth={4} fill="none" />
-                <text x={420 + (norm + hero) / 2} y={675} textAnchor="middle" fill={C.gold} fontFamily={FONT_UI} fontWeight={800} fontSize={48} letterSpacing={3}>0.225 s</text>
+                <path d={`M${400 + norm},${585} L${400 + norm},605 L${400 + hero},605 L${400 + hero},585`} stroke={C.gold} strokeWidth={4} fill="none" />
+                <text x={400 + (norm + hero) / 2} y={570} textAnchor="middle" fill={C.gold} fontFamily={FONT_UI} fontWeight={800} fontSize={48} letterSpacing={3}>0.225 s</text>
               </g>
             )}
           </Blueprint>
@@ -494,7 +491,7 @@ export const MIN1: Shot[] = [
           <CafeBg t={t} u={u} a={[960, 640, 1.8]} blur={10} />
           <Stage>
             <Character x={960} y={890} s={1.9}
-              pose={{ lean: 0, armN: [40 + flap * 50, -20], armF: [-40 - flap * 50, 20], legN: [6, 0], legF: [-6, 0] }}
+              view="front" pose={{ lean: 0, armN: [45 + flap * 55, 12], armF: [45 + flap * 55, 12], legN: [8, 0], legF: [8, 0] }}
               expr={t > arms ? "deadpan" : "happy"} brainGlow={sstep(seg(t, at(8, "brain"), at(8, "upgrade")))} blink={blinkAt(f, 17)} />
           </Stage>
           <Chip x={960} y={250} t={t - at(8, "upgrade")} text="BRAIN  ×10" accent={C.gold} />
@@ -513,8 +510,8 @@ export const MIN1: Shot[] = [
         <AbsoluteFill>
           <Blueprint t={t}>
             <line x1={330} y1={160} x2={330} y2={920} stroke={C.cream} strokeWidth={4} strokeDasharray="14 10" />
-            <Character x={380 + norm} y={420} s={0.9} outfit="extra" pose={norm > 0 ? walk(t * 11) : POSES.stand} expr="neutral" />
-            <Character x={380 + hero} y={840} s={0.9} pose={walk(t * 11)} expr="happy" blink={blinkAt(f)} />
+            <Character x={380 + norm} y={420} s={0.9} outfit="extra" pose={norm > 0 ? walkPose(t * 11) : POSES.stand} expr="neutral" />
+            <Character x={380 + hero} y={840} s={0.9} pose={walkPose(t * 11)} expr="happy" blink={blinkAt(f)} />
           </Blueprint>
           <Chip x={960} y={600} t={t - at(8, "faster")} text="SAME SPEED" accent="#8a8aa0" size={38} />
           <Chip x={1450} y={680} t={t - at(8, "earlier", 1)} text="EARLIER" accent={C.gold} />
@@ -532,7 +529,7 @@ export const MIN1: Shot[] = [
           <Streaks t={t} n={26} speed={1800} opacity={0.3} />
           <Cam u={u} a={[960, 560, 1.18]} b={[960, 600, 1.0]} t={t}>
             <Stage>
-              <Character x={960} y={900} s={1.6} pose={POSES.hero} expr="happy" blink={blinkAt(f, 4)} rimDir={[0, -1]}
+              <Character x={960} y={900} s={1.6} view="front" pose={POSES.hero} expr="happy" blink={blinkAt(f, 4)} rimDir={[0, -1]}
                 brainGlow={0.4 + 0.5 * sstep(seg(t, sp, sp + 0.3))} />
               <Rings t={t - sp} cx={960} cy={680} scale={1.4} color={C.gold} />
             </Stage>

@@ -1,17 +1,28 @@
 import React from "react";
 import { C } from "../theme";
 
-// Angle convention (degrees): a limb hangs straight down at 0; +90 points forward
-// (the way the character faces), -90 backward, 180 straight up. Forearm / shin
-// angles are relative to the upper limb.
+// ─── Conventions ───────────────────────────────────────────────────────────────
+// Local space: hips at (0,0), y down, scale 1. Standing height ≈ 300 px.
+// Two views:
+//   "side"  – the 3/4 view, character faces +x. Limb angle 0 = hanging down,
+//             + swings FORWARD (toward +x), 180 = straight up.
+//   "front" – facing the camera. Limb angle 0 = hanging down, + swings OUTWARD
+//             (away from the body's centre line), 180 = straight up.
+// Elbow / knee angles are RELATIVE to the upper limb and are clamped so that
+// elbows only flex forward (side) / outward-up (front) and knees only flex
+// backward. A wrong sign in a pose can therefore never hyper-extend a joint.
+
+export type View = "side" | "front";
+
 export type Pose = {
-  lean?: number; // torso tilt, + leans forward
-  head?: number; // head tilt
-  armN?: [number, number]; // near arm: shoulder, elbow
-  armF?: [number, number]; // far arm
+  lean?: number;   // torso tilt (deg), + leans forward (side) / to the right (front)
+  head?: number;   // extra head tilt (deg)
+  armN?: [number, number]; // near arm (screen-right in front view): shoulder, elbow
+  armF?: [number, number]; // far arm (screen-left in front view)
   legN?: [number, number]; // near leg: hip, knee
   legF?: [number, number];
-  shrug?: number; // 0..1 shoulders up
+  shrug?: number;  // 0..1 shoulders up
+  bob?: number;    // vertical offset of the whole body (px, − = up)
 };
 
 export type Expr =
@@ -20,68 +31,173 @@ export type Expr =
 
 export type Outfit = "hero" | "friend" | "scientist" | "sister" | "extra";
 
-const OUTFIT: Record<Outfit, { top: string; topDark: string; legs: string; long?: boolean }> = {
+// `sleeve` is the near-arm colour. On dark outfits it is a step lighter than the
+// torso: a dark outline cannot separate a dark arm from a dark body.
+const OUTFIT: Record<Outfit, { top: string; topDark: string; legs: string; long?: boolean; sleeve?: string }> = {
   hero: { top: C.hoodie, topDark: C.hoodieDark, legs: C.ink },
-  friend: { top: C.friendTop, topDark: "#1d1c2a", legs: "#1a1622" },
+  friend: { top: C.friendTop, topDark: "#1d1c2a", legs: "#1a1622", sleeve: "#45435e" },
   scientist: { top: C.coat, topDark: "#bdbab2", legs: C.ink, long: true },
   sister: { top: "#c56aa8", topDark: "#93487c", legs: C.ink },
-  extra: { top: "#5b5470", topDark: "#433d55", legs: "#221c2c" },
+  extra: { top: "#5b5470", topDark: "#433d55", legs: "#221c2c", sleeve: "#6e6787" },
 };
 
+export const RIG = {
+  neck: 96,      // hips → base of neck
+  headR: 62,
+  headGap: 68,   // base of neck → head centre (head bottom just overlaps the collar)
+  upperArm: 54,
+  foreArm: 50,
+  thigh: 56,
+  shin: 54,
+  hipX: 9,
+  shoulderSide: 9,   // shoulder x offset in side view (near +, far −)
+  shoulderFront: 40, // shoulder x offset in front view
+  shoulderDrop: 12,  // shoulders sit this far below the neck base
+};
+
+const ELBOW: Record<View, [number, number]> = { side: [-4, 150], front: [-150, 150] };
+const KNEE: [number, number] = [-150, 4];
+const clamp = (v: number, [lo, hi]: [number, number]) => Math.max(lo, Math.min(hi, v));
+
 export const POSES = {
-  stand: { lean: 0, armN: [8, -6], armF: [-6, -4], legN: [4, 0], legF: [-4, 0] },
-  sit: { lean: -4, armN: [30, -70], armF: [24, -64], legN: [88, -92], legF: [82, -88] },
-  sitTable: { lean: 6, armN: [55, -10], armF: [48, -12], legN: [88, -92], legF: [82, -88] },
-  shrug: { lean: 0, armN: [30, 95], armF: [-30, -95], legN: [4, 0], legF: [-4, 0], shrug: 1 },
-  point: { lean: 4, armN: [100, -10], armF: [-6, -4], legN: [4, 0], legF: [-4, 0] },
-  armUp: { lean: 0, armN: [165, 10], armF: [-6, -4], legN: [4, 0], legF: [-4, 0] },
+  // side view
+  stand: { lean: 0, armN: [10, 14], armF: [-8, 12], legN: [4, 0], legF: [-4, 0] },
+  sit: { lean: -4, armN: [30, 70], armF: [24, 64], legN: [88, -92], legF: [82, -88] },
+  sitTable: { lean: 6, armN: [50, 32], armF: [44, 28], legN: [88, -92], legF: [82, -88] },
+  point: { lean: 4, armN: [95, 6], armF: [-8, 12], legN: [4, 0], legF: [-4, 0] },
+  armUp: { lean: 0, armN: [160, 6], armF: [-8, 12], legN: [4, 0], legF: [-4, 0] },
   fistsUp: { lean: 2, armN: [60, 100], armF: [50, 105], legN: [10, -6], legF: [-8, 0] },
-  hero: { lean: 0, armN: [20, -30], armF: [-20, 30], legN: [14, 0], legF: [-12, 0] },
+  // front view
+  front: { lean: 0, armN: [12, 8], armF: [12, 8], legN: [6, 0], legF: [6, 0] },
+  hero: { lean: 0, armN: [18, 10], armF: [18, 10], legN: [12, 0], legF: [12, 0] },
+  spread: { lean: 0, armN: [82, 14], armF: [82, 14], legN: [8, 0], legF: [8, 0] },
+  shrug: { lean: 0, armN: [52, 108], armF: [52, 108], legN: [6, 0], legF: [6, 0], shrug: 1, head: 8 },
+  frontFists: { lean: 0, armN: [40, 125], armF: [40, 125], legN: [8, 0], legF: [8, 0] },
 } satisfies Record<string, Pose>;
 
 export const mixPose = (a: Pose, b: Pose, u: number): Pose => {
   const m = (x = 0, y = 0) => x + (y - x) * u;
   const m2 = (x: [number, number] = [0, 0], y: [number, number] = [0, 0]): [number, number] => [m(x[0], y[0]), m(x[1], y[1])];
   return {
-    lean: m(a.lean, b.lean), head: m(a.head, b.head), shrug: m(a.shrug, b.shrug),
+    lean: m(a.lean, b.lean), head: m(a.head, b.head), shrug: m(a.shrug, b.shrug), bob: m(a.bob, b.bob),
     armN: m2(a.armN, b.armN), armF: m2(a.armF, b.armF), legN: m2(a.legN, b.legN), legF: m2(a.legF, b.legF),
+  };
+};
+
+/**
+ * Side-view walk, phase in radians (one full cycle = 2π). Built on the
+ * contact → down → passing → up cycle: the knee is straight at contact (leg
+ * forward), bends most mid-swing, the arms swing opposite the same-side leg
+ * with elbows flexed forward, and the body is lowest at contact.
+ */
+export const walkPose = (ph: number, amp = 1): Pose => {
+  const leg = (p: number): [number, number] => [30 * amp * Math.sin(p), -(8 + 55 * amp * Math.max(0, Math.cos(p)))];
+  const arm = (p: number): [number, number] => [-26 * amp * Math.sin(p), 18 + 16 * Math.max(0, Math.sin(p))];
+  return {
+    lean: 6, legN: leg(ph), legF: leg(ph + Math.PI), armN: arm(ph), armF: arm(ph + Math.PI),
+    bob: -4 * Math.abs(Math.cos(ph)),
   };
 };
 
 const rad = (d: number) => (d * Math.PI) / 180;
 const dir = (deg: number, len: number) => [Math.sin(rad(deg)) * len, Math.cos(rad(deg)) * len];
 
+/** Joint positions in local space for a pose and view. */
+export const joints = (pose: Pose, view: View = "side") => {
+  const lean = pose.lean ?? 0;
+  const shrug = (pose.shrug ?? 0) * 10;
+  const bob = pose.bob ?? 0;
+  const [nx, ny0] = dir(180 - lean, RIG.neck);
+  const ny = ny0 + bob;
+  const sx = view === "side" ? RIG.shoulderSide : RIG.shoulderFront;
+  const shN: [number, number] = [nx + sx, ny + RIG.shoulderDrop - shrug];
+  const shF: [number, number] = [nx - sx, ny + RIG.shoulderDrop - shrug];
+  // front view: the far arm's "outward" is −x
+  const mir = (a: [number, number], far: boolean): [number, number] => (view === "front" && far ? [-a[0], -a[1]] : a);
+  const limb = (root: [number, number], a: [number, number], l1: number, l2: number, lim: [number, number], far: boolean) => {
+    const ang: [number, number] = [a[0], clamp(a[1], lim)];
+    const [a0, a1] = mir(ang, far);
+    const [ax, ay] = dir(a0, l1);
+    const [bx, by] = dir(a0 + a1, l2);
+    return { root, mid: [root[0] + ax, root[1] + ay] as [number, number], end: [root[0] + ax + bx, root[1] + ay + by] as [number, number], ang: [a0, a1] as [number, number] };
+  };
+  const hipN: [number, number] = [RIG.hipX, bob];
+  const hipF: [number, number] = [-RIG.hipX, bob];
+  return {
+    neck: [nx, ny] as [number, number],
+    head: [nx, ny - RIG.headGap - shrug * 0.4] as [number, number],
+    shN, shF, bob,
+    armN: limb(shN, pose.armN ?? [0, 0], RIG.upperArm, RIG.foreArm, ELBOW[view], false),
+    armF: limb(shF, pose.armF ?? [0, 0], RIG.upperArm, RIG.foreArm, ELBOW[view], true),
+    legN: limb(hipN, pose.legN ?? [0, 0], RIG.thigh, RIG.shin, KNEE, false),
+    legF: limb(hipF, pose.legF ?? [0, 0], RIG.thigh, RIG.shin, KNEE, true),
+  };
+};
+
+/** World position of a hand: attach held props here, never by guesswork. */
+export const handPos = (x: number, y: number, s: number, facing: 1 | -1, pose: Pose, which: "N" | "F" = "N", view: View = "side"): [number, number] => {
+  const h = joints(pose, view)[which === "N" ? "armN" : "armF"].end;
+  return [x + h[0] * s * facing, y + h[1] * s];
+};
+
+/** World position of the head centre (speech bubbles, rings, glows, label clearance). */
+export const headPos = (x: number, y: number, s: number, facing: 1 | -1, pose: Pose, view: View = "side"): [number, number] => {
+  const h = joints(pose, view).head;
+  return [x + h[0] * s * facing, y + h[1] * s];
+};
+
+/** Floor level under a standing character (feet bottom). */
+export const floorY = (y: number, s: number) => y + (RIG.thigh + RIG.shin + 6) * s;
+
+/** Seated layout derived from the leg lengths, so feet reach the floor and the table meets the hands. */
+export const seatLayout = (hipY: number, s: number) => ({
+  seatY: hipY + 8 * s,
+  floorY: hipY + (RIG.shin + 8) * s,
+  chairLegs: RIG.shin * s,
+  tableTopY: hipY - 60 * s,
+  tableH: (RIG.shin + 68) * s,
+});
+
+// ─── Drawing ───────────────────────────────────────────────────────────────────
+
 const Limb: React.FC<{
-  x: number; y: number; a: [number, number]; l1: number; l2: number;
-  w1: number; w2: number; c1: string; c2: string; end: "hand" | "foot"; paint?: string; ink: string;
-}> = ({ x, y, a, l1, l2, w1, w2, c1, c2, end, paint, ink }) => {
-  const [dx1, dy1] = dir(a[0], l1);
-  const [dx2, dy2] = dir(a[0] + a[1], l2);
-  const ex = x + dx1, ey = y + dy1, hx = ex + dx2, hy = ey + dy2;
+  j: { root: [number, number]; mid: [number, number]; end: [number, number]; ang: [number, number] };
+  w: number; color: string; end: "hand" | "foot"; paint?: string; outline?: boolean; facing: 1 | -1;
+}> = ({ j, w, color, end, paint, outline, facing }) => {
+  const d = `M${j.root[0]},${j.root[1]} L${j.mid[0]},${j.mid[1]} L${j.end[0]},${j.end[1]}`;
+  const [ex, ey] = j.end;
+  const fa = (Math.atan2(ey - j.mid[1], ex - j.mid[0]) * 180) / Math.PI; // forearm / shin direction
   return (
-    <g strokeLinecap="round">
-      <line x1={x} y1={y} x2={ex} y2={ey} stroke={paint ?? c1} strokeWidth={w1} />
-      <line x1={ex} y1={ey} x2={hx} y2={hy} stroke={paint ?? c2} strokeWidth={w2} />
+    <g strokeLinecap="round" strokeLinejoin="round" fill="none">
+      {outline && !paint && <path d={d} stroke={C.outline} strokeWidth={w + 6} opacity={0.9} />}
+      <path d={d} stroke={paint ?? color} strokeWidth={w} />
       {end === "hand" ? (
-        <circle cx={hx} cy={hy} r={w2 * 0.62} fill={paint ?? ink} />
+        // mitten in line with the forearm, thumb toward the body
+        <g transform={`translate(${ex},${ey}) rotate(${fa})`}>
+          <ellipse cx={6} cy={0} rx={w * 0.8} ry={w * 0.62} fill={paint ?? C.ink} stroke="none" />
+          <circle cx={1} cy={-w * 0.55 * facing} r={w * 0.3} fill={paint ?? C.ink} stroke="none" />
+        </g>
       ) : (
-        <ellipse cx={hx + 7} cy={hy + 2} rx={12} ry={6} fill={paint ?? ink} />
+        // shoe: toe forward; tilts toe-down when the leg trails behind
+        <g transform={`translate(${ex},${ey}) rotate(${Math.max(-30, Math.min(30, -(j.ang[0] + j.ang[1]) * 0.45))})`}>
+          <path d="M-10,-4 L12,-4 Q22,-2 22,5 L-10,5 Z" fill={paint ?? C.ink} stroke="none" />
+        </g>
       )}
     </g>
   );
 };
 
-export const Face: React.FC<{ expr: Expr; look?: [number, number]; blink?: boolean; glasses?: boolean }> = ({
-  expr, look = [0, 0], blink, glasses,
+export const Face: React.FC<{ expr: Expr; look?: [number, number]; blink?: boolean; glasses?: boolean; view?: View }> = ({
+  expr, look = [0, 0], blink, glasses, view = "side",
 }) => {
-  const fx = 12 + look[0] * 10;
+  const fx = (view === "side" ? 12 : 0) + look[0] * 10;
   const fy = -6 + look[1] * 8;
   const st = { stroke: C.face, strokeWidth: 4.5, strokeLinecap: "round" as const, fill: "none" };
   const eyes: [number, number][] = [[fx - 15, fy], [fx + 15, fy]];
   let eyeEls: React.ReactNode;
   if (blink) {
     eyeEls = eyes.map(([x, y], i) => <line key={i} x1={x - 6} y1={y + 1} x2={x + 6} y2={y + 1} {...st} />);
-  } else if (expr === "happy" || expr === "laugh" && false) {
+  } else if (expr === "happy") {
     eyeEls = eyes.map(([x, y], i) => <path key={i} d={`M${x - 7},${y + 3} Q${x},${y - 7} ${x + 7},${y + 3}`} {...st} />);
   } else if (expr === "laugh") {
     eyeEls = eyes.map(([x, y], i) => (
@@ -164,74 +280,79 @@ export const Face: React.FC<{ expr: Expr; look?: [number, number]; blink?: boole
 };
 
 const Body: React.FC<{
-  pose: Pose; outfit: Outfit; paint?: string; expr: Expr; look?: [number, number]; blink?: boolean;
+  pose: Pose; outfit: Outfit; view: View; facing: 1 | -1; paint?: string; expr: Expr; look?: [number, number]; blink?: boolean;
   brainGlow?: number;
-}> = ({ pose, outfit, paint, expr, look, blink, brainGlow = 0 }) => {
+}> = ({ pose, outfit, view, facing, paint, expr, look, blink, brainGlow = 0 }) => {
   const o = OUTFIT[outfit];
   const lean = pose.lean ?? 0;
-  const shrug = (pose.shrug ?? 0) * 10;
-  const neck = dir(180 - lean, 100);
-  const [nx, ny] = [neck[0], neck[1]];
-  const sh = { x: nx - 2, y: ny + 16 - shrug };
-  const armArgs = (a: [number, number], near: boolean) => ({
-    x: sh.x + (near ? 6 : -6), y: sh.y, a, l1: 56, l2: 52, w1: 18, w2: 16,
-    c1: near ? o.top : o.topDark, c2: near ? o.top : o.topDark, end: "hand" as const, paint, ink: C.ink,
-  });
-  const legArgs = (a: [number, number], near: boolean) => ({
-    x: near ? 8 : -8, y: -2, a, l1: 58, l2: 56, w1: 15, w2: 13,
-    c1: o.legs, c2: o.legs, end: "foot" as const, paint, ink: C.ink,
-  });
+  const J = joints(pose, view);
+  const [nx, ny] = J.neck;
   const fill = (c: string) => paint ?? c;
-  const torsoLen = o.long ? 150 : 0;
+  const front = view === "front";
+  const hw = front ? 44 : 36; // half width at the shoulders
+  const hb = front ? 40 : 34; // half width at the hips
+  const sh = -RIG.neck + RIG.shoulderDrop - 6; // shoulder line y (torso space)
+  const torso = `M${-hw},${sh + 10} Q${-hw},${sh - 10} ${-hw + 16},${sh - 12} L${hw - 16},${sh - 12} Q${hw},${sh - 10} ${hw},${sh + 10} Q${hw + 4},-40 ${hb},4 L${-hb},4 Q${-hw - 4},-40 ${-hw},${sh + 10} Z`;
+  const near = { w: 18, color: o.sleeve ?? o.top, end: "hand" as const, paint, outline: true, facing };
+  const farA = { w: 17, color: o.topDark, end: "hand" as const, paint, outline: true, facing };
+  const leg = { w: 15, color: o.legs, end: "foot" as const, paint, facing };
   return (
     <g>
-      <Limb {...armArgs(pose.armF ?? [0, 0], false)} />
-      <Limb {...legArgs(pose.legF ?? [0, 0], false)} />
-      <g transform={`rotate(${-lean})`}>
-        <path
-          d={`M-33,-102 Q-46,-55 -37,4 L35,4 Q44,-55 31,-102 Q0,-114 -33,-102 Z`}
-          fill={fill(o.top)}
-        />
-        {o.long && <path d="M-37,-10 L-42,52 L38,52 L35,-10 Z" fill={fill(o.top)} />}
+      <Limb j={J.armF} {...farA} />
+      <Limb j={J.legF} {...leg} />
+      <g transform={`translate(0,${J.bob}) rotate(${-lean})`}>
+        <path d={torso} fill={fill(o.top)} />
+        {o.long && <path d={`M${-hb - 1},-10 L${-hb - 7},54 L${hb + 3},54 L${hb + 1},-10 Z`} fill={fill(o.top)} />}
         {!paint && (
           <>
-            <path d="M-33,-102 Q-46,-55 -37,4 L-22,4 Q-30,-55 -16,-106 Z" fill={o.topDark} opacity={0.55} />
+            {/* shade on the far side */}
+            <path d={`M${-hw},${sh + 10} Q${-hw - 4},-40 ${-hb},4 L${-hb + 14},4 Q${-hw + 10},-40 ${-hw + 12},${sh - 8} Q${-hw},${sh - 6} ${-hw},${sh + 10} Z`} fill={o.topDark} opacity={0.5} />
             {outfit === "hero" && (
               <>
-                <ellipse cx={-20} cy={-102} rx={20} ry={12} fill={o.topDark} />
-                <line x1={12} y1={-98} x2={14} y2={-72} stroke={C.cream} strokeWidth={3} strokeLinecap="round" />
-                <line x1={21} y1={-98} x2={23} y2={-74} stroke={C.cream} strokeWidth={3} strokeLinecap="round" />
-                <path d="M-16,-26 L26,-26" stroke={o.topDark} strokeWidth={3} />
+                <line x1={front ? -10 : 8} y1={-94} x2={front ? -9 : 10} y2={-66} stroke={C.cream} strokeWidth={3} strokeLinecap="round" />
+                <line x1={front ? 10 : 20} y1={-94} x2={front ? 11 : 22} y2={-68} stroke={C.cream} strokeWidth={3} strokeLinecap="round" />
+                <path d={`M${-hb + 12},-26 L${hb - 10},-26`} stroke={o.topDark} strokeWidth={3} />
               </>
             )}
-            {outfit === "scientist" && <line x1={4} y1={-100} x2={2} y2={50} stroke="#bdbab2" strokeWidth={3} />}
-            {/* gloss streak */}
-            <path d="M18,-94 Q32,-62 26,-24" stroke="white" strokeOpacity={0.16} strokeWidth={4} fill="none" strokeLinecap="round" />
+            {outfit === "scientist" && <line x1={front ? 0 : 4} y1={-96} x2={front ? 0 : 2} y2={50} stroke="#bdbab2" strokeWidth={3} />}
+            <path d={`M${hw - 14},-92 Q${hw - 2},-60 ${hw - 8},-24`} stroke="white" strokeOpacity={0.16} strokeWidth={4} fill="none" strokeLinecap="round" />
           </>
         )}
       </g>
-      <Limb {...legArgs(pose.legN ?? [0, 0], true)} />
-      <g transform={`translate(${nx},${ny - 8 - shrug * 0.4}) rotate(${-(pose.head ?? 0) - lean * 0.3}) translate(0,-58)`}>
-        <circle r={62} fill={fill(C.ink)} />
+      <Limb j={J.legN} {...leg} />
+      {/* short neck, then the hood collar over it */}
+      <line x1={nx} y1={ny + 2} x2={J.head[0]} y2={J.head[1] + 30} stroke={fill(C.ink)} strokeWidth={22} strokeLinecap="round" />
+      {(outfit === "hero" || outfit === "sister") && (
+        <path d={`M${nx - 36},${ny + 4} Q${nx - 32},${ny - 14} ${nx - 6},${ny - 12} Q${nx + 20},${ny - 11} ${nx + 32},${ny + 4} Q${nx},${ny + 16} ${nx - 36},${ny + 4} Z`} fill={fill(o.topDark)} />
+      )}
+      {outfit === "scientist" && (
+        <path d={`M${nx - 26},${ny + 6} L${nx - 10},${ny - 8} L${nx},${ny + 4} L${nx + 10},${ny - 8} L${nx + 26},${ny + 6} Z`} fill={fill(o.topDark)} />
+      )}
+      <g transform={`translate(${J.head[0]},${J.head[1]}) rotate(${-(pose.head ?? 0) - lean * 0.3})`}>
+        <circle r={RIG.headR} fill={fill(C.ink)} />
         {!paint && (
           <>
             <path d="M-36,-42 A55,55 0 0 1 26,-52" stroke="white" strokeOpacity={0.13} strokeWidth={6} fill="none" strokeLinecap="round" />
             <circle cx={-32} cy={-36} r={3.5} fill="white" opacity={0.35} />
             {brainGlow > 0 && (
-              <g opacity={brainGlow} transform="translate(-4,-22) scale(0.8)">
+              <g opacity={brainGlow} transform={`translate(${front ? -8 : -4},-30) scale(0.72)`}>
                 <circle cx={4} cy={-18} r={30} fill={C.gold} opacity={0.25} />
                 <path d="M-10,-24 q0,-12 12,-12 q4,-6 12,-2 q10,0 10,10 q6,6 0,13 q-2,9 -12,8 q-6,6 -14,1 q-10,0 -9,-9 q-6,-5 1,-9 z"
                   fill="none" stroke={C.gold} strokeWidth={3.5} />
                 <path d="M4,-34 q-4,8 2,14 q-6,6 0,12" fill="none" stroke={C.gold} strokeWidth={2.5} />
               </g>
             )}
-            <g transform="scale(1.3)"><Face expr={expr} look={look} blink={blink} glasses={outfit === "scientist"} /></g>
+            <g transform="scale(1.3)"><Face expr={expr} look={look} blink={blink} glasses={outfit === "scientist"} view={view} /></g>
           </>
         )}
         {outfit === "friend" && (
           <g>
             <path d="M-60,-14 A62,62 0 0 1 58,-24 L60,-14 Z" fill={fill(C.cap)} />
-            <path d="M36,-22 Q84,-26 102,-12 Q72,-7 40,-10 Z" fill={fill(C.capDark)} />
+            {front ? (
+              <path d="M-50,-20 Q0,-2 50,-20 Q0,-8 -50,-20 Z" fill={fill(C.capDark)} />
+            ) : (
+              <path d="M36,-22 Q84,-26 102,-12 Q72,-7 40,-10 Z" fill={fill(C.capDark)} />
+            )}
             {!paint && <path d="M-34,-36 Q-8,-52 22,-46" stroke="white" strokeOpacity={0.3} strokeWidth={5} fill="none" strokeLinecap="round" />}
           </g>
         )}
@@ -242,24 +363,27 @@ const Body: React.FC<{
           </g>
         )}
       </g>
-      <Limb {...armArgs(pose.armN ?? [0, 0], true)} />
+      <Limb j={J.armN} {...near} />
     </g>
   );
 };
 
-/** A full character. (x, y) is the hip point; height ≈ 380·s standing. */
+/** A full character. (x, y) is the hip point; standing height ≈ 300·s. */
 export const Character: React.FC<{
-  x: number; y: number; s?: number; facing?: 1 | -1; outfit?: Outfit; pose?: Pose;
+  x: number; y: number; s?: number; facing?: 1 | -1; view?: View; outfit?: Outfit; pose?: Pose;
   expr?: Expr; look?: [number, number]; blink?: boolean; rim?: string; rimDir?: [number, number];
   brainGlow?: number;
-}> = ({ x, y, s = 1, facing = 1, outfit = "hero", pose = POSES.stand, expr = "neutral", look, blink, rim = C.rim, rimDir = [-1, -0.5], brainGlow }) => (
-  <g transform={`translate(${x},${y}) scale(${s * facing},${s})`}>
-    <g transform={`translate(${rimDir[0] * 5 * facing},${rimDir[1] * 5})`}>
-      <Body pose={pose} outfit={outfit} paint={rim} expr={expr} />
+}> = ({ x, y, s = 1, facing = 1, view = "side", outfit = "hero", pose, expr = "neutral", look, blink, rim = C.rim, rimDir = [-1, -0.5], brainGlow }) => {
+  const p = pose ?? (view === "front" ? POSES.front : POSES.stand);
+  return (
+    <g transform={`translate(${x},${y}) scale(${s * facing},${s})`}>
+      <g transform={`translate(${rimDir[0] * 5 * facing},${rimDir[1] * 5})`}>
+        <Body pose={p} outfit={outfit} view={view} facing={facing} paint={rim} expr={expr} />
+      </g>
+      <Body pose={p} outfit={outfit} view={view} facing={facing} expr={expr} look={look} blink={blink} brainGlow={brainGlow} />
     </g>
-    <Body pose={pose} outfit={outfit} expr={expr} look={look} blink={blink} brainGlow={brainGlow} />
-  </g>
-);
+  );
+};
 
 /** Blink every ~3.7 s (2 frames), phase per character. */
 export const blinkAt = (frame: number, phase = 0) => (frame + phase) % 89 < 2;
