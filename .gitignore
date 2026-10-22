@@ -4,3 +4,4 @@ source/
 analysis/
 episodes/*/*.wav
 episodes/*/voiceover_*.mp3
+sfx/_downloads/
