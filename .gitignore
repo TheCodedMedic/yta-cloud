@@ -11,3 +11,4 @@ episodes/*/mix_*.wav
 episodes/*/*.mp4
 episodes/*/final_check.jpg
 __pycache__/
+episodes/*/*.log
