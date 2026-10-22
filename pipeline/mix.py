@@ -74,8 +74,14 @@ def main(cue_path, out_path):
 
     beds = np.zeros((total, 2), np.float32)
     cache = {}
+
+    def get(name):
+        if name not in cache:
+            cache[name] = load(resolve(name))
+        return cache[name]
+
     for name, start, stop, rel, fi, fo in cues.BEDS:
-        clip = cache.setdefault(name, load(resolve(name)))
+        clip = get(name)
         a, b = int(start * SR), min(total, int(stop * SR))
         if b <= a:
             continue
@@ -93,7 +99,7 @@ def main(cue_path, out_path):
 
     fx = np.zeros((total, 2), np.float32)
     for name, at, rel in cues.SFX:
-        clip = cache.setdefault(name, load(resolve(name)))
+        clip = get(name)
         a = int(at * SR)
         if a >= total or a < 0:
             continue
