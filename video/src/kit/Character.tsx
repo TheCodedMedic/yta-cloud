@@ -31,14 +31,15 @@ export type Expr =
 
 export type Outfit = "hero" | "friend" | "scientist" | "sister" | "extra";
 
-// `sleeve` is the near-arm colour. On dark outfits it is a step lighter than the
-// torso: a dark outline cannot separate a dark arm from a dark body.
-const OUTFIT: Record<Outfit, { top: string; topDark: string; legs: string; long?: boolean; sleeve?: string }> = {
-  hero: { top: C.hoodie, topDark: C.hoodieDark, legs: C.ink },
-  friend: { top: C.friendTop, topDark: "#1d1c2a", legs: "#1a1622", sleeve: "#45435e" },
-  scientist: { top: C.coat, topDark: "#bdbab2", legs: C.ink, long: true },
-  sister: { top: "#c56aa8", topDark: "#93487c", legs: C.ink },
-  extra: { top: "#5b5470", topDark: "#433d55", legs: "#221c2c", sleeve: "#6e6787" },
+// No outlines (they flatten the look). Depth comes from tone: the near sleeve is
+// a step lighter than the torso, the far sleeve darker, plus the rim light on the
+// lit edge and a soft shadow where a limb crosses the body.
+const OUTFIT: Record<Outfit, { top: string; topDark: string; legs: string; long?: boolean; sleeve: string }> = {
+  hero: { top: C.hoodie, topDark: C.hoodieDark, legs: C.ink, sleeve: "#e4503f" },
+  friend: { top: C.friendTop, topDark: "#1d1c2a", legs: "#1a1622", sleeve: "#4a4866" },
+  scientist: { top: C.coat, topDark: "#c6c3ba", legs: C.ink, long: true, sleeve: "#f8f6f1" },
+  sister: { top: "#c56aa8", topDark: "#93487c", legs: C.ink, sleeve: "#d57dbb" },
+  extra: { top: "#5b5470", topDark: "#433d55", legs: "#221c2c", sleeve: "#726b8d" },
 };
 
 export const RIG = {
@@ -162,14 +163,15 @@ export const seatLayout = (hipY: number, s: number) => ({
 
 const Limb: React.FC<{
   j: { root: [number, number]; mid: [number, number]; end: [number, number]; ang: [number, number] };
-  w: number; color: string; end: "hand" | "foot"; paint?: string; outline?: boolean; facing: 1 | -1;
-}> = ({ j, w, color, end, paint, outline, facing }) => {
+  w: number; color: string; end: "hand" | "foot"; paint?: string; shadow?: boolean; facing: 1 | -1;
+}> = ({ j, w, color, end, paint, shadow, facing }) => {
   const d = `M${j.root[0]},${j.root[1]} L${j.mid[0]},${j.mid[1]} L${j.end[0]},${j.end[1]}`;
   const [ex, ey] = j.end;
   const fa = (Math.atan2(ey - j.mid[1], ex - j.mid[0]) * 180) / Math.PI; // forearm / shin direction
   return (
     <g strokeLinecap="round" strokeLinejoin="round" fill="none">
-      {outline && !paint && <path d={d} stroke={C.outline} strokeWidth={w + 6} opacity={0.9} />}
+      {/* soft contact shadow under the limb, not an outline */}
+      {shadow && !paint && <path d={d} stroke={C.ink} strokeWidth={w + 7} opacity={0.16} transform="translate(2,5)" />}
       <path d={d} stroke={paint ?? color} strokeWidth={w} />
       {end === "hand" ? (
         // mitten in line with the forearm, thumb toward the body
@@ -293,8 +295,8 @@ const Body: React.FC<{
   const hb = front ? 40 : 34; // half width at the hips
   const sh = -RIG.neck + RIG.shoulderDrop - 6; // shoulder line y (torso space)
   const torso = `M${-hw},${sh + 10} Q${-hw},${sh - 10} ${-hw + 16},${sh - 12} L${hw - 16},${sh - 12} Q${hw},${sh - 10} ${hw},${sh + 10} Q${hw + 4},-40 ${hb},4 L${-hb},4 Q${-hw - 4},-40 ${-hw},${sh + 10} Z`;
-  const near = { w: 18, color: o.sleeve ?? o.top, end: "hand" as const, paint, outline: true, facing };
-  const farA = { w: 17, color: o.topDark, end: "hand" as const, paint, outline: true, facing };
+  const near = { w: 18, color: o.sleeve, end: "hand" as const, paint, shadow: true, facing };
+  const farA = { w: 17, color: o.topDark, end: "hand" as const, paint, facing };
   const leg = { w: 15, color: o.legs, end: "foot" as const, paint, facing };
   return (
     <g>
