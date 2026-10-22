@@ -105,14 +105,15 @@ export const MotionBlur: React.FC<{ amount: number; angle?: number; children: Re
 };
 
 /**
- * Whip-pan transition: returns the blur amount and horizontal offset for a cut at `cut`
- * lasting `dur`. The outgoing shot slides out, the incoming slides in, both smeared.
+ * Whip-pan transition across a cut at `cut` lasting `dur`. Returns the blur amount and
+ * `slide` (0..W): draw the outgoing shot at translateX(-slide) and the incoming at
+ * translateX(W - slide) (mirror both for dir = -1). Outside the transition `slide` is 0 or W.
  */
 export const whip = (t: number, cut: number, dur = 0.22, dir: 1 | -1 = 1) => {
   const u = (t - (cut - dur / 2)) / dur;
-  if (u < 0 || u > 1) return { blur: 0, dx: 0, phase: u < 0 ? "before" : "after" } as const;
-  const k = Math.sin(u * Math.PI);
-  return { blur: 70 * k, dx: -dir * (u < 0.5 ? u * 2 : (u - 1) * 2) * W, phase: u < 0.5 ? "before" : "after" } as const;
+  const k = u <= 0 ? 0 : u >= 1 ? 1 : sstep(u);
+  const blur = u <= 0 || u >= 1 ? 0 : 70 * Math.sin(u * Math.PI);
+  return { blur, slide: k * W * dir, active: u > 0 && u < 1, after: u >= 0.5 } as const;
 };
 
 /** Anamorphic-style horizontal light streak on bright points. */

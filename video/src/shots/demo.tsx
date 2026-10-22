@@ -58,25 +58,26 @@ export const DEMO: Shot[] = [
       const tt = t - CUTS.whip;
       const cut = 1.5;
       const wp = whip(tt, cut, 0.26, 1);
-      const onHero = tt < cut;
       const heroHead = headPos(960, 990, 2.7, 1, POSES.stand);
       const look = lookAt(heroHead, [2400, 500]);
+      const bg = <><Sky t={t} sunY={170} /><CafeFront t={t} wind={0.4} /><Bokeh t={t} n={12} seed="wb" opacity={0.3} /></>;
+      const heroShot = (
+        <Camera t={tt} hand={1} keys={[{ at: 0, x: 960, y: 540, zoom: 1 }, { at: 1.5, x: 980, y: 530, zoom: 1.06 }]}
+          layers={[{ depth: 0.4, blur: 12, children: bg }, { depth: 1, children: (
+            <Stage><Character x={960} y={990} s={2.7} pose={idle({ lean: 4, armN: [14, 18], armF: [6, 16] }, tt, 2, 1.2)} expr={tt > 0.9 ? "smug" : "smile"} look={tt > 0.6 ? look : [0.2, 0.1]} blink={blinkAt(f, 11)} /></Stage>
+          ) }]} />
+      );
+      const friendShot = (
+        <Camera t={tt} hand={1} keys={[{ at: 1.5, x: 940, y: 540, zoom: 1.06 }, { at: 3.1, x: 960, y: 540, zoom: 1 }]}
+          layers={[{ depth: 0.4, blur: 12, children: bg }, { depth: 1, children: (
+            <Stage><Character x={980} y={990} s={2.7} facing={-1} outfit="friend" pose={idle({ lean: 2, armN: [30, 50 + Math.sin(tt * 6) * 8], armF: [10, 16] }, tt, 5, 1.2)} expr="laugh" look={[0.5, 0.1]} blink={blinkAt(f, 30)} /></Stage>
+          ) }]} />
+      );
       return (
         <AbsoluteFill>
           <MotionBlur amount={wp.blur}>
-            <AbsoluteFill style={{ transform: `translateX(${wp.dx}px)` }}>
-              <Camera t={tt} hand={1} keys={onHero ? [{ at: 0, x: 960, y: 540, zoom: 1 }, { at: 1.5, x: 980, y: 530, zoom: 1.06 }] : [{ at: 1.5, x: 940, y: 540, zoom: 1.06 }, { at: 3.1, x: 960, y: 540, zoom: 1 }]}
-                layers={[
-                  { depth: 0.4, blur: 12, children: <><Sky t={t} sunY={170} /><CafeFront t={t} wind={0.4} /><Bokeh t={t} n={12} seed="wb" opacity={0.3} /></> },
-                  { depth: 1, children: (
-                    <Stage>
-                      {onHero
-                        ? <Character x={960} y={990} s={2.7} pose={idle({ lean: 4, armN: [14, 18], armF: [6, 16] }, tt, 2, 1.2)} expr={tt > 0.9 ? "smug" : "smile"} look={tt > 0.6 ? look : [0.2, 0.1]} blink={blinkAt(f, 11)} />
-                        : <Character x={980} y={990} s={2.7} facing={-1} outfit="friend" pose={idle({ lean: 2, armN: [30, 50 + Math.sin(tt * 6) * 8], armF: [10, 16] }, tt, 5, 1.2)} expr="laugh" look={[0.5, 0.1]} blink={blinkAt(f, 30)} />}
-                    </Stage>
-                  ) },
-                ]} />
-            </AbsoluteFill>
+            {(wp.active || !wp.after) && <AbsoluteFill style={{ transform: `translateX(${-wp.slide}px)` }}>{heroShot}</AbsoluteFill>}
+            {(wp.active || wp.after) && <AbsoluteFill style={{ transform: `translateX(${W - wp.slide}px)` }}>{friendShot}</AbsoluteFill>}
           </MotionBlur>
         </AbsoluteFill>
       );
