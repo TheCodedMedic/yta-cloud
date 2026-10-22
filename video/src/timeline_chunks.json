@@ -1,0 +1,258 @@
+[
+ {
+  "index": 0,
+  "speaker": "N",
+  "start": 0.3,
+  "end": 9.223,
+  "gap_after": 0.45,
+  "text": "Every human who has ever lived has lost a fight to a fly. It sees your hand coming from a mile away. It has all the time in the world."
+ },
+ {
+  "index": 1,
+  "speaker": "N",
+  "start": 9.673,
+  "end": 16.267,
+  "gap_after": 0.45,
+  "text": "But today, one lands on your coffee cup, and you don't swat. You just close your hand. Gotcha."
+ },
+ {
+  "index": 2,
+  "speaker": "N",
+  "start": 16.717,
+  "end": 25.976,
+  "gap_after": 0.45,
+  "text": "Across the table, your friend's phone slides off the edge. Before he even notices it's falling, you've caught it, put it back, and taken a sip of coffee."
+ },
+ {
+  "index": 3,
+  "speaker": "N",
+  "start": 26.426,
+  "end": 31.789,
+  "gap_after": 0.45,
+  "text": "He stares at you. You shrug. To you, that phone fell in slow motion."
+ },
+ {
+  "index": 4,
+  "speaker": "N",
+  "start": 32.239,
+  "end": 36.109,
+  "gap_after": 0.6,
+  "text": "Because your brain now runs ten times faster than everyone else's."
+ },
+ {
+  "index": 5,
+  "speaker": "N",
+  "start": 36.709,
+  "end": 39.922,
+  "gap_after": 2.2,
+  "text": "What if your reaction time was ten times faster?"
+ },
+ {
+  "index": 6,
+  "speaker": "N",
+  "start": 42.122,
+  "end": 51.031,
+  "gap_after": 0.45,
+  "text": "Normally, it takes you about a quarter of a second to react. Light hits your eyes, your brain decides, and only then do your muscles move."
+ },
+ {
+  "index": 7,
+  "speaker": "N",
+  "start": 51.481,
+  "end": 59.07,
+  "gap_after": 0.6,
+  "text": "Yours takes two and a half hundredths of a second. That gap between you and everyone else? Let's call it your head start."
+ },
+ {
+  "index": 8,
+  "speaker": "N",
+  "start": 59.67,
+  "end": 71.258,
+  "gap_after": 1.0,
+  "text": "But here's the catch. Only your brain got the upgrade. Your arms are the same old arms. You're not faster. You're earlier. And it turns out, earlier is almost a superpower."
+ },
+ {
+  "index": 9,
+  "speaker": "N",
+  "start": 72.258,
+  "end": 80.656,
+  "gap_after": 0.45,
+  "text": "A blink lasts about a tenth of a second. For you, every blink is a full second of darkness. You start blinking a lot less."
+ },
+ {
+  "index": 10,
+  "speaker": "N",
+  "start": 81.106,
+  "end": 89.88,
+  "gap_after": 0.45,
+  "text": "Toast slides off the plate? Caught, butter side up. Your little sister's ice cream tips off the cone? Caught, and placed right back on top."
+ },
+ {
+  "index": 11,
+  "speaker": "N",
+  "start": 90.33,
+  "end": 101.354,
+  "gap_after": 0.45,
+  "text": "Online games stop being fair. By the time other players see you, you've already moved. Forty wins in a row. Your inbox fills up with one word. Hacker."
+ },
+ {
+  "index": 12,
+  "speaker": "N",
+  "start": 101.804,
+  "end": 109.907,
+  "gap_after": 0.45,
+  "text": "Dodgeball becomes a nature documentary. You stand in the middle with your hands in your pockets, and nobody hits you. Not once."
+ },
+ {
+  "index": 13,
+  "speaker": "N",
+  "start": 110.357,
+  "end": 112.501,
+  "gap_after": 0.9,
+  "text": "And then, things start getting weird."
+ },
+ {
+  "index": 14,
+  "speaker": "N",
+  "start": 113.401,
+  "end": 120.049,
+  "gap_after": 0.45,
+  "text": "Your brain is burning energy like a gaming computer. You eat five meals a day, and you're still hungry."
+ },
+ {
+  "index": 15,
+  "speaker": "N",
+  "start": 120.499,
+  "end": 129.438,
+  "gap_after": 0.45,
+  "text": "Conversations feel like loading screens. Your friend starts a sentence, and you've already guessed the ending, answered it in your head, and gotten bored."
+ },
+ {
+  "index": 16,
+  "speaker": "N",
+  "start": 129.888,
+  "end": 135.231,
+  "gap_after": 0.45,
+  "text": "A ten minute bus ride feels like an hour and a half. A school day feels like a week."
+ },
+ {
+  "index": 17,
+  "speaker": "N",
+  "start": 135.681,
+  "end": 142.591,
+  "gap_after": 0.45,
+  "text": "So you start finishing people's sentences. Then their jokes. And one day, your friend just stops telling you jokes."
+ },
+ {
+  "index": 18,
+  "speaker": "N",
+  "start": 143.041,
+  "end": 147.296,
+  "gap_after": 1.5,
+  "text": "Being early for everything, it turns out, is a lonely way to live."
+ },
+ {
+  "index": 19,
+  "speaker": "N",
+  "start": 148.796,
+  "end": 153.925,
+  "gap_after": 1.2,
+  "text": "But one Saturday afternoon, being early is the only thing that matters."
+ },
+ {
+  "index": 20,
+  "speaker": "N",
+  "start": 155.125,
+  "end": 161.907,
+  "gap_after": 0.45,
+  "text": "The train platform is packed. Your friend, your little sister, and the red balloon she's been carrying all day."
+ },
+ {
+  "index": 21,
+  "speaker": "N",
+  "start": 162.357,
+  "end": 171.145,
+  "gap_after": 0.3,
+  "text": "The string slips out of her hand. She follows it. One step. Two. Toward the edge. And the express train that doesn't stop here."
+ },
+ {
+  "index": 22,
+  "speaker": "N",
+  "start": 171.445,
+  "end": 175.49,
+  "gap_after": 0.8,
+  "text": "Everyone else will see it in a quarter of a second. You see it now."
+ },
+ {
+  "index": 23,
+  "speaker": "N",
+  "start": 176.29,
+  "end": 184.913,
+  "gap_after": 0.45,
+  "text": "And here's the thing about a head start. You can't run faster than anyone. Your legs are normal legs. All you get is time to think."
+ },
+ {
+  "index": 24,
+  "speaker": "N",
+  "start": 185.363,
+  "end": 193.157,
+  "gap_after": 0.45,
+  "text": "So you think. Grab her arm? Too far. Shout? She won't hear you over the train. You get one move."
+ },
+ {
+  "index": 25,
+  "speaker": "N",
+  "start": 193.607,
+  "end": 196.925,
+  "gap_after": 0.3,
+  "text": "You don't reach for your sister. You reach for the balloon."
+ },
+ {
+  "index": 26,
+  "speaker": "N",
+  "start": 197.225,
+  "end": 202.12,
+  "gap_after": 3.0,
+  "text": "The string stops. She stops. She looks up at the balloon, then at you."
+ },
+ {
+  "index": 27,
+  "speaker": "N",
+  "start": 205.12,
+  "end": 214.64,
+  "gap_after": 0.45,
+  "text": "By the time anyone else on the platform reacts, it's already over. Nobody even knows anything happened. Except your friend. He saw the whole thing."
+ },
+ {
+  "index": 28,
+  "speaker": "N",
+  "start": 215.09,
+  "end": 222.271,
+  "gap_after": 1.0,
+  "text": "And for the first time in months, he isn't looking at you like a hacker. He just says, okay. Tell me what it's like."
+ },
+ {
+  "index": 29,
+  "speaker": "N",
+  "start": 223.271,
+  "end": 231.712,
+  "gap_after": 0.45,
+  "text": "So you tell him. Slowly. You let him finish his sentences. You laugh at the end of his joke, even though you saw it coming a mile away."
+ },
+ {
+  "index": 30,
+  "speaker": "N",
+  "start": 232.162,
+  "end": 239.043,
+  "gap_after": 1.5,
+  "text": "And when a fly lands on your coffee cup, you just watch it. You have all the time in the world. So you let it go."
+ },
+ {
+  "index": 31,
+  "speaker": "N",
+  "start": 240.543,
+  "end": 249.108,
+  "gap_after": 3.5,
+  "text": "What would you do with a quarter second head start? Tell us in the comments. And if you'd have reached for the balloon too, subscribe for more what ifs."
+ }
+]
