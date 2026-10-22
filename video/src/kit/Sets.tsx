@@ -47,7 +47,8 @@ export const SunRays: React.FC<{ cx: number; cy: number; t: number; opacity?: nu
 );
 
 /** Café front at sunset. Drawn in 1920x1080 space; wrap in a camera to frame it. */
-export const CafeFront: React.FC<{ t: number; y?: number; patrons?: React.ReactNode }> = ({ t, y = 140, patrons }) => {
+export const CafeFront: React.FC<{ t: number; y?: number; patrons?: React.ReactNode; wind?: number }> = ({ t, y = 140, patrons, wind = 0 }) => {
+  const flap = (i: number) => wind * (6 + 6 * Math.sin(t * 9 + i * 0.9)) + wind * wind * 4 * Math.sin(t * 15 + i);
   const x = 330, w = 1260;
   const stripes = 18, sw = w / stripes;
   const awningY = y + 430, winY = awningY + 112, winH = 300;
@@ -93,7 +94,7 @@ export const CafeFront: React.FC<{ t: number; y?: number; patrons?: React.ReactN
       <text x={x + w / 2} y={awningY - 42} textAnchor="middle" fontSize={26} fontWeight={800} letterSpacing={8} fill={C.windowHot} fontFamily="sans-serif">CAFÉ</text>
       {/* awning */}
       {Array.from({ length: stripes }, (_, i) => (
-        <path key={i} d={`M${x + i * sw},${awningY} h${sw} v64 q${-sw / 2},20 ${-sw},0 z`} fill={i % 2 ? C.awningCream : C.awningRed} />
+        <path key={i} d={`M${x + i * sw},${awningY} h${sw} v${64 + flap(i)} q${-sw / 2},${20 + flap(i) * 0.8} ${-sw},${-flap(i) * 0.3} z`} fill={i % 2 ? C.awningCream : C.awningRed} />
       ))}
       <rect x={x - 12} y={awningY - 12} width={w + 24} height={14} fill={C.shadow} />
       {/* window glow + panes */}
@@ -130,9 +131,11 @@ export const CafeFront: React.FC<{ t: number; y?: number; patrons?: React.ReactN
       <rect x={1700} y={540} width={10} height={560} fill={C.ink} />
       <circle cx={1705} cy={532} r={14} fill={C.windowHot} />
       <circle cx={1705} cy={532} r={70} fill={C.windowHot} opacity={0.14} />
-      <circle cx={180} cy={650} r={84} fill="#1a1420" />
-      <circle cx={130} cy={700} r={60} fill="#1a1420" />
-      <rect x={172} y={680} width={14} height={420} fill="#1a1420" />
+      <g transform={`rotate(${wind * (3 + 2.5 * Math.sin(t * 1.3)) + wind * Math.sin(t * 7) * 0.8} 180 1100)`}>
+        <circle cx={180 + wind * 8} cy={650} r={84} fill="#1a1420" />
+        <circle cx={130 + wind * 10} cy={700} r={60} fill="#1a1420" />
+        <rect x={172} y={680} width={14} height={420} fill="#1a1420" />
+      </g>
     </svg>
   );
 };
