@@ -2,3 +2,5 @@
 voice-test/
 source/
 analysis/
+episodes/*/*.wav
+episodes/*/voiceover_*.mp3

@@ -9,7 +9,7 @@ Pipeline: Remotion (React/TypeScript) for picture, Python for analysis, voice, t
 - [x] Narrator voice: **Channel_Master_Voice** (id in `.env` as `FISH_NARRATOR_VOICE_ID`), model `s2.1-pro-free`
 - [x] Reference video downloaded from Drive (link-shared folder) to `source/` (git-ignored)
 - [x] First-minute analysis: `notes/findings.md`
-- [ ] Story / topic for the first video
+- [x] Episode "head_start": original script on the reaction-time premise, voiceover 4:12 (Channel_Master_Voice), words verified with Whisper
 - [ ] First minute
 - [ ] Full video
 
