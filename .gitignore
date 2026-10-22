@@ -8,3 +8,5 @@ sfx/_downloads/
 sfx/build.log
 sfx/tools/__pycache__/
 episodes/*/mix_*.wav
+episodes/*/*.mp4
+episodes/*/final_check.jpg
