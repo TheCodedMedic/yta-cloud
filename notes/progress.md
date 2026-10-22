@@ -7,7 +7,8 @@ Pipeline: Remotion (React/TypeScript) for picture, Python for analysis, voice, t
 - [x] Skill loaded (`.claude/skills/nexus-what-if/SKILL.md`); `workspace/` bundle not available — rebuild in Remotion
 - [x] Fish Audio key works (stored in `.env`, git-ignored, as `FISH_API_KEY`)
 - [x] Narrator voice: **Channel_Master_Voice** (id in `.env` as `FISH_NARRATOR_VOICE_ID`), model `s2.1-pro-free`
-- [ ] Reference video: first 1-2 min into Drive "1 - Reference videos" (<10 MB), then analysis
+- [x] Reference video downloaded from Drive (link-shared folder) to `source/` (git-ignored)
+- [x] First-minute analysis: `notes/findings.md`
 - [ ] Story / topic for the first video
 - [ ] First minute
 - [ ] Full video
