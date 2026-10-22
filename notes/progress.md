@@ -13,7 +13,9 @@ Pipeline: Remotion (React/TypeScript) for picture, Python for analysis, voice, t
 - [x] Sound library: `sfx/` (177 sounds, credits.json, library_index.md, levels.json)
 - [x] First minute v1: `episodes/head_start/head_start_minute1.mp4` (72 s, -14 LUFS), cue sheet `cues_min1.py` — awaiting review
 - [x] Full episode v1: `episodes/head_start/head_start_full.mp4` (4:13, 1080p, -14 LUFS); render 54 min on one 4-core session; 47 beds + 319 effects — awaiting review
-- [ ] Review feedback → fixes → v2
+- [x] Feedback: next videos must feel like a filmed animation (camera moves, wind, rain, speed, angle changes)
+- [x] Cinematic kit built (`Cinema`, `Atmos`, `Motion`, `TopDown`) + 20 s demo reel `video/out/demo_cinematic.mp4`
+- [ ] Head Start v2 with the cinematic kit, or next episode script
 - [ ] Parallel rendering across sessions for the next episode (see chat notes: workers need no voice file; segments return via Drive)
 
 Drive folder: "Claude Video Studio" (1 - Reference videos, 2 - Skills, 3 - Finished renders)

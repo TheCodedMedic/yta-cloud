@@ -35,3 +35,16 @@ References used for the rules: the contact → down → passing → up walk cycl
 5. No overlay covers a face, an eye or a hand.
 6. Framing: head in the upper half of a close-up; nothing important under the letterbox bars.
 7. Fix, delete `out/strips`, re-render, look again. Only then render the minute.
+
+## Camera and world motion (`video/src/kit/Cinema.tsx`, `Atmos.tsx`, `Motion.tsx`, `TopDown.tsx`)
+
+| Rule | Why | How the kit enforces it |
+|---|---|---|
+| **C1. Every shot has a moving camera and a moving world.** A locked frame with a static background reads as a slideshow. | v1 of Head Start felt like slides with characters. | Use `Camera` with at least two keyframes (push, drift or pan) and `handheld` on; give sets `wind`, and add at least one atmosphere layer (`Leaves`, `Clouds`, `Dust`, `Rain`, `Fog`) per scene. |
+| **C2. Parallax layers pivot on the frame centre and overscan.** | The first parallax maths shifted far layers off-centre, leaving black bands at the edges. | `Camera` moves a layer by `(cam − centre) × depth` and scales far layers up (`overscan`) so edges never show. |
+| **C3. A long camera move needs a set wider than the move.** | The sprint ran off the end of a single café. | Wrap the set in `TileX` for travelling shots. |
+| **C4. A rolled (tilted) camera needs zoom ≥ 1.15.** | Black corners at 0° … 6° roll at zoom 1. | Keep `zoom ≥ 1.15` whenever `roll ≠ 0`. |
+| **C5. Cut between angles like coverage: wide → close → top-down → over-the-shoulder; whip-pan between people.** | Same angle for 10 s is dead. | `TopChar`/`TopCafe` for top-downs, `whip()` + `MotionBlur` for whip pans, `focus`/`dof` for rack focus. |
+| **C6. Idle characters breathe and look at things.** | Frozen poses between actions. | Wrap poses in `idle()`; drive `look` with `lookAt()` toward whatever matters in the shot. |
+| **C7. Speed is shown, not stated.** | A fast runner at normal frame reads slow. | `runPose` + `Trail` ghosts + `DustKicks` at `footfalls` + `Streaks`/`RadialLines` + camera lag and a punch-in on the burst. |
+| **C8. Weather has depth.** | Flat rain looks like a screen filter. | Two `Rain` depths (far behind the subject, near in front), `Splashes` on the ground line, `WetReflection` under lights, `LensBeads` only on night/rain shots, `Fog` low. |
