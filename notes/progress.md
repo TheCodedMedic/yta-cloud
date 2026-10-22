@@ -12,6 +12,8 @@ Pipeline: Remotion (React/TypeScript) for picture, Python for analysis, voice, t
 - [x] Episode "head_start": original script on the reaction-time premise, voiceover 4:12 (Channel_Master_Voice), words verified with Whisper
 - [x] Sound library: `sfx/` (177 sounds, credits.json, library_index.md, levels.json)
 - [x] First minute v1: `episodes/head_start/head_start_minute1.mp4` (72 s, -14 LUFS), cue sheet `cues_min1.py` — awaiting review
-- [ ] Full video
+- [x] Full episode v1: `episodes/head_start/head_start_full.mp4` (4:13, 1080p, -14 LUFS); render 54 min on one 4-core session; 47 beds + 319 effects — awaiting review
+- [ ] Review feedback → fixes → v2
+- [ ] Parallel rendering across sessions for the next episode (see chat notes: workers need no voice file; segments return via Drive)
 
 Drive folder: "Claude Video Studio" (1 - Reference videos, 2 - Skills, 3 - Finished renders)

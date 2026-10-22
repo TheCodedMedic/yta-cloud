@@ -26,7 +26,7 @@ def main(pic, mix, out, web=None):
     m = json.loads(probe[probe.index("{"): probe.rindex("}") + 1])
     af = (f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}"
           f":measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true,"
-          f"alimiter=limit=0.84:level=false,apad=whole_dur={plen + 0.1},atrim=duration={plen + 0.02}")
+          f"alimiter=limit=0.74:level=false:attack=3:release=60,apad=whole_dur={plen + 0.1},atrim=duration={plen + 0.02}")
     r = run(["ffmpeg", "-v", "error", "-y", "-i", pic, "-i", mix, "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-af", af,
              "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-t", str(plen), "-movflags", "+faststart", out])
     if r.returncode:
