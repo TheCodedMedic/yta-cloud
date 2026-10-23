@@ -28,3 +28,5 @@ Drive folder: "Claude Video Studio" (1 - Reference videos, 2 - Skills, 3 - Finis
 - [x] Music: 34 Mixkit tracks by mood in `music/library/` (git-ignored; `music/credits.json`, `music/README.md`). Freesound is blocked from cloud IPs (403).
 - [x] Sound: `pipeline/synth.py` (sizzle, drill, bell, buzz, monitor, thought pops/whoomps…), `pipeline/cuekit.py`, cue sheets `episodes/05_no_pain/cues.py`, `episodes/06_read_your_mind/cues.py`. Mixer duck envelope now a running sum (was a 30-minute convolution).
 - Render: `--gl=swangle`, 30 fps; two renders in parallel share the CPU (~47 frames/min combined, ~0.9 s/frame alone).
+- [x] Finished: `episodes/05_no_pain/ep05_no_pain_final.mp4` (5:57, −14.1 LUFS, TP −1.9) and `episodes/06_read_your_mind/ep06_read_your_mind_final.mp4` (5:32, −14.1 LUFS, TP −1.7). Delivered to the user; MP4s are git-ignored.
+- [ ] Awaiting the user's review of both episodes.
