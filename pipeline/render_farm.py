@@ -69,7 +69,7 @@ def collect(job):
     (out / "list.txt").write_text("".join(f"file '{n}'\n" for n in names))
     final = out / f"{job}.mp4"
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(out / "list.txt"), "-c", "copy", "-movflags", "+faststart", str(final)], check=True)
-    n = subprocess.run(["ffprobe", "-v", "error", "-count_packets", "-select_streams", "v:0", "-show_entries", "stream=nb_read_packets", "-of", "csv=p=0", str(final)], capture_output=True, text=True).stdout.strip()
+    n = subprocess.run(["ffprobe", "-v", "error", "-count_packets", "-select_streams", "v:0", "-show_entries", "stream=nb_read_packets", "-of", "csv=p=0", str(final)], capture_output=True, text=True).stdout.strip().strip(",")
     print(f"{final}: {n} frames (expected {pl['total']})" + ("" if int(n) == pl["total"] else "  <-- MISMATCH"))
 
 

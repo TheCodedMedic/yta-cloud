@@ -17,6 +17,7 @@ import { DEMO, DEMO_END } from "./shots/demo";
 import { F } from "./timing";
 import { Short, ShortPicture, ShortStrips, SHORT_FRAMES, SHORT_STRIPS } from "./short/Short";
 import { FPS, H, W } from "./theme";
+import { CastSheet, CAST_PANELS } from "./cast/Cast";
 import { TEST_PAIN } from "./test_pain/Film";
 import { TEST_MIND } from "./test_mind/Film";
 
@@ -63,6 +64,7 @@ export const Root = () => (
     <Composition id="TestPainStrips" component={TEST_PAIN.Strips} durationInFrames={TEST_PAIN.strips} fps={FPS4} width={1920} height={1080} />
     <Composition id="TestMindPicture" component={TEST_MIND.Picture} durationInFrames={TEST_MIND.frames} fps={FPS4} width={1920} height={1080} />
     <Composition id="TestMindStrips" component={TEST_MIND.Strips} durationInFrames={TEST_MIND.strips} fps={FPS4} width={1920} height={1080} />
+    <Composition id="CastSheet" component={CastSheet} durationInFrames={CAST_PANELS} fps={30} width={1920} height={1080} />
     <Composition id="RigTest" component={RigTest} durationInFrames={1} fps={FPS} width={W} height={H} />
     <Composition id="KitTest" component={KitTest} durationInFrames={1} fps={FPS} width={W} height={H} />
   </>
