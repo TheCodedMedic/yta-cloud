@@ -71,12 +71,15 @@ This is how "What If in Theory" Episode 04 ("What If You Could Go Back in Time?"
 
 ## 6. Sound
 - **Effects:** CC0 libraries plus numpy synthesis (crackle, thunder, the time tear, freeze whoosh, tunnel roar, screech, pass-by, ticks, bells).
-- **Music:** licensed library tracks per scene mood (`music/pixabay`), **low under the voice** (about −20 to −24 dB relative to the narrator) and ducked. Use synthesised stingers and risers only for hits. Keep true silence on the biggest beat.
+- **Music:** licensed library tracks per scene mood (`music/pixabay`), ducked under the voice. Episode 04 sat about 20+ dB under, which reads as almost no music. From Part 2 on, aim for about 9–13 dB RMS under the voice while someone speaks, swelling in the gaps, with a new cue on every story turn (measured from a 78k-view reference, `notes/18_otherwise_why_it_resonates.md`). Use synthesised stingers and risers only for hits. Keep true silence on the biggest beat.
 - **How the music is wired (Episode 04):**
   - `cues_full.py` has a `MUSIC` list of `(track, offset, start, end, rel_db)`, one entry per scene mood. Each entry is cut once into `music_beds/` and added as a bed. The mixer ducks beds under the voice.
   - `film_audio.py` run with `STINGS=1` writes `score_stings.wav`: only the hits, risers, heartbeats and clock ticks, so the synth never fights the music.
   - Never use `01_tense` (the user dislikes it).
 - **Track choice:** when the user is present, offer 3–4 playable options per mood from several libraries and let them choose.
+
+## 6b. Anatomy and acting
+The full list of rules (true angles, hands, phone grip, waving, held props, sitting, facing, mouths, matte look, face variety) is in the skill, section 6a.
 
 ## 7. Review loop (non-negotiable)
 1. **Test sheets** for any new rig feature or prop (`HandTest`, `AssetSheet`), read at **full size**. Small contact sheets hide fingers piercing phones and hands behind heads.

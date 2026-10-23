@@ -100,6 +100,15 @@ Store the map as `config/voices.json`, holding speaker tag → voice id, gain in
 
 ## 4. Story and script (approval gate 3)
 
+**Before writing,** read `notes/18_otherwise_why_it_resonates.md`. The subject decides whether a video spreads:
+- the power must be a metaphor for something every viewer has felt (regret, grief, losing people), not money or thrills;
+- everyday scenes;
+- science that lands on "you";
+- a flaw that causes the cost;
+- one tiny specific memory;
+- a climax solved by character;
+- a real-life thing to do today.
+
 1. **Research demand** before writing: YouTube autocomplete (`https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=<prefix>`) and the view counts of recent videos in the niche. Prefer premises people type ("what if you could…"), told in the second person, with a number or a power. Avoid copying an existing video's twist: search for it first.
 2. **Pick the spine with the user:** the power or event and its rules, the want (someone to save, money, one mistake), the escalation, and the cliffhanger. Offer 3–4 options each with examples (a clickable question if the client supports it).
 3. **Structure for retention:**
@@ -122,7 +131,8 @@ Store the map as `config/voices.json`, holding speaker tag → voice id, gain in
 2. **Assemble** the master: a 0.3 s lead, a designed gap after each beat (0.4–0.6 s normally; 1–3 s for action holds, title cards and silences; up to 6 s for a big cinematic hold), and character voices level-matched to the narrator. Write `master_voiceover.wav` and `timeline_chunks.json` (index, speaker, start, end, gap).
 3. **Pauses are never dead air:** every long gap is planned for action, effects or music.
 4. **Word timing:** `whisper narrator_16k.wav --model small --word_timestamps True --output_format json`, then align the words to the script tokens one-to-one. Check the counts match; a mismatch means a clipped or garbled word, so re-voice that beat.
-5. **Timing file:** export `video/src/<ep>/timing.json` as `{words: [{b, w, s, e}], beats: [{b, s, e, gap}]}` in master time (add the lead if Whisper ran on the trimmed file).
+5. **Pace check before timing:** compute words per second for every clip and compare with that speaker's median. A clip more than about 25 % faster (Fish sometimes rushes short or tender lines) gets regenerated once. If it's still rushed, slow just that clip with `ffmpeg -af atempo=0.8–0.9` (pitch is unchanged), then reassemble. Reuse identical lines across episodes (for example a character's voice note) so they sound exactly the same.
+6. **Timing file:** export `video/src/<ep>/timing.json` as `{words: [{b, w, s, e}], beats: [{b, s, e, gap}]}` in master time (add the lead if Whisper ran on the trimmed file).
 
 Share the script plus a voiceover MP3 and get approval.
 
@@ -159,6 +169,24 @@ Share the script plus a voiceover MP3 and get approval.
 
 **Variety:** move through places (interiors and exteriors, day and night, crowds with varied clothing, trees, vehicles), and give every scene its own mood and light.
 
+### 6a. Anatomy and acting rules (every one came from a frame the user rejected)
+- **True angles:** a side view turns the whole body (torso, hips, head), never a front torso with the limbs drawn on the chest. Check every new pose from the front, three-quarter, profile and behind.
+- **Hands are articulated and change shape with the action:** relaxed when walking, fists when running, open palms when talking, a grip on cups, a pinch on spoons. One frozen mitten for every hand is wrong.
+- **A phone is cradled:** it rests on the palm, the fingers stay behind it, and the thumb sits on the edge. Fingers must never pass through the screen.
+- **Waving:** the upper arm goes out and rolls up so the forearm is upright beside the head, palm forward. An arm raised straight overhead puts the hand behind or inside the head. For a high five or a cheer between two people, use a fist bump at chest height.
+- **Every held object is attached to the hand** (coffee, phone, spoon, cereal box, shopping bag, photo frame), never floating in the world next to it.
+- **Nobody sits on air:**
+  - match the seat height to the furniture: chair about 0.46 m, bed edge about 0.7 m;
+  - on a kerb, the pelvis sits on the kerb with the knees up and the feet on the road;
+  - put a real chair, bed or kerb under every sitter.
+- **Hands never pass through tables:** eating is spoon from bowl to mouth, with the bowl within reach.
+- **Lying down:** rotate the body around the hips, not the feet, so the head lands on the pillow.
+- **Facing:** in a two-person shot, compute each yaw from one position to the other. Never type yaws by hand. A close-up still faces the off-screen partner.
+- **Framed photos** are held face-up on the lap with the hands on the sides, shot over the shoulder. Never edge-on like a plank.
+- **Mouths move only on speech.** The acting is in the brows, eyes, head tilts, breathing and weight shifts. Listeners react; idle characters are never frozen.
+- **Not too glossy, not too rigid:** prefer matte materials (low specular) and soft light. Give each person a different face (head shape, hair, brows, glasses, freckles, age) rather than one face for everyone.
+- **Not all night:** most scenes in daylight, in real everyday places. Save night and heavy VFX for the peaks.
+
 ---
 
 ## 7. Review loop (before every long render)
@@ -177,6 +205,12 @@ Share the script plus a voiceover MP3 and get approval.
    - the wrong facing (the bus doors on the far side);
    - a phone covering a face;
    - too-dark flashes.
+   - an over-the-shoulder shot where the near head fills half the frame: move the camera about 1 m sideways off the line between the two people;
+   - a camera so close to a vehicle that it reads as coloured blocks;
+   - a camera that follows a moving object until the characters leave frame (clamp the target);
+   - an orbit that passes behind the hero's head and hides the other person;
+   - an empty set (a bare wall, an empty car park): dress it.
+   - **Read test sheets at full size.** Small contact sheets hide fingers piercing phones and hands behind heads.
 4. Fix, re-render only the affected strips, then render the whole thing.
 
 ---
@@ -189,8 +223,15 @@ Share the script plus a voiceover MP3 and get approval.
   - **Ask the user** whether they want to supply tracks (for example from a music generator). Give them prompts per section, such as "tense cinematic pulse 110 bpm, builds to a hit, then silence" or "soft piano, hopeful but sad". Cut what they send to the beats.
   - Never download commercial music.
 - **Cue sheet:** a Python file with `VOICE`, `LENGTH`, `BEDS` (name, start, end, rel_dB, fade_in, fade_out) and `SFX` (name, time, rel_dB), all from `at()`.
-- **Levels** relative to the narrator: effects −8 to −20 dB, beds −20 to −30 dB, score about −12 dB. Beds duck under the voice.
-- **Finish:** two-pass loudnorm to −14 LUFS, true peak −1.5 dBTP, audio padded to the picture. Verify durations, loudness and a non-silent opening.
+- **Levels** relative to the narrator: effects −8 to −20 dB, ambience beds −20 to −30 dB.
+- **Music level and shape:** a story channel that hit 78k views (see `notes/18_otherwise_why_it_resonates.md`) keeps its music:
+  - about 9–13 dB RMS under the voice while someone speaks, rising to 5–7 dB under in the pauses;
+  - continuous;
+  - on a new cue every 30–90 s, cut exactly on story turns;
+  - silent only on the 1–2 hardest moments.
+
+  Music mixed 20+ dB under reads as "no music". Duck under speech and swell in the gaps.
+- **Finish:** two-pass loudnorm to −14 LUFS, true peak −1.5 dBTP, audio padded to the picture. Verify durations, loudness and a non-silent opening. Always re-measure the true peak on the final file (`ffmpeg -af ebur128=peak=true`). If it is above −1 dB, re-limit the audio only (`-c:v copy -af loudnorm=I=-14:TP=-1.5`).
 
 ---
 
@@ -201,6 +242,7 @@ Share the script plus a voiceover MP3 and get approval.
   npx remotion render src/index.ts <PictureComp> out/picture.mp4 --codec=h264 --crf=17 --gl=angle --concurrency=4 --muted --port=<free>
   ```
   On cloud use `--gl=swangle`, and render in background chunks with `--frames=a-b` if needed.
+- **Render time grows with set detail:** about 25 min for an 8-minute film with simple sets, about 2 h once the interiors are fully dressed (Mac, concurrency 4). Check free disk space first (`df -h`; a long render needs about 3 GB), and keep the machine awake.
 - **Mux and finish**, then sample a frame grid from the final file (`ffmpeg -vf "fps=1/10,scale=384:-1,tile=6x8"`) to catch glitches. Send the MP4.
 - **Gate:** render the first minute first and get approval, then the rest. Skip the gate only if the user is away and says to finish everything.
 - **After final approval:** delete render caches and intermediate pictures, keep the master, the mix, the scripts and the code, and report the space freed.
