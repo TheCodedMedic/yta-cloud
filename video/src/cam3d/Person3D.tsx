@@ -10,14 +10,32 @@ export type Pose3 = {
   twist?: number;    // torso twist about y (deg)
   headTurn?: number; // head turn about y (deg), + = to the character's left
   headNod?: number;  // + looks down (deg)
-  armL?: [number, number, number]; // left arm: forward swing, outward swing, elbow bend (deg)
-  armR?: [number, number, number];
+  armL?: Arm; // left arm: forward swing, outward swing, elbow bend, and optional upper-arm roll (deg, + turns the elbow outward/down)
+  armR?: Arm;
   legL?: [number, number];         // left leg: forward swing, knee bend (deg)
   legR?: [number, number];
   bob?: number;      // whole body vertical offset
-  curl?: number;     // finger curl 0 open .. 1 fist
+  curl?: number;     // finger curl 0 open .. 1 fist (used when no hand shape is given)
+  handL?: HandShape; handR?: HandShape;          // named hand shapes (see HANDS)
+  wristL?: [number, number]; wristR?: [number, number]; // wrist bend (deg, + toward the palm) and twist (deg, about the forearm)
 };
 
+/** Hand shapes: curl per finger (index, middle, ring, pinky), thumb curl, finger spread. */
+export type HandShape = "relaxed" | "open" | "fist" | "point" | "grip" | "pinch" | "wave" | "thumbsUp" | "flat" | "cradle";
+export const HANDS: Record<HandShape, { f: [number, number, number, number]; th: number; spread: number }> = {
+  relaxed: { f: [0.25, 0.32, 0.4, 0.48], th: 0.25, spread: 0.1 },
+  open: { f: [0.05, 0.05, 0.08, 0.1], th: 0.05, spread: 0.6 },
+  wave: { f: [0, 0, 0, 0], th: 0, spread: 1 },
+  flat: { f: [0, 0, 0, 0], th: 0.3, spread: 0 },
+  fist: { f: [1, 1, 1, 1], th: 0.9, spread: 0 },
+  point: { f: [0, 1, 1, 1], th: 0.85, spread: 0 },
+  grip: { f: [0.62, 0.68, 0.72, 0.78], th: 0.55, spread: 0 },
+  pinch: { f: [0.55, 0.85, 0.95, 1], th: 0.6, spread: 0 },
+  thumbsUp: { f: [1, 1, 1, 1], th: -0.4, spread: 0 },
+  cradle: { f: [0.1, 0.12, 0.16, 0.2], th: 0.55, spread: 0.05 }, // a phone resting on the palm and fingers, screen up
+};
+
+export type Arm = [number, number, number] | [number, number, number, number];
 export type Face3 = { smile?: number; open?: number; brow?: number; blink?: boolean; eyesBig?: number };
 
 export type Look3 = {
@@ -74,21 +92,38 @@ const Seg: React.FC<{ l: number; r0: number; r1: number; mat: THREE.Material; ca
   </>
 );
 
-/** Hand at the end of the forearm: palm, four fingers that curl, a thumb toward the body. side = +1 left, −1 right. */
-const Hand: React.FC<{ curl: number; side: number; children?: React.ReactNode }> = ({ curl, side, children }) => (
-  <group>
-    <mesh material={gloss} scale={[0.048, 0.058, 0.026]} position={[0, -0.045, 0]} castShadow><sphereGeometry args={[1, 16, 12]} /></mesh>
-    {[-1.5, -0.5, 0.5, 1.5].map((k) => (
-      <group key={k} position={[k * 0.019, -0.095, 0.004]} rotation={[-D(15 + 85 * curl), 0, 0]}>
-        <mesh material={gloss} position={[0, -0.022, 0]} castShadow><capsuleGeometry args={[0.0105, 0.03, 4, 8]} /></mesh>
+/** Hand at the end of the forearm: palm, four two-joint fingers that curl, an opposable thumb, a wrist that bends and twists.
+ * Local frame before the wrist: −y runs along the forearm, the palm faces +z. side = +1 left hand, −1 right hand.
+ * Default twist turns the palm toward the body when the arm hangs. Props attach at the palm (children). */
+const Hand: React.FC<{ shape: HandShape | number; side: number; wrist?: [number, number]; children?: React.ReactNode }> = ({ shape, side, wrist, children }) => {
+  const h = typeof shape === "number" ? { f: [shape, shape, shape, shape] as [number, number, number, number], th: shape * 0.8, spread: 0.1 } : HANDS[shape];
+  const bend = wrist?.[0] ?? 8, twist = wrist?.[1] ?? -side * 80;
+  return (
+    <group rotation={[0, D(twist), 0]}>
+      <group rotation={[-D(bend), 0, 0]}>
+        <mesh material={gloss} scale={[0.046, 0.055, 0.024]} position={[0, -0.045, 0]} castShadow><sphereGeometry args={[1, 16, 12]} /></mesh>
+        {[-1.5, -0.5, 0.5, 1.5].map((k, i) => {
+          const c = h.f[i], len = i === 3 ? 0.8 : i === 1 ? 1.08 : 1;
+          return (
+            <group key={k} position={[k * 0.0185, -0.092, 0.004]} rotation={[-D(8 + 70 * c), 0, D(k * 6 * h.spread)]}>
+              <mesh material={gloss} position={[0, -0.017 * len, 0]} castShadow><capsuleGeometry args={[0.0102, 0.022 * len, 4, 8]} /></mesh>
+              <group position={[0, -0.036 * len, 0]} rotation={[-D(85 * c), 0, 0]}>
+                <mesh material={gloss} position={[0, -0.012 * len, 0]}><capsuleGeometry args={[0.0095, 0.016 * len, 4, 8]} /></mesh>
+              </group>
+            </group>
+          );
+        })}
+        <group position={[side * 0.04, -0.045, 0.012]} rotation={[-D(25 + 45 * Math.max(0, h.th)), 0, side * D(h.th < 0 ? -10 : 40 - 25 * h.th)]}>
+          <mesh material={gloss} position={[0, -0.016, 0]} castShadow><capsuleGeometry args={[0.012, 0.022, 4, 8]} /></mesh>
+          <group position={[0, -0.032, 0]} rotation={[-D(50 * Math.max(0, h.th)), 0, 0]}>
+            <mesh material={gloss} position={[0, -0.011, 0]}><capsuleGeometry args={[0.011, 0.014, 4, 8]} /></mesh>
+          </group>
+        </group>
+        <group position={[0, -0.075, 0.03]}>{children}</group>
       </group>
-    ))}
-    <group position={[-side * 0.042, -0.05, 0.018]} rotation={[-D(30 + 40 * curl), 0, side * D(35)]}>
-      <mesh material={gloss} position={[0, -0.02, 0]} castShadow><capsuleGeometry args={[0.012, 0.028, 4, 8]} /></mesh>
     </group>
-    {children}
-  </group>
-);
+  );
+};
 
 /** Shoe: heel, toe pointing forward (+z), a lighter sole. */
 const Shoe: React.FC<{ color: string }> = ({ color }) => (
@@ -177,24 +212,26 @@ export const Person3D: React.FC<{
   const lean = pose.lean ?? 0, twist = pose.twist ?? 0;
   const torsoGeo = useMemo(() => new THREE.LatheGeometry(torsoPts(!!look.long), 40), [look.long]);
   const coat = toon(look.coat), coatDark = toon(look.coatDark), legs = toon(look.trousers);
-  const arm = (side: 1 | -1, a: [number, number, number] = [0, 6, 8], prop?: React.ReactNode) => (
+  const arm = (side: 1 | -1, a: Arm = [0, 6, 8], prop?: React.ReactNode) => (
     <group position={[side * 0.215, 0.44, -0.01]}>
       <mesh material={coat} castShadow><sphereGeometry args={[0.078, 18, 14]} /></mesh>
       <group rotation={[0, 0, side * D(clamp(a[1], -10, 170))]}>
         <group rotation={[-D(clamp(a[0], -80, 180)), 0, 0]}>
+          <group rotation={[0, side * D(clamp(a[3] ?? 0, -110, 110)), 0]}>
           <Seg l={0.27} r0={0.064} r1={0.055} mat={coat} cap={false} />
           <group position={[0, -0.27, 0]} rotation={[-D(clamp(a[2], 0, 150)), 0, 0]}>
             <Seg l={0.24} r0={0.055} r1={0.046} mat={coat} />
             <mesh material={coatDark} position={[0, -0.235, 0]}><cylinderGeometry args={[0.05, 0.05, 0.03, 16]} /></mesh>
-            <group position={[0, -0.25, 0]}><Hand curl={pose.curl ?? 0.35} side={side}>{prop}</Hand></group>
+            <group position={[0, -0.25, 0]}><Hand shape={(side === 1 ? pose.handL : pose.handR) ?? (pose.curl !== undefined ? pose.curl : "relaxed")} side={side} wrist={side === 1 ? pose.wristL : pose.wristR}>{prop}</Hand></group>
             {look.scar && side === -1 && <mesh position={[0, -0.12, 0.05]}><boxGeometry args={[0.012, 0.22, 0.012]} /><meshBasicMaterial color="#BFE6FF" toneMapped={false} /></mesh>}
+          </group>
           </group>
         </group>
       </group>
     </group>
   );
   const leg = (side: 1 | -1, l: [number, number] = [0, 0]) => (
-    <group position={[side * 0.095, 0, 0]} rotation={[-D(clamp(l[0], -90, 110)), 0, 0]}>
+    <group position={[side * 0.095, 0, 0]} rotation={[-D(clamp(l[0], -90, 135)), 0, 0]}>
       <Seg l={0.39} r0={0.088} r1={0.066} mat={legs} />
       <group position={[0, -0.39, 0]} rotation={[D(clamp(l[1], 0, 150)), 0, 0]}>
         <Seg l={0.36} r0={0.064} r1={0.05} mat={legs} />
@@ -283,9 +320,11 @@ export const run3 = (ph: number): Pose3 => {
 export const mix3 = (a: Pose3, b: Pose3, u: number): Pose3 => {
   const m = (x = 0, y = 0) => x + (y - x) * u;
   const m2 = (x: [number, number] = [0, 0], y: [number, number] = [0, 0]): [number, number] => [m(x[0], y[0]), m(x[1], y[1])];
-  const m3 = (x: [number, number, number] = [0, 0, 0], y: [number, number, number] = [0, 0, 0]): [number, number, number] => [m(x[0], y[0]), m(x[1], y[1]), m(x[2], y[2])];
+  const m3 = (x: Arm = [0, 0, 0], y: Arm = [0, 0, 0]): Arm => [m(x[0], y[0]), m(x[1], y[1]), m(x[2], y[2]), m(x[3] ?? 0, y[3] ?? 0)];
   return {
     lean: m(a.lean, b.lean), twist: m(a.twist, b.twist), headTurn: m(a.headTurn, b.headTurn), headNod: m(a.headNod, b.headNod),
     armL: m3(a.armL, b.armL), armR: m3(a.armR, b.armR), legL: m2(a.legL, b.legL), legR: m2(a.legR, b.legR), bob: m(a.bob, b.bob), curl: m(a.curl ?? 0.35, b.curl ?? 0.35),
+    handL: u < 0.5 ? a.handL : b.handL, handR: u < 0.5 ? a.handR : b.handR,
+    wristL: a.wristL || b.wristL ? m2(a.wristL ?? [8, -80], b.wristL ?? [8, -80]) : undefined, wristR: a.wristR || b.wristR ? m2(a.wristR ?? [8, 80], b.wristR ?? [8, 80]) : undefined,
   };
 };

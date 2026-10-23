@@ -3,6 +3,7 @@ import { makeEpisode } from "./Episode";
 import { KitTest } from "./KitTest";
 import { RigTest } from "./RigTest";
 import { AssetSheet, ASSET_PANELS } from "./ep04/AssetSheet";
+import { HandTest, HAND_PANELS } from "./ep04/HandTest";
 import { Ep4Minute1, Ep4Minute1Picture, M1_FRAMES } from "./ep04/Minute1";
 import { FPS4 } from "./ep04/core";
 import { Ep4Film, Ep4FilmPicture, Ep4PartStrips, FILM_FRAMES, stripCount, PART_COUNT } from "./ep04/Film";
@@ -54,6 +55,7 @@ export const Root = () => (
     <Composition id="Ep4Film" component={Ep4Film} durationInFrames={FILM_FRAMES} fps={FPS4} width={1920} height={1080} />
     <Composition id="Ep4FilmPicture" component={Ep4FilmPicture} durationInFrames={FILM_FRAMES} fps={FPS4} width={1920} height={1080} />
     {Array.from({ length: PART_COUNT }, (_, k) => <Composition key={k} id={`Ep4Part${k}`} component={() => <Ep4PartStrips part={k} />} durationInFrames={stripCount(k)} fps={FPS4} width={1920} height={1080} />)}
+    <Composition id="Ep4Hands" component={HandTest} durationInFrames={HAND_PANELS} fps={30} width={1920} height={1080} />
     <Composition id="Ep4Assets" component={AssetSheet} durationInFrames={ASSET_PANELS} fps={30} width={1920} height={1080} />
     <Composition id="RigTest" component={RigTest} durationInFrames={1} fps={FPS} width={W} height={H} />
     <Composition id="KitTest" component={KitTest} durationInFrames={1} fps={FPS} width={W} height={H} />

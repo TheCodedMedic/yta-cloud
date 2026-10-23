@@ -5,6 +5,8 @@ description: Make a cinematic animated story video (a YouTube episode or Short) 
 
 # Story video in 3D code (Three.js + Remotion)
 
+> **Read `notes/3d_episode_handbook.md` first.** It has the exact file layout of a finished episode (`video/src/ep04/`), the hands, props, seats and facing rules, the detailed-sets standard, the music approach and the review loop.
+
 The whole film is **code that is a pure function of time**. A script is split into beats. Fish Audio reads each beat. Whisper times every word. Every cut, camera move, pose, effect, line of on-screen text and sound is anchored to a **measured word**, never a typed second. The picture is a Remotion project that renders real 3D scenes (Three.js via `@remotion/three`) for any frame number. On a laptop this renders a minute of 1080p in about 2–3 minutes, roughly 70× faster than Blender, with true camera angles (orbit, crane, top shot, dolly zoom).
 
 **Ground rules (always):**

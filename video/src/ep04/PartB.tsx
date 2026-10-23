@@ -3,11 +3,14 @@
 import React, { useMemo } from "react";
 import * as THREE from "three";
 import { LOOKS, mix3, Person3D, Pose3, run3, SIT, STAND, toon, walk3 } from "../cam3d/Person3D";
+import { Bowl, Chair, CUP_HOLD, eatPose, HeldCup, HeldPhone, HeldSpoon, HeldToast, PHONE_LOOK, sitOn, talkHands } from "../cam3d/Props3D";
+import { Framed } from "./Sets3";
 import { World3D } from "../cam3d/World3D";
 import { at, CamS, ex, hand, io, L3, orbit, P, PE, PS, rnd, RUN_Y, seg, Shot, shakeC } from "./core";
 import { Lottery, MapScreen, Phone2D } from "./Dom";
-import { Bedroom, Env } from "./Sets";
-import { Bus, BusStop, Classroom, Coffee, Kitchen, Pigeon, Pitch, Space } from "./Sets2";
+import { Env } from "./Sets";
+import { Bus, BusStop, Coffee, Pigeon, Pitch, Space } from "./Sets2";
+import { Bedroom, Classroom, Kitchen } from "./Sets3";
 import { C, Chip, Flash, Rise, Slam } from "./Text";
 import { BodyArcs, ClockFace, SkyCracks, Streaks, V3 } from "./Vfx";
 
@@ -26,6 +29,11 @@ const satPos = (t: number, k = 0): V3 => { const inc = (20 + k * 25) * Math.PI /
 const tRun = at(14, "You"), tSlow = P(15), tFlash = at(16, "flash");
 const tueX = (t: number) => (t < tRun ? -4 : t < tSlow ? -4 + (t - tRun) * 1.9 : -4 + (tSlow - tRun) * 1.9 + (t - tSlow) * 0.1);
 const PIGEON: V3 = [2.6, 1.9, 0.0], MAN: V3 = [4.2, 0, -0.9], CUP: V3 = [3.95, 1.18, -0.75];
+/** The man's coffee, in his hand: the cup tips and the coffee ribbon floats out (spill 0..1). */
+const HeldCoffee: React.FC<{ spill: number; tilt?: number }> = ({ spill, tilt = 0 }) => (
+  <group position={[0, -0.03, 0.045]} rotation={[0, 0, (90 + tilt) * Math.PI / 180]}><Coffee p={[0, 0, 0]} spill={spill} tilt={0} /></group>
+);
+const MAN_POSE: Pose3 = { ...CUP_HOLD, armR: [40, 8, 70] };
 
 // five-a-side: the run-up and the shot
 const tKick = at(22, "shoot");
@@ -63,7 +71,7 @@ export const B_SHOTS: Shot[] = [
   { id: "limb", t0: at(11, "Engineers"), t1: at(11, "If"), scene: (t) => <Space t={t} sats={8} />,
     cam: (t) => { const u = io(seg(t, at(11, "Engineers"), at(11, "If"))); return { pos: L3([0, 5.6, 6], [3, 5.2, 5], u), target: [0, 2.8, 0], fov: 46 }; } },
   // "the map on your phone would drift": a phone over the day street
-  { id: "map", t0: at(11, "If"), t1: P(12), scene: (t) => <><DayStreet t={t} /><Person3D pos={[0, 0, 0.4]} yaw={-0.4} look={HOOD} pose={{ ...STAND, armR: [40, 4, 92], headNod: 22 }} face={{ smile: 0.1 }} /></>,
+  { id: "map", t0: at(11, "If"), t1: P(12), scene: (t) => <><DayStreet t={t} /><Person3D pos={[0, 0, 0.4]} yaw={-0.4} look={HOOD} pose={PHONE_LOOK} face={{ smile: 0.1, eyesBig: 0.3 }} propR={<HeldPhone />} /></>,
     cam: (t) => hand({ pos: [1.4, 1.5, 3.4], target: [0, 1.2, 0.4], fov: 40 }, t, 0.01),
     dom: (t) => <Phone2D x={1240} y={560} s={0.95} enter={seg(t, at(11, "If"), at(11, "If") + 0.5)}><MapScreen drift={io(seg(t, at(11, "drift") - 0.2, P(12)))} /></Phone2D> },
   // 12 · forward is physics, back is an argument
@@ -75,24 +83,24 @@ export const B_SHOTS: Shot[] = [
   // 13 · Tuesday: late
   { id: "tuesday", t0: P(13), t1: at(13, "You're"), scene: (t) => <><DayStreet t={t} bus={{ x: 12, doors: 0 }} /><Person3D pos={[-4, 0, 0.3]} yaw={RUN_Y} look={HOOD} pose={walk3(t * 1.2)} face={{ smile: 0 }} /></>,
     cam: (t) => { const u = io(seg(t, P(13), at(13, "You're"))); return { pos: L3([-1, 6, 9], [-1, 2.4, 6.5], u), target: [-2, 1, 0], fov: 42 }; } },
-  { id: "late", t0: at(13, "You're"), t1: P(14), scene: (t) => <><DayStreet t={t} bus={{ x: 12, doors: 0 }} /><Person3D pos={[-4, 0, 0.3]} yaw={1.2} look={HOOD} pose={{ ...STAND, armR: [42, 4, 95], headNod: 20 }} face={{ smile: 0, open: 0.3, eyesBig: 1 }} /></>,
-    cam: (t) => hand({ pos: [-2.6, 1.6, 1.6], target: [-4, 1.45, 0.3], fov: 38 }, t, 0.012) },
+  { id: "late", t0: at(13, "You're"), t1: P(14), scene: (t) => <><DayStreet t={t} bus={{ x: 12, doors: 0 }} /><Person3D pos={[-4, 0, 0.3]} yaw={1.2} look={HOOD} pose={PHONE_LOOK} face={{ smile: 0, open: 0.3, eyesBig: 1 }} propR={<HeldPhone />} /></>,
+    cam: (t) => hand({ pos: [-2.6, 1.6, 1.6], target: [-4, 1.4, 0.3], fov: 38 }, t, 0.012) },
   // 14 · the bus doors close; you run; your legs keep going
   { id: "doors", t0: P(14), t1: at(14, "You"), scene: (t) => <DayStreet t={t} bus={{ x: 10, doors: io(seg(t, at(14, "doors"), at(14, "You"))) }} />,
-    cam: () => ({ pos: [5.2, 1.5, 0.4], target: [6.4, 1.4, 2.15], fov: 40 }) },
+    cam: (t) => ({ pos: L3([3.2, 1.7, -2.0], [3.8, 1.6, -1.4], seg(t, P(14), at(14, "You"))), target: [6.6, 1.3, 2.2], fov: 42 }) },
   { id: "run-bus", t0: at(14, "You"), t1: at(14, "something"), scene: (t) => <><DayStreet t={t} bus={{ x: 10 - (t - at(14, "You")) * 2, doors: 1 }} /><Person3D pos={[tueX(t), 0, 1.2]} yaw={RUN_Y} look={HOOD} pose={run3(t * 1.5)} face={{ smile: 0, brow: -0.5, open: 0.3 }} /></>,
     cam: (t) => hand({ pos: [tueX(t) + 0.3, 1.0, 4.6], target: [tueX(t) + 0.8, 1.0, 1.2], fov: 38 }, t, 0.02) },
   { id: "legs", t0: at(14, "something"), t1: P(15), scene: (t) => <><DayStreet t={t} /><Person3D pos={[tueX(t), 0, 1.2]} yaw={RUN_Y} look={HOOD} pose={run3(t * 1.5)} /><BodyArcs c={[tueX(t), 0.5, 1.2]} t={t} n={4} amt={seg(t, at(14, "legs"), P(15))} /><Streaks center={[tueX(t), 0.6, 1.2]} t={t} amt={seg(t, at(14, "going"), P(15)) * 0.6} /></>,
     cam: (t) => ({ pos: [tueX(t) + 1.4, 0.35, 2.4], target: [tueX(t), 0.45, 1.2], fov: 40 }) },
   // 15 · the world slows down: pigeon mid-flap, coffee ribbon
   { id: "slow", t0: P(15), t1: at(15, "A"), noBlur: true, grade: "saturate(0.75) contrast(1.05)", scene: (t) => (
-      <><DayStreet t={t} /><Person3D pos={[tueX(t), 0, 1.2]} yaw={RUN_Y} look={HOOD} pose={run3(at(15, "The") * 1.5 + (t - P(15)) * 0.05)} /><Pigeon p={PIGEON} flap={1.2} yaw={0.6} /><Person3D pos={MAN} yaw={0.3} look={LOOKS.ex4} pose={{ ...STAND, armR: [60, 6, 70] }} /><Coffee p={CUP} spill={0.15} /></>
+      <><DayStreet t={t} /><Person3D pos={[tueX(t), 0, 1.2]} yaw={RUN_Y} look={HOOD} pose={run3(at(15, "The") * 1.5 + (t - P(15)) * 0.05)} /><Pigeon p={PIGEON} flap={1.2} yaw={0.6} /><Person3D pos={MAN} yaw={0.3} look={LOOKS.ex4} pose={MAN_POSE} propR={<HeldCoffee spill={0.12} />} /></>
     ),
     cam: (t) => { const u = seg(t, P(15), at(15, "A")); return { pos: orbit([tueX(t), 1.1, 1.2], 60 + 50 * u, 3.4, 1.4), target: [tueX(t) + 1, 1.1, 1.2], fov: 42 }; } },
   { id: "pigeon", t0: at(15, "A"), t1: at(15, "A", 2), noBlur: true, grade: "saturate(0.75)", scene: (t) => <><DayStreet t={t} /><Pigeon p={PIGEON} flap={1.2 + (t - at(15, "A")) * 0.3} yaw={0.6} /></>,
     cam: (t) => { const u = io(seg(t, at(15, "A"), at(15, "A", 2))); return { pos: orbit(PIGEON, 20 + 60 * u, 0.9 - 0.2 * u, 2.0), target: PIGEON, fov: 34 }; } },
-  { id: "coffee", t0: at(15, "A", 2), t1: P(16), noBlur: true, grade: "saturate(0.75)", scene: (t) => <><DayStreet t={t} /><Person3D pos={MAN} yaw={0.3} look={LOOKS.ex4} pose={{ ...STAND, armR: [60, 6, 70], headNod: 18 }} face={{ open: 0.4, eyesBig: 1 }} /><Coffee p={CUP} spill={0.15 + 0.75 * seg(t, at(15, "floats"), P(16))} tilt={-0.5} /></>,
-    cam: (t) => { const u = io(seg(t, at(15, "A", 2), P(16))); return { pos: L3([4.6, 1.35, 0.6], [4.5, 1.3, 0.1], u), target: [CUP[0] + 0.2, CUP[1] + 0.1, CUP[2]], fov: 36 }; } },
+  { id: "coffee", t0: at(15, "A", 2), t1: P(16), noBlur: true, grade: "saturate(0.75)", scene: (t) => <><DayStreet t={t} /><Person3D pos={MAN} yaw={0.3} look={LOOKS.ex4} pose={{ ...MAN_POSE, headNod: 18, wristR: [5, 80 - 40 * seg(t, at(15, "floats"), P(16))] }} face={{ open: 0.4, eyesBig: 1 }} propR={<HeldCoffee spill={0.15 + 0.75 * seg(t, at(15, "floats"), P(16))} />} /></>,
+    cam: (t) => { const u = io(seg(t, at(15, "A", 2), P(16))); return { pos: L3([5.2, 1.4, 0.7], [4.9, 1.35, 0.3], u), target: [4.0, 1.15, -0.75], fov: 36 }; } },
   // 16 · a flash: back at the corner, ten seconds ago
   { id: "corner", t0: P(16), t1: at(16, "Ten"), scene: (t) => <><DayStreet t={t} bus={{ x: 12, doors: 0 }} /><Person3D pos={[-4, 0, 0.3]} yaw={0.9} look={HOOD} pose={{ ...STAND, headTurn: 25 * Math.sin((t - P(16)) * 2) }} face={{ open: 0.3, eyesBig: 1 }} />{t < at(16, "And") && <BodyArcs c={[-4, 1.15, 0.3]} t={t} n={6} amt={1} />}</>,
     cam: (t) => hand({ pos: [-1.6, 1.5, 3], target: [-4, 1.2, 0.3], fov: 38 }, t, 0.012) },
@@ -101,17 +109,17 @@ export const B_SHOTS: Shot[] = [
   // 17 · the same pigeon, the same coffee... you catch the cup
   { id: "takeoff", t0: P(17), t1: at(17, "The"), scene: (t) => { const u = seg(t, at(17, "take"), P(17) + 2); return <><DayStreet t={t} /><Pigeon p={[PIGEON[0] + u * 3, PIGEON[1] - 1 + u * 3 + (1 - Math.min(1, u * 4)), PIGEON[2]]} flap={t * 30} yaw={0.6} /></>; },
     cam: () => ({ pos: [1.6, 1.3, 2.6], target: [3, 1.6, 0], fov: 40 }) },
-  { id: "spill", t0: at(17, "The"), t1: at(17, "This"), scene: (t) => <><DayStreet t={t} /><Person3D pos={MAN} yaw={0.3} look={LOOKS.ex4} pose={{ ...STAND, armR: [60, 6, 70] }} face={{ open: 0.4, eyesBig: 1 }} /><Coffee p={[CUP[0], CUP[1] - 1.5 * Math.max(0, seg(t, at(17, "spill"), at(17, "This")) ** 2), CUP[2]]} spill={seg(t, at(17, "spill"), at(17, "spill") + 0.4) * 0.8} tilt={-1.2 * seg(t, at(17, "spill"), at(17, "This"))} /></>,
+  { id: "spill", t0: at(17, "The"), t1: at(17, "This"), scene: (t) => { const u = seg(t, at(17, "spill"), at(17, "This")); return <><DayStreet t={t} /><Person3D pos={MAN} yaw={0.3} look={LOOKS.ex4} pose={{ ...MAN_POSE, wristR: [5, 80 - 60 * u], handR: u > 0.5 ? "open" : "grip" }} face={{ open: 0.4, eyesBig: 1 }} propR={u < 0.5 ? <HeldCoffee spill={u * 1.2} /> : undefined} />{u >= 0.5 && <Coffee p={[CUP[0], CUP[1] - 1.6 * (u - 0.5) ** 2, CUP[2]]} spill={0.6} tilt={-1.2 * u} />}</>; },
     cam: () => ({ pos: [5.6, 1.3, 1.6], target: [4.0, 1.0, -0.7], fov: 38 }) },
   { id: "catch", t0: at(17, "This"), t1: P(18), scene: (t) => {
-      const u = seg(t, at(17, "This"), at(17, "catch") + 0.1);
-      return <><DayStreet t={t} /><Person3D pos={MAN} yaw={0.3} look={LOOKS.ex4} pose={{ ...STAND, armR: [60, 6, 70] }} face={{ open: 0.5, eyesBig: 1 }} />
-        <Person3D pos={[L3([-1, 0, -0.2], [3.3, 0, -0.35], ex(u * 1.4))[0], 0, -0.35]} yaw={RUN_Y} look={HOOD} pose={mix3(run3(t * 1.6), { ...STAND, armR: [80, 6, 20], lean: 18 }, seg(t, at(17, "catch") - 0.3, at(17, "catch")))} face={{ brow: -0.5, eyesBig: 0.5 }} />
-        <Coffee p={[3.95, Math.max(0.65, 1.18 - 2.6 * u * u), -0.62]} spill={0.3} tilt={-0.6} /><BodyArcs c={[3.3, 1.15, -0.35]} t={t} n={4} amt={u < 0.9 ? 1 : 0.2} /></>;
+      const u = seg(t, at(17, "This"), at(17, "catch") + 0.1), caught = t > at(17, "catch") + 0.05;
+      return <><DayStreet t={t} /><Person3D pos={MAN} yaw={0.3} look={LOOKS.ex4} pose={{ ...STAND, armR: [40, 20, 40], handR: "open" }} face={{ open: 0.5, eyesBig: 1 }} />
+        <Person3D pos={[L3([-1, 0, -0.2], [3.3, 0, -0.35], ex(u * 1.4))[0], 0, -0.35]} yaw={RUN_Y} look={HOOD} pose={mix3(run3(t * 1.6), { ...CUP_HOLD, armR: [70, 6, 40], lean: 14 }, seg(t, at(17, "catch") - 0.3, at(17, "catch")))} face={{ brow: -0.5, eyesBig: 0.5 }} propR={caught ? <HeldCup /> : undefined} />
+        {!caught && <Coffee p={[3.95, Math.max(0.65, 1.18 - 2.6 * u * u), -0.62]} spill={0.3} tilt={-0.6} />}<BodyArcs c={[3.3, 1.15, -0.35]} t={t} n={4} amt={u < 0.9 ? 1 : 0.2} /></>;
     },
     cam: (t) => { const z = ex(seg(t, at(17, "catch") - 0.1, at(17, "catch") + 0.15)); return shakeC({ pos: [5.2, 1.0, 1.8], target: [3.8, 0.9, -0.6], fov: 44 - 16 * z }, t, z > 0.5 && z < 0.99 ? 0.02 : 0); } },
   // 18 · "okay, okay, okay"
-  { id: "okay", t0: P(18), t1: P(19), scene: (t) => <><DayStreet t={t} /><Person3D pos={[3.3, 0, -0.35]} yaw={1.1} look={HOOD} pose={{ ...STAND, armR: [65, 6, 85], headNod: 12 }} face={{ smile: 0.3, open: 0.3 * Math.max(0, Math.sin(t * 14)), eyesBig: 1 }} propR={<mesh position={[0, -0.12, 0.04]}><cylinderGeometry args={[0.045, 0.035, 0.13, 14]} /><meshToonMaterial color="#F1E8D6" /></mesh>} /></>,
+  { id: "okay", t0: P(18), t1: P(19), scene: (t) => <><DayStreet t={t} /><Person3D pos={[3.3, 0, -0.35]} yaw={1.1} look={HOOD} pose={{ ...CUP_HOLD, armR: [55, 8, 95], headNod: 12 }} face={{ smile: 0.3, open: 0.3 * Math.max(0, Math.sin(t * 14)), eyesBig: 1 }} propR={<HeldCup />} /></>,
     cam: (t) => { const u = io(seg(t, P(18), P(19))); return { pos: L3([4.9, 1.6, 1.3], [4.4, 1.6, 0.8], u), target: [3.3, 1.5, -0.35], fov: 34 }; } },
   // 19 · "so you test it"
   { id: "grin", t0: P(19), t1: P(20), scene: (t) => <><DayStreet t={t} /><Person3D pos={[3.3, 0, -0.35]} yaw={1.3} look={HOOD} pose={{ ...STAND, lean: 4 }} face={{ smile: 1 }} /></>,
@@ -139,7 +147,7 @@ export const B_SHOTS: Shot[] = [
     },
     cam: (t) => { const s = t > tKick ? 0.25 : 1; return { pos: L3([9.6, 0.6, 2.6], [12.4, 0.9, 3.4], io(seg(t, tKick, P(23)))), target: L3([12, 0.6, 0.4], [14.6, 1.0, 1.0], io(seg(t, tKick - 0.2, P(23)))), fov: 40 + 0 * s }; } },
   // 23–24 · the coach; "lucky guess"
-  { id: "coach", t0: P(23), t1: P(24), scene: (t) => <><Env mood="dusk" /><Pitch /><Person3D pos={[8, 0, -6.5]} yaw={0.3} look={LOOKS.coach} pose={{ ...STAND, armR: [40, 20, 80] }} face={{ open: Math.max(0, Math.sin(t * 15)) * 0.5, eyesBig: 0.6 }} /></>,
+  { id: "coach", t0: P(23), t1: P(24), scene: (t) => <><Env mood="dusk" /><Pitch /><Person3D pos={[8, 0, -6.5]} yaw={0.3} look={LOOKS.coach} pose={talkHands(t, STAND)} face={{ open: Math.max(0, Math.sin(t * 15)) * 0.5, eyesBig: 0.6 }} /></>,
     cam: () => ({ pos: [8.9, 1.6, -4.4], target: [8, 1.5, -6.5], fov: 34 }) },
   { id: "lucky", t0: P(24), t1: P(25), scene: (t) => <><Env mood="dusk" /><Pitch /><Person3D pos={[12, 0, 1.2]} yaw={-2.6} look={HOOD} pose={{ ...STAND, armL: [30, 50, 60], armR: [30, 50, 60] }} face={{ smile: 0.8 }} /></>,
     cam: () => ({ pos: [11.0, 1.6, -0.6], target: [12, 1.5, 1.2], fov: 34 }) },
@@ -147,20 +155,20 @@ export const B_SHOTS: Shot[] = [
   { id: "panting", t0: P(25), t1: P(26), scene: (t) => <><Env mood="dusk" /><Pitch /><Person3D pos={[12, 0, 1.2]} yaw={-2.2} look={HOOD} pose={{ ...STAND, lean: 38, armL: [40, 4, 10], armR: [40, 4, 10], bob: -0.05 + 0.02 * Math.sin(t * 9) }} face={{ open: 0.4 + 0.3 * Math.sin(t * 9), eyesBig: 0.3 }} /></>,
     cam: (t) => { const u = io(seg(t, P(25), P(26))); return { pos: orbit([12, 1, 1.2], 210 - 40 * u, 2.6, 1.3), target: [12, 1.0, 1.2], fov: 38 }; } },
   // 26 · the cost: furnace, four breakfasts, eleven hours, hungry
-  { id: "furnace", t0: P(26), t1: at(26, "You"), scene: (t) => <><Kitchen bowls={1} /><Person3D pos={[0.9, 0, 0.9]} yaw={-0.6} look={HOOD} pose={{ ...STAND, armR: [60, 6, 100] }} face={{ smile: 0.2 }} /><pointLight position={[0.9, 0.7, 1.5]} color="#FF8A4A" intensity={2 + Math.sin(t * 20)} distance={2.2} /></>,
+  { id: "furnace", t0: P(26), t1: at(26, "You"), scene: (t) => <><Kitchen bowls={0} /><Person3D pos={[0.9, 0, 0.9]} yaw={-0.6} look={HOOD} pose={{ ...STAND, armR: [62 + 8 * Math.sin(t * 3), 8, 118], handR: "grip", wristR: [10, 40] }} face={{ smile: 0.3, open: Math.max(0, Math.sin(t * 6)) * 0.4 }} propR={<HeldToast />} /><pointLight position={[0.9, 0.7, 1.5]} color="#FF8A4A" intensity={2 + Math.sin(t * 20)} distance={2.2} /></>,
     cam: (t) => ({ pos: L3([2.6, 1.7, 3.2], [2.0, 1.6, 2.4], io(seg(t, P(26), at(26, "You")))), target: [0.6, 1.2, 0.6], fov: 40 }) },
-  { id: "breakfasts", t0: at(26, "You"), t1: at(26, "You", 2), scene: (t) => <><Kitchen bowls={Math.min(4, 1 + Math.floor((t - at(26, "four")) * 6) + (t > at(26, "four") ? 0 : -1) + 1)} /><Person3D pos={[0, 0, 1.0]} yaw={Math.PI} look={HOOD} pose={{ ...SIT, armR: [60, 6, 100], headNod: 20 }} face={{ smile: 0.5, open: Math.max(0, Math.sin(t * 10)) * 0.3 }} /></>,
-    cam: () => ({ pos: [0.2, 2.3, -1.4], target: [0, 0.8, 0.3], fov: 44 }) },
+  { id: "breakfasts", t0: at(26, "You"), t1: at(26, "You", 2), scene: (t) => { const n = t < at(26, "four") ? 1 : Math.min(4, 1 + Math.floor((t - at(26, "four")) * 6)); return <><Kitchen bowls={0} />{Array.from({ length: n }, (_, k) => <Bowl key={k} p={[-0.45 + k * 0.3, 0.8, (k % 2) * 0.12]} full={k === 0 ? 0.4 : 1} />)}<Person3D pos={[0, 0, -0.46]} yaw={0} look={HOOD} pose={eatPose(t, sitOn(0.46))} face={{ smile: 0.5, open: Math.max(0, Math.sin(t * 2.4 + 1.5)) * 0.3 }} propR={<HeldSpoon />} /></>; },
+    cam: (t) => ({ pos: L3([0.7, 1.9, 2.5], [0.45, 1.7, 2.0], seg(t, at(26, "You"), at(26, "You", 2))), target: [0, 0.95, -0.4], fov: 40 }) },
   { id: "sleep", t0: at(26, "You", 2), t1: at(26, "You", 3), scene: (t) => <><Bedroom windowMood={t < at(26, "hours") ? "night" : "day"} /><ambientLight intensity={0.4} /><Person3D pos={[-1.4, 0.82, -0.3]} yaw={0} rotX={-Math.PI / 2} look={HOOD} pose={STAND} face={{ blink: true }} /></>,
     cam: (t) => ({ pos: L3([0.6, 2.6, 1.2], [0.2, 2.2, 0.6], io(seg(t, at(26, "You", 2), at(26, "You", 3)))), target: [-1.4, 0.7, -1.5], fov: 44 }) },
-  { id: "hungry", t0: at(26, "You", 3), t1: P(27), scene: (t) => <><Kitchen bowls={4} /><Person3D pos={[2.2, 0, -1.6]} yaw={Math.PI * 0.9} look={HOOD} pose={{ ...STAND, lean: 20, armR: [80, 10, 40] }} face={{ open: 0.3 }} /></>,
-    cam: () => ({ pos: [0.4, 1.5, 1.5], target: [2.3, 1.2, -2.0], fov: 40 }) },
+  { id: "hungry", t0: at(26, "You", 3), t1: P(27), scene: (t) => { const o = io(seg(t, at(26, "You", 3), at(26, "hungry"))); return <><Kitchen bowls={0} fridgeOpen={o} /><Person3D pos={[2.4, 0, -1.45]} yaw={Math.PI} look={HOOD} pose={{ ...STAND, lean: 14, armR: [60 + 20 * o, 10, 30], handR: "grip", armL: [20, 10, 20] }} face={{ open: 0.3, eyesBig: 0.5 }} /></>; },
+    cam: () => ({ pos: [0.6, 1.5, 0.4], target: [2.4, 1.1, -2.2], fov: 42 }) },
   // 27 · the lottery... then the only thing you've wanted for a year
   { id: "lottery", t0: P(27), t1: at(27, "Then"), scene: (t) => <><Bedroom windowMood="night" /><ambientLight intensity={0.3} /><Person3D pos={[0.4, 0, 0]} yaw={0.4} look={HOOD} pose={STAND} face={{ smile: 0.3 }} /></>,
     cam: () => ({ pos: [1.2, 1.5, 2.6], target: [0.3, 1.3, 0], fov: 40 }), grade: "blur(6px) brightness(0.7)",
     dom: (t) => <Lottery show={seg(t, at(27, "lottery") - 0.2, at(27, "lottery") + 0.2)} burn={seg(t, at(27, "second") - 0.1, at(27, "Then"))} /> },
-  { id: "photo", t0: at(27, "Then"), t1: P(28), scene: (t) => <><Bedroom windowMood="night" /><ambientLight intensity={0.25} /><Person3D pos={[-1.1, 0, -0.4]} yaw={0.6} look={HOOD} pose={{ ...SIT, armR: [60, 4, 100], armL: [60, 4, 100], headNod: 25 }} face={{ smile: 0 }} /><Photo p={[-0.55, 0.98, 0.0]} ry={-2.6} /><pointLight position={[0.2, 1.6, 0.8]} color="#FFC877" intensity={3} distance={4} /></>,
-    cam: (t) => { const u = io(seg(t, at(27, "Then"), P(28))); return { pos: L3([0.4, 1.4, 1.6], [-0.3, 1.1, 0.5], u), target: L3([-0.9, 1.1, -0.3], [-0.55, 0.98, 0.0], u), fov: 36 }; } },
+  { id: "photo", t0: at(27, "Then"), t1: P(28), scene: (t) => { const Y = 0.25, hp: [number, number, number] = [-1.25 + 0.4 * Math.sin(Y), 0.9, -0.42 + 0.4 * Math.cos(Y)]; return <><Bedroom windowMood="night" /><ambientLight intensity={0.3} /><Person3D pos={[-1.25, 0, -0.42]} yaw={Y} look={HOOD} pose={sitOn(0.7, { armR: [34, 16, 52], armL: [34, 16, 52], handR: "grip", handL: "grip", wristR: [0, 80], wristL: [0, -80], headNod: 40 })} face={{ smile: 0, brow: 0.6 }} /><group position={hp} rotation={[0, Y + Math.PI, 0]}><group rotation={[-0.85, 0, 0]}><Framed kind="brothers" p={[0, 0, 0]} w={0.34} /></group></group><pointLight position={[-0.4, 1.4, 0.6]} color="#FFC877" intensity={3} distance={4} /></>; },
+    cam: (t) => { const u = io(seg(t, at(27, "Then"), P(28))); return { pos: L3([-0.25, 2.25, -1.25], [-0.45, 2.1, -1.05], u), target: L3([-1.1, 0.9, 0.0], [-1.12, 0.9, -0.02], u), fov: 40 }; } },
 ];
 
 export const BType: React.FC<{ t: number }> = ({ t }) => (

@@ -3,10 +3,12 @@
 import React, { useMemo } from "react";
 import * as THREE from "three";
 import { LOOKS, mix3, Person3D, Pose3, run3, SIT, STAND, walk3 } from "../cam3d/Person3D";
+import { faceTo, HeldBag, HeldPhone, kerbSit, PHONE_LOOK, sitOn, talkHands } from "../cam3d/Props3D";
 import { World3D } from "../cam3d/World3D";
 import { at, ex, hand, io, L3, orbit, P, PE, PS, rnd, RUN_Y, seg, Shot, shakeC } from "./core";
 import { Phone2D, VoiceNoteScreen } from "./Dom";
-import { Bedroom, Env, Mood, Park } from "./Sets";
+import { Env, Mood, Park } from "./Sets";
+import { Bedroom } from "./Sets3";
 import { Crossing, RiverRoad, Van } from "./Sets2";
 import { BODY, C, Chip, expo, Flash, HEAD, Rise, Slam } from "./Text";
 import { BodyArcs, Rain, Streaks, Tunnel, V3 } from "./Vfx";
@@ -55,7 +57,11 @@ const jamieZ = (t: number) => {
   return 1.9 - 1.6 * ex(seg(t, tPull, tPull + 0.5));
 };
 const heroSaveX = (t: number) => (t < at(43, "run") ? -14 : t < tReach ? -14 + 13.3 * seg(t, at(43, "run"), tReach) : -0.7);
-const jamieWalk = (t: number): Pose3 => (t < at(44, "Jamie's") ? { ...STAND, armR: [42, 4, 95], headNod: 22 } : mix3({ ...walk3(0.12), armR: [42, 4, 95], headNod: 20 }, walk3(0.3), seg(t, at(44, "Jamie's"), tReach)));
+const PHONE_ARM = { armR: PHONE_LOOK.armR, wristR: PHONE_LOOK.wristR, handR: PHONE_LOOK.handR };
+const jamieWalk = (t: number): Pose3 => (t < at(44, "Jamie's") ? PHONE_LOOK : { ...mix3(walk3(0.12), walk3(0.3), seg(t, at(44, "Jamie's"), tReach)), ...PHONE_ARM, headNod: 20 });
+// after the save: where the brothers stand, and the yaw that turns each toward the other
+const JP: [number, number] = [0.1, 0.3], HP: [number, number] = [-0.7, 0.7];
+const J_YAW = faceTo(JP, HP), H_YAW = faceTo(HP, JP);
 
 const Save: React.FC<{ t: number }> = ({ t }) => {
   const pulled = t > tPull;
@@ -63,7 +69,7 @@ const Save: React.FC<{ t: number }> = ({ t }) => {
   return (
     <>
       <MillRoad t={t} />
-      <Person3D pos={[0.1, 0, jamieZ(t)]} yaw={pulled ? Math.PI * 0.85 : 0} look={JAMIE} pose={pulled ? { ...STAND, lean: -12, armL: [70, 30, 20] } : jamieWalk(t)} face={{ smile: 0, open: pulled ? 0.5 : 0, eyesBig: pulled ? 1 : 0 }} />
+      <Person3D pos={[0.1, 0, jamieZ(t)]} yaw={pulled ? Math.PI * 0.85 : 0} look={JAMIE} propR={pulled ? undefined : <HeldPhone />} pose={pulled ? { ...STAND, lean: -12, armL: [70, 30, 20], handL: "open", armR: [30, 20, 40], handR: "open" } : jamieWalk(t)} face={{ smile: 0, open: pulled ? 0.5 : 0, eyesBig: pulled ? 1 : 0 }} />
       <Person3D pos={[heroSaveX(t), 0, hz]} yaw={pulled ? -2.6 : RUN_Y} look={HOOD} pose={pulled ? { ...STAND, lean: -18, armR: [95, 10, 30] } : run3(t * 1.6)} face={{ brow: -0.8, open: 0.3 }} />
       {t > at(43, "run") && t < tPull + 0.3 && <BodyArcs c={[heroSaveX(t), 1.15, hz]} t={t} n={5} amt={0.9} />}
       <Van p={[vanX(t), 0, 3.6]} />
@@ -106,22 +112,22 @@ export const C_SHOTS: Shot[] = [
   // 28–30 · the memory: twelve months ago, Mill Road
   { id: "mem-jamie", t0: P(28), t1: at(28, "crossed"), grade: MEMORY, scene: (t) => <><MillRoad t={t} rain /><Person3D pos={[-6 + (t - P(28)) * 1.2, 0, 1.0]} yaw={RUN_Y} look={JAMIE} pose={walk3(t * 1.1)} face={{ smile: 0.4 }} /></>,
     cam: (t) => hand({ pos: [-2 + (t - P(28)) * 0.8, 1.5, 5.6], target: [-4 + (t - P(28)) * 1.2, 1.2, 1.0], fov: 36 }, t, 0.01) },
-  { id: "mem-light", t0: at(28, "crossed"), t1: at(29, "The", 2), grade: MEMORY, scene: (t) => <><MillRoad t={t} rain /><Person3D pos={[0.1, 0, 1.0 + seg(t, at(29, "green"), at(29, "The", 2) + 0.5) * 0.9]} yaw={0} look={JAMIE} pose={t > at(29, "green") ? walk3(t * 1.1) : { ...STAND, armR: [42, 4, 95], headNod: 22 }} /></>,
-    cam: (t) => ({ pos: L3([0.9, 1.35, -0.9], [0.7, 1.45, -0.6], io(seg(t, at(28, "crossed"), at(29, "The", 2)))), target: [-1.6, 2.3, 8.3], fov: 40 }) },
+  { id: "mem-light", t0: at(28, "crossed"), t1: at(29, "The", 2), grade: MEMORY, scene: (t) => <><MillRoad t={t} rain /><Person3D pos={[0.1, 0, 1.0 + seg(t, at(29, "green"), at(29, "The", 2) + 0.5) * 0.9]} yaw={0} look={JAMIE} pose={t > at(29, "green") ? { ...walk3(t * 1.1), ...PHONE_ARM } : PHONE_LOOK} propR={<HeldPhone />} /></>,
+    cam: (t) => ({ pos: L3([1.7, 1.7, -2.1], [1.35, 1.65, -1.6], io(seg(t, at(28, "crossed"), at(29, "The", 2)))), target: [-1.2, 1.9, 8.3], fov: 42 }) },
   { id: "mem-van", t0: at(29, "The", 2), t1: P(30), grade: MEMORY, scene: (t) => <><MillRoad t={t} rain /><Van p={[22 - (t - at(29, "The", 2)) * 14, 0, 3.6]} /></>,
     cam: () => ({ pos: [-3, 0.6, 2.2], target: [12, 1.2, 3.6], fov: 34 }) },
   { id: "mem-late", t0: P(30), t1: P(31), grade: MEMORY + " brightness(0.8)", scene: (t) => <><MillRoad t={t} rain green={false} /><Person3D pos={[-1.6, 0, 1.0]} yaw={0.9} look={HOOD} pose={{ ...STAND, headNod: 15 }} face={{ smile: 0, brow: 0.8 }} /></>,
     cam: (t) => { const u = io(seg(t, P(30), P(31))); return { pos: L3([-6, 1.4, 5], [-4.4, 1.6, 3.6], u), target: [-1.6, 1.3, 1.0], fov: 40 }; } },
   // 31–32 · the voice note
-  { id: "voice-note", t0: P(31), t1: P(32), scene: (t) => <><Bedroom windowMood="night" /><ambientLight intensity={0.25} /><Person3D pos={[-1.1, 0, -0.4]} yaw={0.6} look={HOOD} pose={{ ...SIT, armR: [60, 4, 100], headNod: 25 }} face={{ smile: 0, brow: 0.6 }} /><pointLight position={[-0.6, 1.2, 0.2]} color="#9FD8FF" intensity={3} distance={2.5} /></>,
-    cam: (t) => ({ pos: L3([0.8, 1.4, 1.6], [0.3, 1.3, 1.1], io(seg(t, P(31), P(32)))), target: [-1.0, 1.15, -0.4], fov: 36 }), grade: "blur(3px) brightness(0.8)",
+  { id: "voice-note", t0: P(31), t1: P(32), scene: (t) => <><Bedroom windowMood="night" /><ambientLight intensity={0.25} /><Person3D pos={[-1.25, 0, -0.42]} yaw={0.4} look={HOOD} pose={sitOn(0.7, { ...PHONE_ARM, headNod: 26 })} face={{ smile: 0, brow: 0.6 }} propR={<HeldPhone />} /><pointLight position={[-0.9, 1.25, 0.1]} color="#9FD8FF" intensity={3} distance={2.5} /></>,
+    cam: (t) => ({ pos: L3([0.8, 1.4, 1.6], [0.3, 1.3, 1.1], io(seg(t, P(31), P(32)))), target: [-1.1, 1.15, -0.3], fov: 36 }), grade: "blur(3px) brightness(0.8)",
     dom: (t) => <Phone2D x={1220} y={560} s={0.95} enter={seg(t, at(31, "voice") - 0.3, at(31, "voice") + 0.3)}><VoiceNoteScreen progress={0} t={t} /></Phone2D> },
-  { id: "voice-play", t0: P(32), t1: P(33), grade: MEMORY + " blur(2px)", scene: (t) => <><MillRoad t={t} rain /><Person3D pos={[0.1, 0, 1.0]} yaw={-0.5} look={JAMIE} pose={{ ...STAND, armR: [42, 4, 95], headNod: 10 }} face={{ smile: 0.5, open: Math.max(0, Math.sin(t * 15)) * 0.4 }} /></>,
+  { id: "voice-play", t0: P(32), t1: P(33), grade: MEMORY + " blur(2px)", scene: (t) => <><MillRoad t={t} rain /><Person3D pos={[0.1, 0, 1.0]} yaw={-0.5} look={JAMIE} pose={{ ...STAND, armR: [62, 14, 122], handR: "grip", wristR: [10, 60], headNod: 6 }} face={{ smile: 0.5, open: Math.max(0, Math.sin(t * 15)) * 0.4 }} propR={<HeldPhone />} /></>,
     cam: (t) => ({ pos: L3([-1.0, 1.55, 3.0], [-0.6, 1.55, 2.3], io(seg(t, P(32), P(33)))), target: [0.1, 1.45, 1.0], fov: 34 }),
     dom: (t) => <Phone2D x={1500} y={560} s={0.9}><VoiceNoteScreen progress={seg(t, PS(32), PE(32))} t={t} /></Phone2D> },
   // 33–35 · a year is thirty-one million seconds; I'm going
   { id: "seconds", t0: P(33), t1: P(34), scene: (t) => <><Env mood="night" /><RiverRoad t={t} /><Person3D pos={[3, 0, 4.6]} yaw={0} look={HOOD} pose={{ ...STAND, armL: [40, 10, 70], armR: [40, 10, 70] }} /></>,
-    cam: (t) => { const u = io(seg(t, P(33), P(34))); return { pos: L3([0, 6, -4], [6, 4, -3], u), target: [20, 2, 40], fov: 46 }; } },
+    cam: (t) => { const u = io(seg(t, P(33), P(34))); return { pos: L3([1.2, 3.4, -1.8], [4.6, 2.8, -0.8], u), target: L3([2.8, 1.0, 6.5], [3.3, 1.0, 7.5], u), fov: 44 }; } },
   { id: "faster", t0: P(34), t1: P(35), scene: (t) => <><Env mood="night" /><RiverRoad t={t} /><Person3D pos={[0, 0, 1.2]} yaw={RUN_Y} look={HOOD} pose={mix3(STAND, { lean: 22, armL: [-30, 6, 60], armR: [35, 6, 70], legL: [30, 60], legR: [-18, 10], bob: -0.12 }, io(seg(t, at(34, "run"), at(34, "run") + 0.6)))} face={{ brow: -0.6 }} /><BodyArcs c={[0, 1.1, 1.2]} t={t} n={4} amt={seg(t, at(34, "Faster"), P(35))} /></>,
     cam: (t) => { const u = io(seg(t, P(34), P(35))); return { pos: L3([4, 1.0, 4.4], [2.2, 0.9, 3.0], u), target: [0, 1.0, 1.2], fov: 38 }; } },
   { id: "going", t0: P(35), t1: P(36), scene: (t) => <><Env mood="night" /><RiverRoad t={t} /><Person3D pos={[0, 0, 1.2]} yaw={RUN_Y + 0.5} look={HOOD} pose={{ ...STAND, lean: 6 }} face={{ brow: -0.9, open: Math.max(0, Math.sin(t * 13)) * 0.3 }} /><BodyArcs c={[0, 1.1, 1.2]} t={t} n={3} amt={0.5} /></>,
@@ -147,7 +153,7 @@ export const C_SHOTS: Shot[] = [
       const u = t - at(38, "People");
       return <><Env mood="day" /><World3D bare nearTrees={false} lamps={false} glow={0.25} />
         {[-3.4, -2.4, -1.4, -0.4].map((x, i) => <Person3D key={i} pos={[x + 0.4 * i, 0, -2.3 + u * 0.5]} yaw={Math.PI} look={(LOOKS as any)[["ex1", "ex3", "ex5", "ex8"][i]]} pose={walk3(-u * 0.9 - i * 0.3)} face={{ smile: 0.3 }}
-          propR={<mesh position={[0, -0.2, 0]}><boxGeometry args={[0.18, 0.24, 0.12]} /><meshToonMaterial color={["#F2B84B", "#D9472B", "#F1F4F2", "#2E5FD0"][i]} /></mesh>} />)}</>;
+          propR={<HeldBag col={["#F2B84B", "#D9472B", "#F1F4F2", "#2E5FD0"][i]} />} />)}</>;
     },
     cam: () => ({ pos: [-1.6, 1.4, 3.6], target: [-1.8, 1.2, -2], fov: 44 }), grade: "saturate(0.8)" },
   // 39 · winter / autumn / summer / spring, then a whole year in one breath
@@ -163,11 +169,11 @@ export const C_SHOTS: Shot[] = [
   { id: "1958", t0: at(40, "Seven"), t1: P(41), scene: (t) => <MillRoad t={t} />,
     cam: (t) => { const u = io(seg(t, at(40, "Seven"), P(41))); return { pos: L3([6, 7, 9.6], [4, 5, 9.2], u), target: [0, 1, 2], fov: 44 }; } },
   // 41 · there he is: hood up, earphones in, phone
-  { id: "there-he-is", t0: P(41), t1: at(41, "Hood"), scene: (t) => <><MillRoad t={t} /><Person3D pos={[0.1, 0, 1.0]} yaw={0} look={JAMIE} pose={jamieWalk(t)} /></>,
+  { id: "there-he-is", t0: P(41), t1: at(41, "Hood"), scene: (t) => <><MillRoad t={t} /><Person3D pos={[0.1, 0, 1.0]} yaw={0} look={JAMIE} pose={jamieWalk(t)} propR={<HeldPhone />} /></>,
     cam: (t) => ({ pos: L3([-8, 1.5, 1.0], [-6, 1.5, 1.2], io(seg(t, P(41), at(41, "Hood")))), target: [0.1, 1.3, 1.0], fov: 26 }) },
-  { id: "hood", t0: at(41, "Hood"), t1: at(41, "Looking"), scene: (t) => <><MillRoad t={t} /><Person3D pos={[0.1, 0, 1.0]} yaw={0} look={JAMIE} pose={jamieWalk(t)} face={{ smile: 0.2 }} /></>,
+  { id: "hood", t0: at(41, "Hood"), t1: at(41, "Looking"), scene: (t) => <><MillRoad t={t} /><Person3D pos={[0.1, 0, 1.0]} yaw={0} look={JAMIE} pose={jamieWalk(t)} face={{ smile: 0.2 }} propR={<HeldPhone />} /></>,
     cam: (t) => ({ pos: orbit([0.1, 1.6, 1.0], 40 + 30 * seg(t, at(41, "Hood"), at(41, "Looking")), 1.1, 1.65), target: [0.1, 1.55, 1.0], fov: 34 }) },
-  { id: "his-phone", t0: at(41, "Looking"), t1: P(42), scene: (t) => <><MillRoad t={t} /><Person3D pos={[0.1, 0, 1.0]} yaw={0} look={JAMIE} pose={jamieWalk(t)} face={{ smile: 0.3 }} propR={<group position={[0, -0.1, 0.035]} rotation={[-1.15, 0, 0]}><mesh><boxGeometry args={[0.075, 0.15, 0.01]} /><meshStandardMaterial color="#0A0A0F" /></mesh><mesh position={[0, 0, 0.0055]}><planeGeometry args={[0.066, 0.138]} /><meshStandardMaterial color="#9FD8FF" emissive="#7FC8FF" emissiveIntensity={1.6} /></mesh></group>} /></>,
+  { id: "his-phone", t0: at(41, "Looking"), t1: P(42), scene: (t) => <><MillRoad t={t} /><Person3D pos={[0.1, 0, 1.0]} yaw={0} look={JAMIE} pose={jamieWalk(t)} face={{ smile: 0.3 }} propR={<HeldPhone />} /></>,
     cam: () => ({ pos: [0.95, 1.45, 2.1], target: [0.05, 1.25, 1.1], fov: 36 }) },
   // 42 · the van comes round the corner, too fast, again
   { id: "van", t0: P(42), t1: P(43), scene: (t) => <Save t={t} />,
@@ -186,18 +192,18 @@ export const C_SHOTS: Shot[] = [
   { id: "reach", t0: P(45), t1: tPull - 0.05, noBlur: true, scene: (t) => <Save t={t} />,
     cam: (t) => ({ pos: orbit([-0.3, 1.1, 1.6], 120 + 40 * seg(t, P(45), tPull), 3.0, 1.3), target: [-0.3, 1.1, 1.6], fov: 40 }) },
   { id: "pull", t0: tPull - 0.05, t1: P(46), noBlur: true, scene: (t) => <Save t={t} />,
-    cam: (t) => { const u = seg(t, tPull, P(46)); return shakeC({ pos: L3([-2.6, 0.5, -1.4], [-3.2, 0.9, -2.2], u), target: [vanX(t) * 0.5, 1.0, 2.0], fov: 46 }, t, u > 0.25 && u < 0.6 ? 0.04 : 0); } },
+    cam: (t) => { const u = seg(t, tPull, P(46)); return shakeC({ pos: L3([-2.6, 0.5, -1.4], [-3.2, 0.9, -2.2], u), target: [Math.max(-0.6, Math.min(1.6, vanX(t) * 0.5)), 1.0, 1.6], fov: 46 }, t, u > 0.25 && u < 0.6 ? 0.04 : 0); } },
   // 46–50 · whoa; alive; early; the kerb
-  { id: "whoa", t0: P(46), t1: P(47), scene: (t) => <><MillRoad t={t} /><Person3D pos={[0.1, 0, 0.3]} yaw={Math.PI * 0.85} look={JAMIE} pose={{ ...STAND, lean: -8, armL: [40, 30, 30] }} face={{ open: 0.6 * Math.max(0, Math.sin(t * 13)), eyesBig: 1, brow: 0.4 }} /></>,
-    cam: () => ({ pos: [-0.8, 1.6, -1.3], target: [0.1, 1.5, 0.3], fov: 32 }) },
-  { id: "alive", t0: P(47), t1: P(48), scene: (t) => <><MillRoad t={t} /><Person3D pos={[0.1, 0, 0.3]} yaw={Math.PI * 0.85} look={JAMIE} pose={{ ...STAND, armR: [10, 30, 90], armL: [10, 30, 90] }} face={{ smile: t > at(47, "Alive") ? 0.3 : 0, brow: t > at(47, "Annoyed") && t < at(47, "Confused") ? -0.7 : t < at(47, "Alive") ? 0.6 : 0, eyesBig: t > at(47, "Confused") && t < at(47, "Alive") ? 1 : 0 }} /><Person3D pos={[-0.7, 0, 0.7]} yaw={-2.4} look={HOOD} pose={STAND} face={{ smile: 0.4 }} /></>,
-    cam: (t) => { const u = io(seg(t, P(47), P(48))); return { pos: L3([-1.8, 1.6, -2.8], [-1.2, 1.6, -1.8], u), target: [-0.2, 1.4, 0.5], fov: 34 }; } },
-  { id: "early", t0: P(48), t1: P(49), scene: (t) => <><MillRoad t={t} /><Person3D pos={[0.1, 0, 0.3]} yaw={Math.PI * 0.75} look={JAMIE} pose={{ ...STAND, armR: [20, 20, 40] }} face={{ smile: 0.7, open: 0.4 * Math.max(0, Math.sin(t * 13)) }} /></>,
-    cam: () => ({ pos: [-0.9, 1.55, -1.2], target: [0.1, 1.5, 0.3], fov: 30 }) },
-  { id: "film", t0: P(49), t1: P(50), scene: (t) => <><MillRoad t={t} /><Person3D pos={[-0.7, 0, 0.7]} yaw={-2.0} look={HOOD} pose={{ ...STAND, headNod: -4 }} face={{ smile: 0.6, brow: 0.5, open: 0.3 * Math.max(0, Math.sin(t * 13)) }} /></>,
-    cam: () => ({ pos: [-1.6, 1.55, -0.6], target: [-0.7, 1.5, 0.7], fov: 30 }) },
-  { id: "kerb", t0: P(50), t1: P(51), scene: (t) => { const s = seg(t, at(50, "sit") - 0.3, at(50, "sit") + 0.3); return <><MillRoad t={t} /><Person3D pos={[-0.6, 0.12 * s, 1.35]} yaw={Math.PI} look={HOOD} pose={mix3({ ...STAND, lean: 14 }, { ...SIT, armL: [30, 10, 40], armR: [30, 10, 40], bob: -0.42 }, s)} face={{ smile: 1, open: 0.4 + 0.3 * Math.sin(t * 16) }} /><Person3D pos={[0.4, 0, 0.6]} yaw={-2.4} look={JAMIE} pose={STAND} face={{ smile: 0.2, brow: 0.5 }} /></>; },
-    cam: (t) => { const u = io(seg(t, P(50), P(51))); return { pos: L3([-1.2, 1.2, -2.6], [-2.5, 5.5, -5.5], u), target: [-0.2, 0.8, 1.0], fov: 38 }; } },
+  { id: "whoa", t0: P(46), t1: P(47), scene: (t) => <><MillRoad t={t} /><Person3D pos={[JP[0], 0, JP[1]]} yaw={J_YAW} look={JAMIE} pose={{ ...STAND, lean: -8, armL: [40, 30, 30], handL: "open", armR: [30, 25, 50], handR: "open" }} face={{ open: 0.6 * Math.max(0, Math.sin(t * 13)), eyesBig: 1, brow: 0.4 }} /><Person3D pos={[HP[0], 0, HP[1]]} yaw={H_YAW} look={HOOD} pose={STAND} /></>,
+    cam: (t) => ({ pos: L3([-1.6, 1.72, 2.45], [-1.45, 1.7, 2.3], seg(t, P(46), P(47))), target: [0.05, 1.4, 0.25], fov: 30 }) },
+  { id: "alive", t0: P(47), t1: P(48), scene: (t) => <><MillRoad t={t} /><Person3D pos={[JP[0], 0, JP[1]]} yaw={J_YAW} look={JAMIE} pose={{ ...STAND, armR: [10, 30, 90], armL: [10, 30, 90], handL: "open", handR: "open" }} face={{ smile: t > at(47, "Alive") ? 0.3 : 0, brow: t > at(47, "Annoyed") && t < at(47, "Confused") ? -0.7 : t < at(47, "Alive") ? 0.6 : 0, eyesBig: t > at(47, "Confused") && t < at(47, "Alive") ? 1 : 0 }} /><Person3D pos={[HP[0], 0, HP[1]]} yaw={H_YAW} look={HOOD} pose={STAND} face={{ smile: 0.4 }} /></>,
+    cam: (t) => { const u = io(seg(t, P(47), P(48))); return { pos: L3([1.4, 1.6, 3.2], [0.9, 1.55, 2.6], u), target: [-0.3, 1.35, 0.5], fov: 34 }; } },
+  { id: "early", t0: P(48), t1: P(49), scene: (t) => <><MillRoad t={t} /><Person3D pos={[JP[0], 0, JP[1]]} yaw={J_YAW} look={JAMIE} pose={talkHands(t, STAND, 0.6)} face={{ smile: 0.7, open: 0.4 * Math.max(0, Math.sin(t * 13)) }} /><Person3D pos={[HP[0], 0, HP[1]]} yaw={H_YAW} look={HOOD} pose={STAND} /></>,
+    cam: () => ({ pos: [-1.3, 1.68, 1.1], target: [0.1, 1.5, 0.3], fov: 30 }) },
+  { id: "film", t0: P(49), t1: P(50), scene: (t) => <><MillRoad t={t} /><Person3D pos={[HP[0], 0, HP[1]]} yaw={H_YAW} look={HOOD} pose={{ ...STAND, headNod: -4, armR: [20, 15, 40], handR: "open" }} face={{ smile: 0.6, brow: 0.5, open: 0.3 * Math.max(0, Math.sin(t * 13)) }} /><Person3D pos={[JP[0], 0, JP[1]]} yaw={J_YAW} look={JAMIE} pose={STAND} /></>,
+    cam: () => ({ pos: [0.68, 1.68, 0.05], target: [-0.7, 1.5, 0.7], fov: 30 }) },
+  { id: "kerb", t0: P(50), t1: P(51), scene: (t) => { const s = io(seg(t, at(50, "sit") - 0.4, at(50, "sit") + 0.4)); return <><MillRoad t={t} /><Person3D pos={[-0.6, 0, 1.58]} yaw={0} look={HOOD} pose={mix3({ ...STAND, lean: 14 }, kerbSit({ armR: [62, 10, 70], armL: [62, 10, 70], headNod: -10 * Math.sin(t * 9) }), s)} face={{ smile: 1, open: 0.4 + 0.3 * Math.sin(t * 16) }} /><Person3D pos={[0.4, 0, 0.95]} yaw={faceTo([0.4, 0.95], [-0.6, 1.58])} look={JAMIE} pose={{ ...STAND, armR: [30, 20, 60], handR: "open" }} face={{ smile: 0.2, brow: 0.5 }} /></>; },
+    cam: (t) => { const u = io(seg(t, P(50), P(51))); return { pos: L3([-0.2, 1.0, 3.8], [-0.6, 5.0, 7.5], u), target: [-0.3, 0.7, 1.4], fov: 38 }; } },
 ];
 
 export const CType: React.FC<{ t: number }> = ({ t }) => (
