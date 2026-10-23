@@ -1,0 +1,74 @@
+[
+ {
+  "index": 0,
+  "speaker": "N",
+  "start": 0.15,
+  "end": 3.446,
+  "gap_after": 0.5,
+  "text": "Tomorrow, the internet disappears. For seven days."
+ },
+ {
+  "index": 1,
+  "speaker": "N",
+  "start": 3.946,
+  "end": 5.709,
+  "gap_after": 0.8,
+  "text": "You think you'll be fine. You won't."
+ },
+ {
+  "index": 2,
+  "speaker": "N",
+  "start": 6.509,
+  "end": 12.027,
+  "gap_after": 0.5,
+  "text": "The lights still work. But your card is useless, your map is blank, and you never learned your mum's number."
+ },
+ {
+  "index": 3,
+  "speaker": "N",
+  "start": 12.527,
+  "end": 15.901,
+  "gap_after": 0.6,
+  "text": "So you learn a trick. Don't trust the dot. Trust the paper."
+ },
+ {
+  "index": 4,
+  "speaker": "N",
+  "start": 16.501,
+  "end": 19.821,
+  "gap_after": 0.6,
+  "text": "It works on everything. Cash. Maps. Letters."
+ },
+ {
+  "index": 5,
+  "speaker": "N",
+  "start": 20.421,
+  "end": 22.821,
+  "gap_after": 0.7,
+  "text": "Until day three, when the shelves start to empty."
+ },
+ {
+  "index": 6,
+  "speaker": "N",
+  "start": 23.521,
+  "end": 29.042,
+  "gap_after": 0.6,
+  "text": "Every day it gets worse. Day four. Day five. And the rumours move faster than the trucks."
+ },
+ {
+  "index": 7,
+  "speaker": "N",
+  "start": 29.642,
+  "end": 32.017,
+  "gap_after": 1.0,
+  "text": "But one old man still knows the way home."
+ },
+ {
+  "index": 8,
+  "speaker": "N",
+  "start": 33.017,
+  "end": 34.357,
+  "gap_after": 2.0,
+  "text": "Watch the full story now."
+ }
+]
