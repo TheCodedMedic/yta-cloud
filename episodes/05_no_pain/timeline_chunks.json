@@ -1,0 +1,562 @@
+[
+ {
+  "index": 0,
+  "speaker": "N",
+  "start": 0.3,
+  "end": 4.801,
+  "gap_after": 0.5,
+  "text": "It starts with a frying pan. Saturday, nine in the morning. You pick it up by the handle."
+ },
+ {
+  "index": 1,
+  "speaker": "N",
+  "start": 5.301,
+  "end": 7.373,
+  "gap_after": 0.6,
+  "text": "The metal handle. Straight off the flame."
+ },
+ {
+  "index": 2,
+  "speaker": "N",
+  "start": 7.973,
+  "end": 13.489,
+  "gap_after": 0.5,
+  "text": "Your sister stops chewing. You look down at your hand. The skin is going red. And you feel nothing."
+ },
+ {
+  "index": 3,
+  "speaker": "MIA",
+  "start": 13.989,
+  "end": 15.218,
+  "gap_after": 0.7,
+  "text": "Why aren't you screaming?"
+ },
+ {
+  "index": 4,
+  "speaker": "N",
+  "start": 15.918,
+  "end": 19.445,
+  "gap_after": 2.6,
+  "text": "That's the question, isn't it. So, what if you couldn't feel pain?"
+ },
+ {
+  "index": 5,
+  "speaker": "N",
+  "start": 22.045,
+  "end": 28.088,
+  "gap_after": 0.45,
+  "text": "Not less pain. None. No stings, no aches, no headaches, no hot handle. Ever again."
+ },
+ {
+  "index": 6,
+  "speaker": "N",
+  "start": 28.538,
+  "end": 31.538,
+  "gap_after": 0.8,
+  "text": "It sounds like a superpower. For about a week, it is."
+ },
+ {
+  "index": 7,
+  "speaker": "N",
+  "start": 32.338,
+  "end": 38.825,
+  "gap_after": 0.45,
+  "text": "Here's how it works. Rule one. Nothing hurts. Not a paper cut, not a broken arm, not a dentist's drill."
+ },
+ {
+  "index": 8,
+  "speaker": "N",
+  "start": 39.275,
+  "end": 45.764,
+  "gap_after": 0.45,
+  "text": "Rule two. You still get hurt. The burn still burns. The bone still breaks. You just don't get the message."
+ },
+ {
+  "index": 9,
+  "speaker": "N",
+  "start": 46.214,
+  "end": 52.379,
+  "gap_after": 0.7,
+  "text": "Rule three. Nobody can tell. You look fine. You always look fine. Remember that one."
+ },
+ {
+  "index": 10,
+  "speaker": "N",
+  "start": 53.079,
+  "end": 58.168,
+  "gap_after": 0.45,
+  "text": "And here's the strange part. This is real. There are people alive right now who were born this way."
+ },
+ {
+  "index": 11,
+  "speaker": "N",
+  "start": 58.618,
+  "end": 69.834,
+  "gap_after": 0.45,
+  "text": "In 2006, doctors in Cambridge studied families in Pakistan with a broken gene called SCN9A. One tiny switch inside the nerves, stuck off. None of them had ever felt pain."
+ },
+ {
+  "index": 12,
+  "speaker": "N",
+  "start": 70.284,
+  "end": 76.456,
+  "gap_after": 0.6,
+  "text": "One boy earned money in the street, walking on hot coals and pushing knives through his arms. He never felt a thing."
+ },
+ {
+  "index": 13,
+  "speaker": "N",
+  "start": 77.056,
+  "end": 81.359,
+  "gap_after": 1.6,
+  "text": "He died at fourteen. He jumped off a roof, because nothing had ever told him not to."
+ },
+ {
+  "index": 14,
+  "speaker": "N",
+  "start": 82.959,
+  "end": 89.779,
+  "gap_after": 0.5,
+  "text": "But you don't know any of that yet. You know you just held a hot pan for six seconds, and your Saturday has suddenly got very interesting."
+ },
+ {
+  "index": 15,
+  "speaker": "N",
+  "start": 90.279,
+  "end": 92.008,
+  "gap_after": 0.5,
+  "text": "So you test it. Like anyone would."
+ },
+ {
+  "index": 16,
+  "speaker": "N",
+  "start": 92.508,
+  "end": 98.457,
+  "gap_after": 0.45,
+  "text": "Test one. The hottest sauce in the shop. The one with the skull on the label. Theo cries from across the table."
+ },
+ {
+  "index": 17,
+  "speaker": "THEO",
+  "start": 98.907,
+  "end": 101.711,
+  "gap_after": 0.3,
+  "text": "Your face isn't even red. That's not normal, bro."
+ },
+ {
+  "index": 18,
+  "speaker": "YOU",
+  "start": 102.011,
+  "end": 102.907,
+  "gap_after": 0.8,
+  "text": "Tastes like ketchup."
+ },
+ {
+  "index": 19,
+  "speaker": "N",
+  "start": 103.707,
+  "end": 107.533,
+  "gap_after": 0.45,
+  "text": "Test two. The dentist. The one you've been avoiding for three years."
+ },
+ {
+  "index": 20,
+  "speaker": "N",
+  "start": 107.983,
+  "end": 112.683,
+  "gap_after": 0.6,
+  "text": "No injection. No gas. You watch the drill go in and think about lunch."
+ },
+ {
+  "index": 21,
+  "speaker": "N",
+  "start": 113.283,
+  "end": 120.958,
+  "gap_after": 0.45,
+  "text": "Test three. Five-a-side. The tackle that would have ended your season. You get up, pick the ball out of the net, and walk it back to the centre circle."
+ },
+ {
+  "index": 22,
+  "speaker": "THEO",
+  "start": 121.408,
+  "end": 123.925,
+  "gap_after": 0.3,
+  "text": "Bro. Your ankle is the wrong shape."
+ },
+ {
+  "index": 23,
+  "speaker": "YOU",
+  "start": 124.225,
+  "end": 124.949,
+  "gap_after": 0.5,
+  "text": "Feels fine."
+ },
+ {
+  "index": 24,
+  "speaker": "N",
+  "start": 125.449,
+  "end": 127.214,
+  "gap_after": 0.8,
+  "text": "And it does. That's the problem."
+ },
+ {
+  "index": 25,
+  "speaker": "N",
+  "start": 128.014,
+  "end": 134.734,
+  "gap_after": 0.45,
+  "text": "Plus. Headaches are gone. The gym stops being a punishment. You do a hundred press-ups, because nothing tells you to stop at thirty."
+ },
+ {
+  "index": 26,
+  "speaker": "N",
+  "start": 135.184,
+  "end": 140.51,
+  "gap_after": 0.5,
+  "text": "Minus. On Tuesday you bite your tongue at lunch, and you don't find out until Theo points at the blood."
+ },
+ {
+  "index": 27,
+  "speaker": "N",
+  "start": 141.01,
+  "end": 147.093,
+  "gap_after": 0.45,
+  "text": "Plus. You become a legend. The guy who can't feel. There's a video. It has four hundred thousand views."
+ },
+ {
+  "index": 28,
+  "speaker": "N",
+  "start": 147.543,
+  "end": 152.948,
+  "gap_after": 0.7,
+  "text": "Minus. The blister on your heel turns into a hole in your heel, because you walked on it for a week."
+ },
+ {
+  "index": 29,
+  "speaker": "N",
+  "start": 153.648,
+  "end": 160.463,
+  "gap_after": 0.45,
+  "text": "Here's the part the movies skip. Your body was never built for this. Pain is the only reason you ever moved your hand off a hot thing."
+ },
+ {
+  "index": 30,
+  "speaker": "N",
+  "start": 160.913,
+  "end": 169.151,
+  "gap_after": 0.45,
+  "text": "Touch a stove, and your spine yanks your arm back before your brain even knows. About a tenth of a second. It's a reflex, and it runs on the same alarm."
+ },
+ {
+  "index": 31,
+  "speaker": "N",
+  "start": 169.601,
+  "end": 171.661,
+  "gap_after": 1.0,
+  "text": "You just ripped the alarm out of the wall."
+ },
+ {
+  "index": 32,
+  "speaker": "N",
+  "start": 172.661,
+  "end": 180.68,
+  "gap_after": 0.45,
+  "text": "There's a woman in Scotland called Jo Cameron. Doctors found her in 2019. A different broken gene, the same result. She has never felt pain either."
+ },
+ {
+  "index": 33,
+  "speaker": "N",
+  "start": 181.13,
+  "end": 188.477,
+  "gap_after": 0.45,
+  "text": "She burns her arm on the oven and only notices when she smells it. So she checks her hands every night, the way you'd check a car for scratches."
+ },
+ {
+  "index": 34,
+  "speaker": "N",
+  "start": 188.927,
+  "end": 191.981,
+  "gap_after": 0.45,
+  "text": "Because when you can't feel the damage, you have to go looking for it."
+ },
+ {
+  "index": 35,
+  "speaker": "N",
+  "start": 192.431,
+  "end": 195.985,
+  "gap_after": 0.6,
+  "text": "And you? You stop looking. Why would you? You feel great."
+ },
+ {
+  "index": 36,
+  "speaker": "N",
+  "start": 196.585,
+  "end": 202.048,
+  "gap_after": 0.45,
+  "text": "Your grandad was a nurse for forty years. He watches you limp into the kitchen like nothing is wrong."
+ },
+ {
+  "index": 37,
+  "speaker": "GRANDAD",
+  "start": 202.498,
+  "end": 207.309,
+  "gap_after": 0.3,
+  "text": "Pain's not your enemy, son. Pain's the only friend who never lies to you."
+ },
+ {
+  "index": 38,
+  "speaker": "YOU",
+  "start": 207.609,
+  "end": 209.874,
+  "gap_after": 0.6,
+  "text": "Then I've got one less liar to worry about."
+ },
+ {
+  "index": 39,
+  "speaker": "N",
+  "start": 210.474,
+  "end": 212.566,
+  "gap_after": 1.0,
+  "text": "You'll remember that line. Just not yet."
+ },
+ {
+  "index": 40,
+  "speaker": "N",
+  "start": 213.566,
+  "end": 216.887,
+  "gap_after": 0.45,
+  "text": "Because here's what you build. A life with no warnings."
+ },
+ {
+  "index": 41,
+  "speaker": "N",
+  "start": 217.337,
+  "end": 227.036,
+  "gap_after": 0.45,
+  "text": "You skip the doctor. You sleep on your arm and wake up with a hand that doesn't work until noon. You eat food that's too hot, and your mouth becomes a map of burns you never felt."
+ },
+ {
+  "index": 42,
+  "speaker": "N",
+  "start": 227.486,
+  "end": 231.606,
+  "gap_after": 0.45,
+  "text": "Theo starts bringing a first-aid kit to football. Not for the team. For you."
+ },
+ {
+  "index": 43,
+  "speaker": "N",
+  "start": 232.056,
+  "end": 237.345,
+  "gap_after": 0.45,
+  "text": "And one Friday, around dinner, something in your stomach goes wrong. You don't know. You can't know."
+ },
+ {
+  "index": 44,
+  "speaker": "N",
+  "start": 237.795,
+  "end": 245.989,
+  "gap_after": 0.7,
+  "text": "You just notice you're not hungry. Then you notice you're cold. Then you notice nothing, because noticing was never your job. It was pain's job."
+ },
+ {
+  "index": 45,
+  "speaker": "N",
+  "start": 246.689,
+  "end": 250.749,
+  "gap_after": 1.0,
+  "text": "And here's where rule three comes back. Nobody can tell. You look fine."
+ },
+ {
+  "index": 46,
+  "speaker": "N",
+  "start": 251.749,
+  "end": 258.8,
+  "gap_after": 0.45,
+  "text": "Except one person. Theo. He's known you for eleven years. He looks at you across the table, and he doesn't see fine."
+ },
+ {
+  "index": 47,
+  "speaker": "THEO",
+  "start": 259.25,
+  "end": 263.606,
+  "gap_after": 0.3,
+  "text": "You've gone grey. You're sweating, and it's cold in here. When did you last eat?"
+ },
+ {
+  "index": 48,
+  "speaker": "YOU",
+  "start": 263.906,
+  "end": 265.719,
+  "gap_after": 0.3,
+  "text": "I'm fine. Nothing hurts."
+ },
+ {
+  "index": 49,
+  "speaker": "THEO",
+  "start": 266.019,
+  "end": 267.916,
+  "gap_after": 0.8,
+  "text": "Yeah. That's what scares me."
+ },
+ {
+  "index": 50,
+  "speaker": "N",
+  "start": 268.716,
+  "end": 275.487,
+  "gap_after": 0.45,
+  "text": "Your appendix burst two hours ago. For anyone else, that's the worst pain of their life. For you, it's a Friday."
+ },
+ {
+  "index": 51,
+  "speaker": "N",
+  "start": 275.937,
+  "end": 283.827,
+  "gap_after": 0.45,
+  "text": "Theo drives. You tell him he's overreacting the whole way. At the hospital, a doctor with grey hair looks at the scan and goes very quiet."
+ },
+ {
+  "index": 52,
+  "speaker": "DOCTOR",
+  "start": 284.277,
+  "end": 289.992,
+  "gap_after": 0.7,
+  "text": "Most people walk in here screaming. You walked in because somebody looked at you. That somebody just saved your life."
+ },
+ {
+  "index": 53,
+  "speaker": "N",
+  "start": 290.692,
+  "end": 294.874,
+  "gap_after": 0.6,
+  "text": "Surgery takes an hour. Recovery takes three weeks. You feel none of it."
+ },
+ {
+  "index": 54,
+  "speaker": "N",
+  "start": 295.474,
+  "end": 299.687,
+  "gap_after": 0.45,
+  "text": "But you feel this. Lying there, you finally understand what your grandad meant."
+ },
+ {
+  "index": 55,
+  "speaker": "N",
+  "start": 300.137,
+  "end": 306.201,
+  "gap_after": 1.2,
+  "text": "Pain was never the enemy. Pain was the alarm. And when you can't hear the alarm, you need somebody watching for the smoke."
+ },
+ {
+  "index": 56,
+  "speaker": "N",
+  "start": 307.401,
+  "end": 309.989,
+  "gap_after": 0.45,
+  "text": "So you change. Not the power. You."
+ },
+ {
+  "index": 57,
+  "speaker": "N",
+  "start": 310.439,
+  "end": 319.55,
+  "gap_after": 0.6,
+  "text": "You check your hands every night, like Jo. You see a doctor every month, whether you like it or not. You let Theo look at you, and when he says you've gone grey, you believe him."
+ },
+ {
+  "index": 58,
+  "speaker": "N",
+  "start": 320.15,
+  "end": 322.975,
+  "gap_after": 0.45,
+  "text": "And at dinner, your sister pokes the scar on your stomach."
+ },
+ {
+  "index": 59,
+  "speaker": "MIA",
+  "start": 323.425,
+  "end": 324.118,
+  "gap_after": 0.3,
+  "text": "Did that hurt?"
+ },
+ {
+  "index": 60,
+  "speaker": "YOU",
+  "start": 324.418,
+  "end": 324.761,
+  "gap_after": 0.4,
+  "text": "No."
+ },
+ {
+  "index": 61,
+  "speaker": "MIA",
+  "start": 325.161,
+  "end": 326.963,
+  "gap_after": 0.6,
+  "text": "Good. Then this won't."
+ },
+ {
+  "index": 62,
+  "speaker": "N",
+  "start": 327.563,
+  "end": 330.231,
+  "gap_after": 0.6,
+  "text": "And she punches your arm, as hard as a twelve-year-old can."
+ },
+ {
+  "index": 63,
+  "speaker": "N",
+  "start": 330.831,
+  "end": 333.315,
+  "gap_after": 1.0,
+  "text": "It doesn't hurt. But you laugh until it should."
+ },
+ {
+  "index": 64,
+  "speaker": "N",
+  "start": 334.315,
+  "end": 337.182,
+  "gap_after": 0.6,
+  "text": "Then your phone buzzes. Two in the morning. Theo."
+ },
+ {
+  "index": 65,
+  "speaker": "N",
+  "start": 337.782,
+  "end": 341.389,
+  "gap_after": 3.2,
+  "text": "\"Mate. I just put my hand on the hob. And I didn't feel anything.\""
+ },
+ {
+  "index": 66,
+  "speaker": "THEO",
+  "start": 344.589,
+  "end": 345.607,
+  "gap_after": 0.4,
+  "text": "It's not just me."
+ },
+ {
+  "index": 67,
+  "speaker": "YOU",
+  "start": 346.007,
+  "end": 346.566,
+  "gap_after": 2.2,
+  "text": "How many?"
+ },
+ {
+  "index": 68,
+  "speaker": "N",
+  "start": 348.766,
+  "end": 353.388,
+  "gap_after": 0.6,
+  "text": "Would you take it? No pain, ever, but no warnings either? Tell us in the comments."
+ },
+ {
+  "index": 69,
+  "speaker": "N",
+  "start": 353.988,
+  "end": 354.653,
+  "gap_after": 3.0,
+  "text": "In theory."
+ }
+]

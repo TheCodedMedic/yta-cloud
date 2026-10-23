@@ -80,7 +80,9 @@ def main(cue_path, out_path):
 
     # voice envelope for ducking (0.25 s window)
     n = int(0.25 * SR)
-    e = np.convolve(np.abs(voice.mean(axis=1)), np.ones(n) / n, mode="same")
+    c = np.cumsum(np.concatenate([[0.0], np.abs(voice.mean(axis=1)).astype(np.float64)]))
+    idx = np.arange(total); h = n // 2
+    e = (c[np.clip(idx + (n - h), 0, total)] - c[np.clip(idx - h, 0, total)]) / n  # moving average (same as the convolution, much faster)
     duck = 1 - 0.45 * np.clip(e / (vref * 0.6), 0, 1)
 
     beds = np.zeros((total, 2), np.float32)

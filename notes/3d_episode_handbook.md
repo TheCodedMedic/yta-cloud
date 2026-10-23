@@ -109,3 +109,16 @@ This is how "What If in Theory" Episode 04 ("What If You Could Go Back in Time?"
 ## 9. Storytelling references
 - **Our study notes:** `notes/16_otherwise_reference_study.md` and `notes/17_otherwise_storytelling_study.md`. Their template: open inside a small moment; numbered rules with one planted to break; real studies landed on "you"; a plus/minus middle; a climax solved by character; a warm landing; a mystery hook.
 - **Episode 04 plan and fix audit:** `episodes/04_go_back_in_time/fix_audit_v1.md` (with the screenplay and the sound scripts `film_audio.py`, `cues_full.py` in the same folder; the audio files themselves are not in git).
+
+## 10. Lessons from Episodes 05–06 (cloud, overnight)
+| Mistake found in review | Rule / fix (in the kit where possible) |
+|---|---|
+| A red dot on every glossy head near the hob | Point lights near faces show as specular dots on the clear-coat head. `Hob` has no light unless `light` is set; keep coloured point lights out of close-ups. |
+| Glows (burns, bruises) floating beside the hand | Anything on a hand is a hand prop: pass `Damage` as `propR`. `XRayHero` adds the seated `bob` to upper-body glow points. |
+| A hand glow placed on the wrong side | A character at yaw π has their right hand on world **+x**. Compute hand positions; don't guess. |
+| Over-the-shoulder shots filled by the near head (again) | Offset ≥ 0.9 m sideways, or shoot over seated heads from above (y ≈ 1.9). Seated head centre ≈ y 1.22 (`sitOn(0.46)`), bus seat ≈ 1.31. |
+| Arms raised to the head cross the face | "Stressed" = fists at the sides + head down + blink. No hands-on-head poses. |
+| Thought cards unreadable in wide shots | `ThoughtCard` `h` is the height of one text line; cards wrap at 560 px and sit on their tail above the head. Use h ≈ 0.22 at 2–4 m, 0.34 at 5–6 m. |
+| A camera behind a fence or inside a tree | Check wide shots against the set footprint (garden fences at z ±4); pick a high shot from inside the set. |
+| `at()` anchor that doesn't exist (beat had one "The") | Run `python3 pipeline/check_anchors.py video/src/<ep>/timing.json video/src/<ep>/*.tsx` before every strip render. |
+| Silent title holds | Many library tracks start quietly: cut music with an offset (8–20 s) and put a pad under title holds. |

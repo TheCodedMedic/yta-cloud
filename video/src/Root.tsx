@@ -17,6 +17,8 @@ import { DEMO, DEMO_END } from "./shots/demo";
 import { F } from "./timing";
 import { Short, ShortPicture, ShortStrips, SHORT_FRAMES, SHORT_STRIPS } from "./short/Short";
 import { FPS, H, W } from "./theme";
+import { EP5 } from "./ep05/Film";
+import { EP6 } from "./ep06/Film";
 
 const Minute1 = makeEpisode(MIN1, FLASHES);
 const Mids1 = makeMids(MIN1);
@@ -57,6 +59,10 @@ export const Root = () => (
     {Array.from({ length: PART_COUNT }, (_, k) => <Composition key={k} id={`Ep4Part${k}`} component={() => <Ep4PartStrips part={k} />} durationInFrames={stripCount(k)} fps={FPS4} width={1920} height={1080} />)}
     <Composition id="Ep4Hands" component={HandTest} durationInFrames={HAND_PANELS} fps={30} width={1920} height={1080} />
     <Composition id="Ep4Assets" component={AssetSheet} durationInFrames={ASSET_PANELS} fps={30} width={1920} height={1080} />
+    <Composition id="Ep5Picture" component={EP5.Picture} durationInFrames={EP5.frames} fps={FPS4} width={1920} height={1080} />
+    <Composition id="Ep5Strips" component={EP5.Strips} durationInFrames={EP5.strips} fps={FPS4} width={1920} height={1080} />
+    <Composition id="Ep6Picture" component={EP6.Picture} durationInFrames={EP6.frames} fps={FPS4} width={1920} height={1080} />
+    <Composition id="Ep6Strips" component={EP6.Strips} durationInFrames={EP6.strips} fps={FPS4} width={1920} height={1080} />
     <Composition id="RigTest" component={RigTest} durationInFrames={1} fps={FPS} width={W} height={H} />
     <Composition id="KitTest" component={KitTest} durationInFrames={1} fps={FPS} width={W} height={H} />
   </>

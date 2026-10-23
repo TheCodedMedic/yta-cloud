@@ -1,0 +1,10 @@
+{
+  "N":       {"id": "905706ee7da040fe8660d5ec5a022131", "name": "What_If_In_Theory_Narrator", "gain_db": 0},
+  "YOU":     {"id": "4ed8abdd1d1242baaf68b894758779f0", "name": "WhatIf_Protagonist", "gain_db": 0},
+  "THEO":    {"id": "2a109a3d4959497a8b336afed5b010d7", "name": "WhatIf_Friend_Theo", "gain_db": 0},
+  "MIA":     {"id": "f0087685505347e0b0d958306b0c375f", "name": "WhatIf_Young_Girl_Bright", "gain_db": 0},
+  "GIRL":    {"id": "f0087685505347e0b0d958306b0c375f", "name": "WhatIf_Young_Girl_Bright", "gain_db": 0},
+  "GRANDAD": {"id": "ac9724cc990847168b371d615aa39ce9", "name": "WhatIf_Night_Guard", "gain_db": 0},
+  "DOCTOR":  {"id": "7f2a5074242c4d7fab35805eedd9a733", "name": "WhatIf_Adult_Man_Deadpan", "gain_db": 0},
+  "BOSS":    {"id": "7f2a5074242c4d7fab35805eedd9a733", "name": "WhatIf_Adult_Man_Deadpan", "gain_db": 0}
+}

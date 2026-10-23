@@ -12,3 +12,9 @@ episodes/*/*.mp4
 episodes/*/final_check.jpg
 __pycache__/
 episodes/*/*.log
+# episode media (rebuildable; cloned-voice clips and licensed music stay local)
+episodes/*/audio/
+episodes/*/music_beds/
+episodes/*/*.wav
+music/library/
+sfx/synth/

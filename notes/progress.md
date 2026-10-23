@@ -19,3 +19,12 @@ Pipeline: Remotion (React/TypeScript) for picture, Python for analysis, voice, t
 - [ ] Parallel rendering across sessions for the next episode (see chat notes: workers need no voice file; segments return via Drive)
 
 Drive folder: "Claude Video Studio" (1 - Reference videos, 2 - Skills, 3 - Finished renders)
+
+## 2026-10-23 · Episodes 05 and 06 (3D, built overnight in one cloud session)
+- [x] Topic research: YouTube autocomplete + view counts of the niche (Ifverse, IFOLOGY, Minute Zero, Oddly Elsewhere…). User picked **"What If You Couldn't Feel Pain?"** and **"What If Everyone Could Read Your Mind?"**.
+- [x] Screenplays with sourced science (`episodes/05_no_pain/screenplay.md`, `episodes/06_read_your_mind/screenplay.md`); cast voices in `config/voices.json` (narrator What_If_In_Theory_Narrator).
+- [x] Voices: `pipeline/fish_cast.py` (one request per beat, voice per speaker), `pipeline/assemble_cast.py` (per-episode `gaps.json`), `pipeline/whisper_words.py`, `pipeline/align_words.py`, `pipeline/timing_json.py` → `video/src/ep05|ep06/timing.json`. Ep05 5:57, Ep06 5:32.
+- [x] Picture: shared kit `video/src/epx/` (Kit: timing, cast, ThoughtCard, Ripples, Damage, film assembly; Sets5; Sets6), shots `video/src/ep05/`, `video/src/ep06/`. Compositions `Ep5Picture`, `Ep5Strips`, `Ep6Picture`, `Ep6Strips`. Reviewed strips at 15/50/85 % twice per episode.
+- [x] Music: 34 Mixkit tracks by mood in `music/library/` (git-ignored; `music/credits.json`, `music/README.md`). Freesound is blocked from cloud IPs (403).
+- [x] Sound: `pipeline/synth.py` (sizzle, drill, bell, buzz, monitor, thought pops/whoomps…), `pipeline/cuekit.py`, cue sheets `episodes/05_no_pain/cues.py`, `episodes/06_read_your_mind/cues.py`. Mixer duck envelope now a running sum (was a 30-minute convolution).
+- Render: `--gl=swangle`, 30 fps; two renders in parallel share the CPU (~47 frames/min combined, ~0.9 s/frame alone).

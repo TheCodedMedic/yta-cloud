@@ -1,0 +1,514 @@
+[
+ {
+  "index": 0,
+  "speaker": "N",
+  "start": 0.3,
+  "end": 7.296,
+  "gap_after": 0.5,
+  "text": "It starts on the number forty-two bus. Monday, eight fifteen. The man in front of you is wearing a wig, and it's slightly to the left."
+ },
+ {
+  "index": 1,
+  "speaker": "N",
+  "start": 7.796,
+  "end": 11.227,
+  "gap_after": 0.5,
+  "text": "You think it. You just think it. That wig is on backwards."
+ },
+ {
+  "index": 2,
+  "speaker": "N",
+  "start": 11.727,
+  "end": 13.317,
+  "gap_after": 0.9,
+  "text": "And the whole bus turns round."
+ },
+ {
+  "index": 3,
+  "speaker": "N",
+  "start": 14.217,
+  "end": 18.052,
+  "gap_after": 0.4,
+  "text": "Forty people. Looking at you. The man in the wig, looking at you."
+ },
+ {
+  "index": 4,
+  "speaker": "YOU",
+  "start": 18.452,
+  "end": 19.731,
+  "gap_after": 0.4,
+  "text": "I didn't say that out loud."
+ },
+ {
+  "index": 5,
+  "speaker": "N",
+  "start": 20.131,
+  "end": 22.356,
+  "gap_after": 0.6,
+  "text": "No. You didn't. You didn't have to."
+ },
+ {
+  "index": 6,
+  "speaker": "N",
+  "start": 22.956,
+  "end": 25.23,
+  "gap_after": 2.6,
+  "text": "So, what if everyone could read your mind?"
+ },
+ {
+  "index": 7,
+  "speaker": "N",
+  "start": 27.83,
+  "end": 34.791,
+  "gap_after": 0.8,
+  "text": "Not you reading theirs. Them reading yours. Every thought. Every single one. Out loud, to everyone near you."
+ },
+ {
+  "index": 8,
+  "speaker": "N",
+  "start": 35.591,
+  "end": 41.514,
+  "gap_after": 0.45,
+  "text": "Here's how it works. Rule one. Anyone within ten metres hears your thoughts as clearly as your voice."
+ },
+ {
+  "index": 9,
+  "speaker": "N",
+  "start": 41.964,
+  "end": 45.585,
+  "gap_after": 0.45,
+  "text": "Rule two. You hear nothing of theirs. It only goes one way."
+ },
+ {
+  "index": 10,
+  "speaker": "N",
+  "start": 46.035,
+  "end": 53.314,
+  "gap_after": 0.6,
+  "text": "Rule three. You can't stop thinking. And the harder you try not to think about something, the louder it gets. Remember that one."
+ },
+ {
+  "index": 11,
+  "speaker": "N",
+  "start": 53.914,
+  "end": 63.613,
+  "gap_after": 0.45,
+  "text": "And here's the strange part. Rule three is real. In 1987, a psychologist called Daniel Wegner sat people in a room and told them not to think about a white bear."
+ },
+ {
+  "index": 12,
+  "speaker": "N",
+  "start": 64.063,
+  "end": 71.967,
+  "gap_after": 0.45,
+  "text": "They couldn't. They rang a bell every time the bear came back, and it came back more than once a minute. Pushing a thought away is exactly what pins it down."
+ },
+ {
+  "index": 13,
+  "speaker": "N",
+  "start": 72.417,
+  "end": 79.906,
+  "gap_after": 0.45,
+  "text": "And you have a lot of thoughts to push. In 2020, a lab at Queen's University in Canada counted them. About six thousand two hundred a day."
+ },
+ {
+  "index": 14,
+  "speaker": "N",
+  "start": 80.356,
+  "end": 82.982,
+  "gap_after": 0.9,
+  "text": "Six thousand. Out loud. To everybody."
+ },
+ {
+  "index": 15,
+  "speaker": "N",
+  "start": 83.882,
+  "end": 86.174,
+  "gap_after": 0.45,
+  "text": "It starts badly, and then it gets worse."
+ },
+ {
+  "index": 16,
+  "speaker": "N",
+  "start": 86.624,
+  "end": 91.805,
+  "gap_after": 0.45,
+  "text": "Your maths teacher hears you work out question seven. Then she hears you decide she looks tired."
+ },
+ {
+  "index": 17,
+  "speaker": "N",
+  "start": 92.255,
+  "end": 95.816,
+  "gap_after": 0.45,
+  "text": "Your boss at the caf\u00e9 hears exactly what you think of the new uniform."
+ },
+ {
+  "index": 18,
+  "speaker": "BOSS",
+  "start": 96.266,
+  "end": 97.369,
+  "gap_after": 0.6,
+  "text": "Mustard, is it."
+ },
+ {
+  "index": 19,
+  "speaker": "N",
+  "start": 97.969,
+  "end": 104.161,
+  "gap_after": 0.7,
+  "text": "Your mum hears you think \"I love you\" in the middle of an argument about the dishes. She cries. You lose the argument anyway."
+ },
+ {
+  "index": 20,
+  "speaker": "N",
+  "start": 104.861,
+  "end": 107.029,
+  "gap_after": 0.45,
+  "text": "So you test the edges. Like anyone would."
+ },
+ {
+  "index": 21,
+  "speaker": "N",
+  "start": 107.479,
+  "end": 117.379,
+  "gap_after": 0.45,
+  "text": "Test one. Ten metres. You stand at the far end of the garden and think the rudest word you know. Theo, on the patio, doesn't flinch. One step closer. He flinches."
+ },
+ {
+  "index": 22,
+  "speaker": "THEO",
+  "start": 117.829,
+  "end": 118.383,
+  "gap_after": 0.6,
+  "text": "Bro."
+ },
+ {
+  "index": 23,
+  "speaker": "N",
+  "start": 118.983,
+  "end": 125.765,
+  "gap_after": 0.45,
+  "text": "Test two. Poker night. You fold with nothing, and everyone hears \"I've got nothing\". You lose forty quid in eleven minutes."
+ },
+ {
+  "index": 24,
+  "speaker": "N",
+  "start": 126.215,
+  "end": 131.812,
+  "gap_after": 0.6,
+  "text": "Test three. Headphones. A hat. Tinfoil, which, for the record, does not work."
+ },
+ {
+  "index": 25,
+  "speaker": "N",
+  "start": 132.412,
+  "end": 137.279,
+  "gap_after": 0.45,
+  "text": "Plus. Nobody ever misunderstands you again. Your sister knows you're sorry before you've said it."
+ },
+ {
+  "index": 26,
+  "speaker": "N",
+  "start": 137.729,
+  "end": 142.721,
+  "gap_after": 0.45,
+  "text": "Plus. You can't lie. Which, it turns out, makes people trust you very fast."
+ },
+ {
+  "index": 27,
+  "speaker": "N",
+  "start": 143.171,
+  "end": 152.445,
+  "gap_after": 0.45,
+  "text": "Minus. You can't lie. The average person tells one or two lies a day, and most of them are tiny. I'm fine. Love it. Nearly there. You've lost all of them."
+ },
+ {
+  "index": 28,
+  "speaker": "N",
+  "start": 152.895,
+  "end": 160.415,
+  "gap_after": 0.6,
+  "text": "Minus. The girl at the bus stop. The one with the book. Every morning for a year you've thought the same thing about her. Now she can hear it."
+ },
+ {
+  "index": 29,
+  "speaker": "N",
+  "start": 161.015,
+  "end": 162.164,
+  "gap_after": 1.0,
+  "text": "You stop getting the bus."
+ },
+ {
+  "index": 30,
+  "speaker": "N",
+  "start": 163.164,
+  "end": 166.964,
+  "gap_after": 0.45,
+  "text": "Here's the thing you don't know yet. Most people aren't listening as hard as you think."
+ },
+ {
+  "index": 31,
+  "speaker": "N",
+  "start": 167.414,
+  "end": 176.448,
+  "gap_after": 0.45,
+  "text": "In the year 2000, researchers at Cornell made students walk into a room wearing an embarrassing T-shirt. The students guessed half the room would notice. Fewer than a quarter did."
+ },
+ {
+  "index": 32,
+  "speaker": "N",
+  "start": 176.898,
+  "end": 182.084,
+  "gap_after": 0.7,
+  "text": "It's called the spotlight effect. We all think we're on stage. Mostly, nobody is watching."
+ },
+ {
+  "index": 33,
+  "speaker": "N",
+  "start": 182.784,
+  "end": 188.286,
+  "gap_after": 0.45,
+  "text": "But you are on stage. Rule one made sure of it. So you do what anyone would do. You leave."
+ },
+ {
+  "index": 34,
+  "speaker": "N",
+  "start": 188.736,
+  "end": 195.882,
+  "gap_after": 0.6,
+  "text": "You move into the flat above the launderette, where nobody is ever within ten metres. You work nights. You shop at four in the morning."
+ },
+ {
+  "index": 35,
+  "speaker": "N",
+  "start": 196.482,
+  "end": 201.785,
+  "gap_after": 0.45,
+  "text": "Your grandad is the only one who still visits. He sits ten metres away, on purpose, and shouts."
+ },
+ {
+  "index": 36,
+  "speaker": "GRANDAD",
+  "start": 202.235,
+  "end": 206.223,
+  "gap_after": 0.3,
+  "text": "Everyone's thinking it, lad. You're just the only one they can hear."
+ },
+ {
+  "index": 37,
+  "speaker": "YOU",
+  "start": 206.523,
+  "end": 207.763,
+  "gap_after": 0.3,
+  "text": "That's not comforting."
+ },
+ {
+  "index": 38,
+  "speaker": "GRANDAD",
+  "start": 208.063,
+  "end": 212.852,
+  "gap_after": 0.6,
+  "text": "It wasn't meant to be. The thought's not the crime. It's what you do after."
+ },
+ {
+  "index": 39,
+  "speaker": "N",
+  "start": 213.452,
+  "end": 215.385,
+  "gap_after": 1.0,
+  "text": "You'll remember that. Just not yet."
+ },
+ {
+  "index": 40,
+  "speaker": "N",
+  "start": 216.385,
+  "end": 221.551,
+  "gap_after": 0.45,
+  "text": "Because here's the trap you built. The quieter you tried to be, the louder it got. Rule three."
+ },
+ {
+  "index": 41,
+  "speaker": "N",
+  "start": 222.001,
+  "end": 231.054,
+  "gap_after": 0.45,
+  "text": "Every time you try not to think about the girl with the book, you think about the girl with the book. Every time you try not to think \"they can hear me\", the whole street hears \"they can hear me\"."
+ },
+ {
+  "index": 42,
+  "speaker": "N",
+  "start": 231.504,
+  "end": 239.232,
+  "gap_after": 0.45,
+  "text": "And then the one thing you actually want comes along. A job. The real one. An interview, in a room with three people, two metres away."
+ },
+ {
+  "index": 43,
+  "speaker": "N",
+  "start": 239.682,
+  "end": 244.347,
+  "gap_after": 0.45,
+  "text": "You sit down. You think, don't think about the sweating. Three people hear \"the sweating\"."
+ },
+ {
+  "index": 44,
+  "speaker": "N",
+  "start": 244.797,
+  "end": 248.579,
+  "gap_after": 0.45,
+  "text": "You think, don't think about the money. Three people hear \"the money\"."
+ },
+ {
+  "index": 45,
+  "speaker": "N",
+  "start": 249.029,
+  "end": 254.488,
+  "gap_after": 0.7,
+  "text": "And for one second you nearly get up and walk out. Then you remember an old man shouting across a room."
+ },
+ {
+  "index": 46,
+  "speaker": "N",
+  "start": 255.188,
+  "end": 257.615,
+  "gap_after": 0.6,
+  "text": "So you stop pushing. You let them hear all of it."
+ },
+ {
+  "index": 47,
+  "speaker": "YOU",
+  "start": 258.215,
+  "end": 268.803,
+  "gap_after": 0.8,
+  "text": "I'm terrified. I want this more than anything I've wanted in years. I'll work harder than anyone you've ever hired. And I'm scared you won't believe me, because nobody believes the quiet ones."
+ },
+ {
+  "index": 48,
+  "speaker": "N",
+  "start": 269.603,
+  "end": 277.219,
+  "gap_after": 0.7,
+  "text": "Silence. The woman at the end of the table puts her pen down, and says the thing nobody has ever said in that room. \"We can hear that you mean it.\""
+ },
+ {
+  "index": 49,
+  "speaker": "N",
+  "start": 277.919,
+  "end": 278.78,
+  "gap_after": 0.8,
+  "text": "You get the job."
+ },
+ {
+  "index": 50,
+  "speaker": "N",
+  "start": 279.58,
+  "end": 282.199,
+  "gap_after": 1.2,
+  "text": "The thoughts were never the problem. The hiding was."
+ },
+ {
+  "index": 51,
+  "speaker": "N",
+  "start": 283.399,
+  "end": 288.442,
+  "gap_after": 0.45,
+  "text": "So you get back on the number forty-two. Monday, eight fifteen. You don't fight your head any more."
+ },
+ {
+  "index": 52,
+  "speaker": "N",
+  "start": 288.892,
+  "end": 295.299,
+  "gap_after": 0.45,
+  "text": "The girl with the book is there. You think what you always think. The whole bus hears it. The whole bus has heard it for months."
+ },
+ {
+  "index": 53,
+  "speaker": "N",
+  "start": 295.749,
+  "end": 296.837,
+  "gap_after": 0.6,
+  "text": "She closes the book."
+ },
+ {
+  "index": 54,
+  "speaker": "GIRL",
+  "start": 297.437,
+  "end": 300.815,
+  "gap_after": 0.3,
+  "text": "I know. I've heard it every morning since February."
+ },
+ {
+  "index": 55,
+  "speaker": "YOU",
+  "start": 301.115,
+  "end": 301.521,
+  "gap_after": 0.3,
+  "text": "Sorry."
+ },
+ {
+  "index": 56,
+  "speaker": "GIRL",
+  "start": 301.821,
+  "end": 304.01,
+  "gap_after": 0.6,
+  "text": "Don't be. You never heard me."
+ },
+ {
+  "index": 57,
+  "speaker": "N",
+  "start": 304.61,
+  "end": 312.37,
+  "gap_after": 0.4,
+  "text": "And then she thinks something. And for the first time, quietly, so quietly only you can hear it, you hear a thought that isn't yours."
+ },
+ {
+  "index": 58,
+  "speaker": "GIRL",
+  "start": 312.77,
+  "end": 313.431,
+  "gap_after": 0.8,
+  "text": "Finally."
+ },
+ {
+  "index": 59,
+  "speaker": "N",
+  "start": 314.231,
+  "end": 317.577,
+  "gap_after": 3.2,
+  "text": "Rule two just broke. Somebody out there can think back."
+ },
+ {
+  "index": 60,
+  "speaker": "THEO",
+  "start": 320.777,
+  "end": 321.995,
+  "gap_after": 0.4,
+  "text": "How many of them are there?"
+ },
+ {
+  "index": 61,
+  "speaker": "YOU",
+  "start": 322.395,
+  "end": 323.507,
+  "gap_after": 2.2,
+  "text": "Everyone on the bus."
+ },
+ {
+  "index": 62,
+  "speaker": "N",
+  "start": 325.707,
+  "end": 328.194,
+  "gap_after": 0.6,
+  "text": "Would you want everyone to hear you? Tell us in the comments."
+ },
+ {
+  "index": 63,
+  "speaker": "N",
+  "start": 328.794,
+  "end": 329.424,
+  "gap_after": 3.0,
+  "text": "In theory."
+ }
+]
