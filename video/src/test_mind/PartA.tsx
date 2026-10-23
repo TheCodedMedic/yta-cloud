@@ -14,7 +14,7 @@ import { CAST, GlowBall, Kid, Ripples, ThoughtCard } from "../epx/Kit";
 import { Box } from "../epx/Sets5";
 import { CafeInterior, Chips, Garden, HeldBook, HeldCards, WhiteBear } from "../epx/Sets6";
 import { at, Bus42, HERO_SEAT, headOf, P, PE, PS, rnd6, Thought, WIG_SEAT } from "./common";
-import { DarkStage } from "../ep05/common";
+import { DarkStage } from "../test_pain/common";
 
 const HERO = CAST.hero;
 const HH = headOf(HERO_SEAT), WH = headOf(WIG_SEAT);

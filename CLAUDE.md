@@ -1,6 +1,6 @@
 # yta-cloud: animated "What If" videos
 
-Read `.claude/skills/nexus-remotion/SKILL.md` first: it is the complete record of how videos are made here (Remotion for the picture, Python for voice, timing and sound; no Blender). The older `nexus-what-if` skill supplies the story rules and sound principles.
+**Read `notes/19_studio_rules.md` first** (the user's standing rules: work from GitHub on several cloud machines, tests are not episodes, story first, our own varied characters, designed scenes). For 3D work follow `.claude/skills/story-video-3d/SKILL.md`. Then read `.claude/skills/nexus-remotion/SKILL.md`: it is the complete record of how videos are made here (Remotion for the picture, Python for voice, timing and sound; no Blender). The older `nexus-what-if` skill supplies the story rules and sound principles.
 
 - Picture: Remotion project in `video/`. Kit in `video/src/kit/`, shots in `video/src/shots/`. `shots/demo.tsx` is the reference for the cinematic style.
 - Voice, timing, sound: `pipeline/` and `episodes/<name>/`. Keys in the git-ignored `.env` (`FISH_API_KEY`, `FISH_NARRATOR_VOICE_ID`, `FREESOUND_API_KEY`); read in code, never print.

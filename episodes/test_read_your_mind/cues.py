@@ -7,7 +7,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent.parent / "pipeline"))
 from cuekit import Cues, synth as G  # noqa: E402
 
-c = Cues("ep06", HERE)
+c = Cues("test_mind", HERE)
 at, PS, PE, P = c.at, c.PS, c.PE, c.P
 VOICE = str(HERE / "master_voiceover.wav")
 LENGTH = c.END

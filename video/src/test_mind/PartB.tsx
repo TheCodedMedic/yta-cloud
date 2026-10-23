@@ -12,7 +12,7 @@ import { BODY, C, Chip, Flash, HEAD, Rise, Slam } from "../ep04/Text";
 import { CAST, ThoughtCard } from "../epx/Kit";
 import { ShopAisle } from "../epx/Sets5";
 import { BUS_SIT, CAND, Garden, HeldBook, InterviewRoom, Launderette, PANEL, Spotlight } from "../epx/Sets6";
-import { DarkStage } from "../ep05/common";
+import { DarkStage } from "../test_pain/common";
 import { at, Bus42, END6, GIRL_SEAT, HERO_SEAT, headOf, P, PE, PS, rnd6, Thought } from "./common";
 
 const HERO = CAST.hero;

@@ -2,7 +2,7 @@
 
 In a cue sheet:
     from cuekit import Cues
-    c = Cues("ep05", HERE)       # timing + output dir for cut music
+    c = Cues("test_pain", HERE)       # timing + output dir for cut music
     c.at(3, "red"), c.PS(5), c.P(6), c.END
     c.music(track, offset, t0, t1, rel_db)  -> a BEDS row
 """
