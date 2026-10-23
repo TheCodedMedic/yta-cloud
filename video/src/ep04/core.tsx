@@ -1,6 +1,6 @@
 // Episode 04 core: word timing, easing and camera helpers, the Shot type, and the frame renderer shared by every part.
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, getInputProps } from "remotion";
 import { ThreeCanvas } from "@remotion/three";
 import * as THREE from "three";
 import { Cam } from "./AssetSheet";
@@ -55,6 +55,10 @@ const blurOf = (s: Shot, t: number) => {
   return Math.min(40, Math.max(0, (ang - 0.9) * (900 / a.fov) * 0.18));
 };
 
+/** Render quality switches from --props (benchmarks): {"shadows":false,"aa":false}. Defaults are full quality. */
+const IP = (typeof window !== "undefined" ? getInputProps() : {}) as { shadows?: boolean; aa?: boolean };
+const Q = { shadows: IP.shadows ?? true, aa: IP.aa ?? true };
+
 export const ShotFrame: React.FC<{ shots: Shot[]; t: number; type?: React.FC<{ t: number }>; label?: string }> = ({ shots, t, type: Type, label }) => {
   const s = pickShot(shots, t), cam = s.cam(t), bl = s.noBlur ? 0 : blurOf(s, t);
   return (
@@ -63,7 +67,7 @@ export const ShotFrame: React.FC<{ shots: Shot[]; t: number; type?: React.FC<{ t
         <>
           <svg width={0} height={0} style={{ position: "absolute" }}><filter id="mb4" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation={`${bl} 0`} /></filter></svg>
           <AbsoluteFill style={{ filter: [bl > 0.3 ? "url(#mb4)" : "", s.grade ?? ""].join(" ").trim() || undefined }}>
-            <ThreeCanvas width={1920} height={1080} shadows gl={{ antialias: true, preserveDrawingBuffer: true }} camera={{ fov: 35, position: [0, 2, 6] }}>
+            <ThreeCanvas width={1920} height={1080} shadows={Q.shadows} gl={{ antialias: Q.aa, preserveDrawingBuffer: true }} camera={{ fov: 35, position: [0, 2, 6] }}>
               <Cam pos={cam.pos} target={cam.target} fov={cam.fov} roll={cam.roll} />
               {s.scene(t)}
             </ThreeCanvas>

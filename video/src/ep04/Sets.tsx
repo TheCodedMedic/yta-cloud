@@ -2,12 +2,15 @@
 // (park with trees, golden plaza, bedroom interior, garage with the time machine, rooftop), plus crowds and umbrellas.
 import React, { useMemo } from "react";
 import * as THREE from "three";
+import { getInputProps } from "remotion";
 import { Building } from "../cam3d/World3D";
 import { Look3, LOOKS, Person3D, Pose3, STAND, toon } from "../cam3d/Person3D";
 import { V3 } from "./Vfx";
 
 const rnd = (s: number) => { const x = Math.sin(s * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 const D = THREE.MathUtils.degToRad;
+/** Shadow map resolution; --props {"shadowRes":1024} to trade sharpness for speed. */
+const SHADOW_RES = ((typeof window !== "undefined" ? (getInputProps() as { shadowRes?: number }).shadowRes : undefined) ?? 2048);
 export type Mood = "night" | "dawn" | "day" | "golden" | "dusk";
 
 const SKY: Record<Mood, [number, string][]> = {
@@ -41,7 +44,7 @@ export const Env: React.FC<{ mood: Mood; shadowBox?: number; center?: V3 }> = ({
       <fog attach="fog" args={f} />
       <hemisphereLight args={L.hemi} />
       <directionalLight position={[center[0] + L.sun[2][0], L.sun[2][1], center[2] + L.sun[2][2]]} target-position={center} color={L.sun[0]} intensity={L.sun[1]} castShadow
-        shadow-mapSize={[2048, 2048]} shadow-camera-left={-shadowBox} shadow-camera-right={shadowBox} shadow-camera-top={shadowBox} shadow-camera-bottom={-shadowBox} shadow-camera-near={1} shadow-camera-far={80} shadow-bias={-0.0004} shadow-normalBias={0.02} />
+        shadow-mapSize={[SHADOW_RES, SHADOW_RES]} shadow-camera-left={-shadowBox} shadow-camera-right={shadowBox} shadow-camera-top={shadowBox} shadow-camera-bottom={-shadowBox} shadow-camera-near={1} shadow-camera-far={80} shadow-bias={-0.0004} shadow-normalBias={0.02} />
       <directionalLight position={[center[0] + 6, 6, center[2] - 16]} color={L.rim[0]} intensity={L.rim[1]} />
     </>
   );
