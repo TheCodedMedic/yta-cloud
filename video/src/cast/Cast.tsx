@@ -35,6 +35,11 @@ const B: Base[] = [
 const SKINS = ["#C68C5E", "#8D5A3B", "#E8B98E", "#6B3F2A", "#D9A47A", "#A86F4C", "#F1C9A5", "#5A3626"];
 export const CAST_INK: ActorLook[] = B.map((b) => ({ ...b, skin: "#20181E", ink: "#F4EFE6" }));
 export const CAST_SKIN: ActorLook[] = B.map((b, i) => ({ ...b, skin: SKINS[(i * 3) % SKINS.length], ink: "#1E1418" }));
+// The house style (chosen by the user): everyone has a skin tone; ONLY the protagonist has the black head with light marks,
+// so the main character stands out in every crowd. Build a project's cast with castWithHero(heroIndex).
+export const HERO_HEAD = { skin: "#20181E", ink: "#F4EFE6" };
+export const asHero = (L: ActorLook): ActorLook => ({ ...L, ...HERO_HEAD });
+export const castWithHero = (hero: number): ActorLook[] => CAST_SKIN.map((L, i) => (i === hero ? asHero(L) : L));
 
 // ─── review sheet: panel 0/1 = lineup (ink / skin), panel 2/3 = faces close-up (ink / skin), panel 4 = expressions ───
 const Lights: React.FC = () => (
@@ -53,8 +58,8 @@ export const CastSheet: React.FC = () => {
   const ready = useEpFonts();
   const f = useCurrentFrame();
   if (!ready) return <AbsoluteFill style={{ background: "#EAE6DE" }} />;
-  const cast = f % 2 === 0 ? CAST_INK : CAST_SKIN;
-  const title = ["Option A · ink heads (matte)", "Option B · skin tones (matte)", "Faces · option A", "Faces · option B", "Expressions · option B"][f];
+  const cast = f % 2 === 0 ? CAST_INK : castWithHero(0);
+  const title = ["Option A · ink heads (matte)", "House style · skin tones, protagonist in ink", "Faces · option A", "Faces · option B", "Expressions · option B"][f];
   let cam: { pos: V3; target: V3; fov: number };
   let scene: React.ReactNode;
   if (f < 2) {

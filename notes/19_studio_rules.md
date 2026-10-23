@@ -17,6 +17,7 @@ These come from the user's review of the two test videos ("What If You Couldn't 
 
 ## 4. Characters must be our own and varied
 - **Too similar to other channels today:** the same eyes, the same everything. Design our own look.
+- **House look (decided 2026-10-23):** everyone has a natural skin tone with dark face marks; **only the protagonist** has the black head with light face marks, so they stand out in every crowd. Use `castWithHero(i)` / `asHero(look)` from `video/src/cast/Cast.tsx`.
 - **Less shine on the heads** (matte or satin), while keeping faces readable: light the face, give the face marks contrast, use a rim light for shape.
 - **About 20 face variations:** eye shapes, brows, mouths, lids, lashes, freckles, glasses.
 - **Head shapes, builds and outfits vary:** taller, shorter, broader, slimmer; headphones, beanies, caps, hair, hoods, scarves; different clothes per person.
